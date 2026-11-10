@@ -1,0 +1,8 @@
+# 0196: bounded transport-neutral watch lifecycle
+Status: accepted
+Date: 2026-10-15
+Context: raw broker/control API is qualified; automatic watches need timer/generation/health ownership without silently consuming application results or retrying arbitrary mutations. Pinned lifecycle audit: RC-WMARK.
+Decision: own constant-space WatchLifecycle per managed watch, transport-neutral in rustyrados. Emit generation-tagged typed control actions, one in flight; explicit first-send and completion callbacks. Bound initial setup, each control and entire reconnect outage with absolute monotonic deadlines. Transport loss may reissue WATCH only before first successful registration, otherwise RECONNECT with new generation/fresh control identity. Server disconnect/reconnect rejection is terminal, never blind WATCH recreation.
+Consequences: deterministic standalone tests before runtime composition. Raw explicit watch APIs remain. Runtime integration must reserve internal control credits, keep internal completions out of public polling, bind each action to registry/session/generation, and advance timers under data load. Core alone is not automatic runtime support.
+Alternatives: timers in application (incomplete native lifecycle); generic object resend (wrong control identities/generation); copy pinned threaded callback design (violates ownership/clean room); silently extend retry deadlines (unbounded lifetime).
+Validation: fake-time setup/ping/reconnect/loss/remap/pause/stale action/clock/exhaustion/terminal fixtures. Native DPDK automatic renewal/reconnect qualification remains required after integration.

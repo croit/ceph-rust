@@ -1,0 +1,15 @@
+# 0042 local read/decode errors are never "absent"; per-item input limits up front
+Status: accepted, amended (am. 1)
+Date: 2026-10-10
+Context: external review: (1) `decode_oi`/`list_objects` folded read+decode errors into "no object"; backfill derived peer-copy deletions (MOSDPGBackfillRemove) from such partial lists. (2) `map_next` returned partial/empty on mapper read errors; empty = snap purged. (3) store key limit (tree max_key = node/16) hit by a single client omap key / xattr name / long oid -> `Queued::Rejected` -> OSD exit.
+Decision:
+- `PgStoreOps` answers are typed: `list_objects -> Result<ObjListing{objs, corrupt, next}, StoreReadError>`, `recovery_info_checked -> Result<_, NoObject|Corrupt|Io>` (`recovery_info` = lossy convenience, only where every failure means "cannot push"), `snapmap_next -> Result<Vec, StoreReadError>`. `NoObject` = absent, `Corrupt` = present but oi/snapset/index entry undecodable, `Io` = read failed. Never a partial list.
+- Backfill (primary): list `Err` -> target `Stalled` (counter `errors`, store note -> clog ERROR), no compare/push/remove until next interval. Local `corrupt` object: peer copy is never removed and nothing is pushed for it; target lacks it -> `Stalled` (cannot backfill soundly). Repair of the damaged primary copy = scrub repair from replicas (not backfill; backfill source must be sound). Replica: list `Err` -> no digest reply (primary waits, never compares a partial list); corrupt objects are omitted from the digest (primary re-push repairs them).
+- Scrub chunk selection: list `Err` -> abort scrub session (retry later). Client pgls: `Err` -> EIO, damaged objects still listed by name.
+- Snap trim: mapper `Err` -> SNAPTRIM_ERROR + clog note, snap NOT added to purged_snaps; empty `Ok` only when the index really has none.
+- Input limits: per-item store limits (omap key, xattr store key = `_`+name, object name key) are enforced in the op executor per op (ENAMETOOLONG), before any log entry, regardless of txn size. Limits come from the store (`ObjView::ov_max_item_key`, `ov_name_fits`). `check_write` (size) skips only below a floor derived from the store page budget / WAL ring (<= 64 KiB), not a constant. `Queued::Rejected` on the replica path is fail-stop (adr 0066); engine path -> clog note, not applied, not acked.
+Consequences: + no data deletion from read errors; no client-triggerable OSD exit via key limits. - a damaged local object stalls backfill only when the target lacks it; `Stalled` backfill retries on a timer (adr 0065). Rejected on engine path leaves the write unacked until interval change (should be unreachable).
+Alternatives: treat corrupt as missing (add to pg missing + pull) - deep coupling with recovery, deferred (90-open-questions). Fatal exit on any read error - rejected (availability, and data-loss window before exit).
+
+## Amendment 1 (2026-10-25): Rejected and Stalled follow-ups
+Decision: a replica PG txn the store refuses (`Queued::Rejected`) is fail-stop (log FATAL, mark down, exit), never "drop the link" (adr 0066). A `Stalled` backfill target retries on a timer, `PeeringCfg.backfill_retry` (adr 0065), not sticky until re-peer.

@@ -1,0 +1,10 @@
+# 0048 EC math: own GF(2^8) implementation, ISA-L optional
+Status: accepted
+Date: 2026-10-11
+Context: adr/0039 Phase B needs encode/decode byte-exact with classic isa (reed_sol_van, cauchy) and jerasure reed_sol_van/r6_op (w=8). spec ec.md 4 gives the field, matrix builders and known answers.
+Decision:
+1. Module `ec::gf`: tables for poly 0x11D, the three matrix builders (IsaVan incl. the m>4 / m=4,k>21 cauchy fallback, IsaCauchy, JerVan), Gauss-Jordan inverse, `Codec` (encode, decode_matrix, decode_into for any k survivors and any wanted raw chunks incl. parity). m == 1 = XOR for every kind. Split-nibble region kernel (scalar). No allocation in region loops; matrices/tables built once per pool.
+2. Frozen own vectors in `src/gf.rs` tests (ec.md 4.8 known answers, matrix rows, every m-erasure pattern decodes). Upstream corpus is a TEMPORARY oracle: `crates/ec/tests/oracle/corpus-oracle.sh <dir>` (#[ignore]d test; 276 isa/jerasure-RS cases byte-exact on v0.92-988).
+3. Speed: scalar nibble kernel (2.5 GB/s data, k=4 m=2, Apple M) is the portable fallback and the oracle of the SIMD tests. SIMD kernels behind the same `mul_acc` entry (runtime `is_x86_feature_detected!("avx2")`, NEON on aarch64) landed with the primary role: 23 GB/s (NEON, M-series), 7.5 GB/s (AVX2 in the lab VM), encode blocked in 16 KiB so parity rows stay in L1. GFNI (`vgf2p8affineqb`, present in the lab CPU) is the next step if cycles/byte demands it. ISA-L FFI (BSD-3, system lib or vendored build via `cc`) is an OPTIONAL cargo feature `isal` replacing the region kernel only (matrices stay ours so both paths are byte-identical, cross-checked by a test); default build has no C dependency. Not enabled until measured.
+Consequences: + no C build dependency, one code path for all plugins, jerasure RS needs only a matrix. - scalar kernel is slower than ISA-L until SIMD/FFI lands (tracked in ec-phase-b.md).
+Alternatives: ISA-L mandatory (rejected: C build dep for a path we can verify ourselves); reed-solomon-erasure crates (rejected: different generator matrix, ec-gap 3).

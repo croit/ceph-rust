@@ -1,0 +1,8 @@
+# 0199: explicit bounded cleanup of terminal watches
+Status: accepted
+Date: 2026-10-15
+Context: a terminal watch retains cookie/error/target but existing live-handle validation prevents UNWATCH through a replacement session. Local removal cannot prove remote registration removed.
+Decision: allow explicit UNWATCH for stopped/failed managed watches and retained raw Watch handles. After successful request admission, mark local entry Removing: reject revival and new ingress, retain queued payload/errors. Dispatch binds only this idempotent cleanup to current authenticated replicated route while preserving terminal lifecycle/error; never WATCH/RECONNECT/activate. Standard application completion/deadline/fence/possibly-sent semantics apply, no implicit retry or remove.
+Consequences: no remote success inferred from timeout/local remove; caller may reissue explicit cleanup with fresh deadline/TID. Rejected admission leaves registry untouched. Removing cannot be revived by raw rebind. Only matching remote durable completion proves requested cleanup; explicit local remove finally releases metadata/queued events. Reuses existing control engine and route gates.
+Alternatives: clear watch failure/reconnect before cleanup (revives removed registration); silently remove locally (no remote proof); background infinite retry (unbounded lifetime); depend on server timeout (not immediate cleanup guarantee).
+Validation: own terminal error/new-session UNWATCH/no-reregister, rejected admission, ingress cutoff/queued prefix, deadline/loss/cancel/ownership/fence and cross-kind fixtures; live classic native CRC/Secure cleanup required.

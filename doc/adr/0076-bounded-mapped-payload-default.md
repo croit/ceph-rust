@@ -1,0 +1,15 @@
+# 0076 Bounded mapped payload allocation by default
+Status: accepted, amended (am. 1, am. 2, am. 3)
+Date: 2026-10-13
+Context: finding 4; the bare-metal launcher enabled mapped payloads, but binary defaults copied heap payloads on physical ports.
+Decision: default mapped payload allocation for DPDK/AF_XDP, using the existing HugeAlloc wrapper with either inner allocator. Cap live requested payload bytes process-wide at one quarter of EAL --mem; explicit override up to half; keep NV_HUGE_ALLOC=0 opt-out. Exhaustion falls back to heap/copy. Native queue mode and actual copied/referenced payload bytes enter existing per-core perf snapshots. Small allocations remain on the inner allocator. Kernel tier does not enable the mode.
+Consequences: bounded payload use within the operator's EAL budget; NIC/SPDK pools and allocator overhead require additional sizing. Startup/perf expose capability and actual use separately. Atomic accounting only on large allocation/free; cached mode and plain per-core TX counters. No wire/disk changes. Deploy contract: `ops/deploy.md`; tests/numbers: `perf/codex-perf-2026-10-13.md`.
+
+## Amendment 1 (2026-10-16): kernel tier too
+The kernel tier now also places payloads (>= 128 KiB) in hugepages of its standalone SPDK env (same budget rule, `NV_HUGE_ALLOC=0` off) when the NVMe is SPDK: the store writes them to the device by reference (adr 0061 am. 4/5; kernel 1-stream 4M write +19 %, OSD cpu per byte -29 %). File devices / no SPDK env: heap as before.
+
+## Amendment 2 (2026-10-25): kernel NVMe memory-only EAL budget = --mem
+With the kernel NVMe backend (adr 0400) the EAL is memory-only and serves nothing but the payload heap: budget default and cap = all of `--mem` (`NV_HUGE_ALLOC_MB` lowers it). The quarter rule stays where the EAL is shared (DPDK/AF_XDP mbuf pools, SPDK DMA buffers). Rationale: a quarter left 3/4 of that EAL unused while the store's large blocks (omap runs, checkpoint chunks) miss the budget; each miss frees parked blocks with zeroing on the PG core (measured with the SPDK env at a quarter: > 0.8 GiB per 1M-key populate; at half: none; doc/perf/payload-heap-20261025.md). Not yet measured on a kernel NVMe cell. Exhaustion still falls back to the inner allocator.
+
+## Amendment 3 (2026-10-25): SPDK-shared EAL budget = half of --mem
+Kernel network tier with SPDK NVMe: payload budget default = cap = half of `--mem` (was a quarter, override up to half). SPDK's share of the EAL is its DMA buffers plus queue memory: `nvme::dmapool` `held_peak_bytes` <= 139 MiB, no `pressure_drains`, EAL heap free >= 2.5 GiB of 4 GiB at half in every cell (b-fill 1M keys, b-mix, 4k/4M block); dmapool parking is bounded per store thread (`CAP_BYTES`) and drains on a failed DMA allocation. At a quarter the store's large blocks missed the budget (payload `used_peak` = limit, up to 202 fallbacks to copies) and the shortfall frees zeroed ~0.8 GiB per 1M-key populate on the PG core; at half none (doc/perf/eal-budget-20261025.md). AF_XDP / DPDK network tiers (`prod.rs`: the EAL also holds the mbuf mempools = XSK umem): quarter unchanged, not measured.

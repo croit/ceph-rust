@@ -1,0 +1,8 @@
+# 0198: native managed-watch runtime composition
+Status: accepted
+Date: 2026-10-15
+Context: lifecycle and independent control credit exist; native owner still requires application-driven registration/ping/rebind.
+Decision: opt-in ObjectClient constructor with bounded managed-watch slots/bytes. start_watch owns raw registry handle plus WatchLifecycle; fixed managed slab maps action to reserved request token. Existing flight/TID/reply path validates wire replies; successful session send records control handoff. Reserved results consumed internally, never published to user. Recoverable loss/remap suspends registry ingress without terminal error, cancels old control and starts finite lifecycle reconnect. Server disconnect/terminal error never silently reregisters.
+Consequences: raw APIs remain, but cannot activate/rebind/register/ping a managed handle. stop_watch cancels internal work and permits explicit remote unwatch; remove cancels/removes all local membership. Close cancels/reclaims internal results while retaining application results and reserved watch errors. Shared rotated flight work prevents unbounded control loops; fixed managed work rotation and timer minima. Cold membership/route/minimum scans and codec allocations remain performance work.
+Alternatives: expose mutable owner (breaks invariants); raw terminal loss for managed watches (cannot reconnect); revive every error (recreates deleted watches); hide application completions (breaks credit).
+Validation: own scripted sessions for timer ping, loss/reconnect/generation/cookie, map change, stale ingress, pause, held application credit, internal cleanup, remote rejection and raw isolation; live DPDK automatic lifecycle next.

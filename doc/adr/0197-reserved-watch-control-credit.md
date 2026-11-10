@@ -1,0 +1,8 @@
+# 0197: reserved watch controls in one request identity domain
+Status: accepted
+Date: 2026-10-15
+Context: managed-watch renewal must progress while application request/completion credits are full. Two independent queues would collide in TIDs for one authenticated client; draining all completions into another FIFO would release application credit early.
+Decision: one ObjectQueue with independent application/reserved-control slot and byte ledgers, same monotonic TID allocator. Existing constructors reserve nothing. Explicit constructor adds fixed control capacity; only typed reserved-control admission can use it. Public completion poll excludes reserved results; exact reserved token take consumes only its terminal result. Internal controls do not enter application fence prefix/failure accounting; durability validation remains unchanged.
+Consequences: held results retain original class credit. No borrowing between partitions, no identity collision, no hidden user-result queue. Initial completion selection/removal is bounded O(total slots); indexed per-class completion links remain performance work. Runtime scheduler composition remains required.
+Alternatives: same shared credits (renewal starvation); independent TID allocators (collision); consume and rebuffer application completions (breaks ownership/credit); reserve only slots (payload credit starvation).
+Validation: own tests cover saturated application and reserved partitions, immutable rejection, mixed completion ordering/exact ownership, stale token/slot reuse, deadlines/cancel, internal fence exclusion and durable controls. Existing no-reserve suites remain green.

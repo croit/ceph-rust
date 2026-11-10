@@ -1,0 +1,13 @@
+# 0091 Shared indexed deadlines for PGs, engines and connections
+Status: accepted
+Date: 2026-10-14
+Context: finding 4 timer part. Wave 2 gate checked with fetch + ls-remote: perf-w4k4 has no remote head. Its PG timer work (0ffec4b2) introduced touched-PG refresh and an ordered deadline index; reuse that design rather than add another timer implementation.
+
+Decision:
+- Refactor the existing PG/engine deadline index into crate deadline::Index, an indexed min-heap with cold registered-key positions. PGs, engines and connections use the same implementation. Preserve touched-PG refresh and deadline/key ordering for due PGs. Earliest queries are O(1); updates fix the heap in place. Position lookups use the existing BTreeMap style; heap swaps therefore have O(log² owners) worst-case update cost. Registration reserves space for every live owner, including owners without a timer. Updates/removal of deadlines allocate nothing; owner registration/removal is cold. No stale heap entries accumulate.
+- Messenger mutations coalesce a dirty-deadline notification using the existing preallocated EventQueue primitive. next_timer refreshes only dirty connections, then reads the heap root. on_timer visits only due connections. Current state/time rules remain in Connection::next_timer/on_timer; handshake, idle and reconnect semantics are unchanged.
+- Register accepted/dialed/adopted links on their owning core. Unregister before link removal/handoff; detach the source notifier and re-register at adoption. Drop cancels the queued notification by registration identity. Test fixtures follow the production registration path.
+- Keep absolute connection Duration values without narrowing; PG clocks remain u64 nanoseconds. Due queries are non-consuming, skip later heap subtrees and sort the result by deadline/key. They allocate result vectors as the previous dispatch did; no allocation is claimed for due dispatch. Heap capacity follows peak live registrations and is retained for reuse.
+- No store FIFO, durability, wire encodings, authentication or peer-visible timer policy changes. Monitor deadlines and other constant-size timers stay with their existing owners.
+
+Validation: randomized heap updates/removal against an ordered reference; zero allocations across 100,000 live deadline changes plus cancellation; connection queries visit zero idle links, one changed link; scan equivalence across timeouts/closes; ready activity/backoff/reconnect/drop notification; existing handoff, relay, watch timers and peering convergence suites. Before/after local release benchmark: ../perf/codex-perf3-2026-10-13.md.

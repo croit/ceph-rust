@@ -117,13 +117,14 @@ Production feature set (Linux): `knet,spdk,rdma,mimalloc`.
   RADOS test driver the opexec golden and cls differential test suites run on;
   it is never linked into the daemon).
 - `docs/` — the operator manual (served as a website on GitHub Pages).
+- `doc/adr/` — the architecture decision records (ADRs).
 - `testdata/` — wire-protocol test vectors (golden fixtures).
 - License files (`COPYING`, `COPYING-*`, `AUTHORS`); every source file carries
   its SPDX license header.
 
-Not included: design documents and ADRs, test labs and benchmark tooling,
-lab/dev CLI tools (benchrun, rdma-bench, ...), and the components marked "no"
-in the roadmap table.
+Not included: the rest of the design documents (specs, perf, ops), test labs
+and benchmark tooling, lab/dev CLI tools (benchrun, rdma-bench, ...), and the
+components marked "no" in the roadmap table.
 
 This repository is a **read-only source snapshot** of the croit ceph-rust
 project: no issue tracker, no contribution workflow. Updates arrive as new
