@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>croit ceph-rust</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ceph, rewritten in Rust for NVMe, fast networks and GPUs. Documentation and operator manual of the croit ceph-rust source snapshot.">
+  <link rel="stylesheet" href="site/docsify.css">
+</head>
+<body>
+  <div id="app">Loading croit ceph-rust documentation…</div>
+  <script>
+    window.$docsify = {
+      name: 'croit ceph-rust',
+      nameLink: '/README.md',
+      homepage: 'README.md',
+      noCompileLinks: ['assets/.*'],
+      alias: {
+        'how-to/(.*)': 'docs/how-to/$1',
+        'reference/(.*)': 'docs/reference/$1',
+        'explanation/(.*)': 'docs/explanation/$1',
+        'tutorials/(.*)': 'docs/tutorials/$1'
+      },
+      loadSidebar: true,
+      auto2top: true,
+      maxLevel: 3,
+      subMaxLevel: 1,
+      search: {
+        placeholder: 'Search the docs',
+        noResults: 'No results',
+        depth: 4
+      },
+      plugins: ['site/docsify-search.min.js']
+    };
+  </script>
+  <script src="site/docsify.min.js"></script>
+</body>
+</html>
