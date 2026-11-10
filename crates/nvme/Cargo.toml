@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "nvme"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+crc = { path = "../crc" }
+bytes = "1.12.1"
+libc = { version = "0.2.190", optional = true }
+dpdk-link = { path = "../dpdk-link", features = ["spdk"], optional = true }
+uring-access = { path = "../uring-access", optional = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+io-uring = { version = "0.7.15", optional = true }
+
+[dev-dependencies]
+# errno names of the errno -> store-error mapping tests (the crate itself takes `libc` only with a backend feature)
+libc = "0.2.190"
+
+[build-dependencies]
+cc = "1.6.0"
+
+[features]
+# DEV/LAB ONLY backends (`FileDev`: pread/pwrite + fdatasync). OFF in production builds (adr 0024-zero-cost-lab-backends).
+lab = ["dep:libc"]
+# Write-view guard (nvme::viewguard: process-wide registry lock + crc32c per write view, guarding allocator). Debug builds have it
+# anyway; never part of `lab`, so lab perf runs stay clean. Enabled by lab/build-host-build.sh prodlab (correctness runs only).
+viewguard = []
+# Kernel admin passthrough (read-only Identify) for hwcheck; no other lab code.
+kprobe = ["dep:libc"]
+# SPDK NVMe driver (needs spdk_nvme + spdk_env_dpdk via pkg-config, Linux only; see lab/devcontainer).
+spdk = ["dep:libc", "dep:dpdk-link"]
+# `kernel:` devices (adr 0169): namespace on the kernel nvme driver, io_uring (O_DIRECT or NVMe passthrough). Linux; a
+# stub elsewhere. Production backend of the kernel tier, selected at runtime (`--store-backend`).
+kernel = ["dep:libc", "dep:io-uring", "dep:uring-access"]
+# DEBUG/TESTING ONLY: SPDK multi-process, several processes on one controller, one namespace each (`spdk:PCI,ns=N,shared`,
+# `croit-flashstore-osd spdk-primary`; adr 0463). Never in production builds: one OSD per controller (adr 0103).
+spdk-mp = ["spdk"]
+
+[[example]]
+name = "spdk_probe"
+required-features = ["spdk"]
+
+[[example]]
+name = "kdev_probe"
+required-features = ["kernel"]

@@ -1,0 +1,23 @@
+# rbd_copyup_thick
+# t=1791560685
+> call rbd copyup hex:68656c6c6f
+result=0
+[0] rval=0 out=
+> read 0 0
+result=0
+[0] rval=0 out=68656c6c6f
+> call rbd copyup hex:616761696e
+result=0
+[0] rval=0 out=
+> read 0 0
+result=0
+[0] rval=0 out=68656c6c6f
+> delete
+result=0
+[0] rval=0 out=
+> call rbd copyup
+result=0
+[0] rval=0 out=
+> stat
+result=0
+[0] rval=0 out=0000000000000000ed0bc96ada125f06

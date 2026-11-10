@@ -1,0 +1,34 @@
+{
+    "epoch": 0,
+    "auth_epoch": 0,
+    "auth_service_cipher": {
+        "name": "none",
+        "value": 0
+    },
+    "auth_allowed_ciphers": [
+        {
+            "name": "none",
+            "value": 0
+        }
+    ],
+    "auth_preferred_cipher": {
+        "name": "none",
+        "value": 0
+    },
+    "fsid": "00000000-0000-0000-0000-000000000000",
+    "modified": "0.000000",
+    "created": "0.000000",
+    "min_mon_release": 0,
+    "min_mon_release_name": "unknown",
+    "election_strategy": 1,
+    "disallowed_leaders": "",
+    "stretch_mode": false,
+    "tiebreaker_mon": "",
+    "removed_ranks": "",
+    "features": {
+        "persistent": [],
+        "optional": []
+    },
+    "mons": []
+}
+

@@ -1,0 +1,50 @@
+# rgw_refcount_explicit_and_set__obj
+# t=1791707459
+> call refcount put hex:010106000000010000006100
+result=-2
+[0] rval=-2 out=
+> call refcount get hex:010106000000010000006100
+result=-2
+[0] rval=-2 out=
+> call refcount get hex:010106000000010000006200
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000000
+result=-2
+[0] rval=0 out=
+> call refcount put hex:010107000000020000007a7a00
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000000
+result=-2
+[0] rval=0 out=
+> call refcount put hex:010106000000010000006100
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000000
+result=-2
+[0] rval=0 out=
+> call refcount set hex:01010e0000000200000001000000780100000079
+result=0
+[0] rval=0 out=
+> call refcount read hex:01010100000000
+result=0
+[0] rval=0 out=01010e0000000200000001000000780100000079
+> call refcount put hex:010106000000010000006100
+result=0
+[0] rval=0 out=
+> call refcount set hex:01010400000000000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

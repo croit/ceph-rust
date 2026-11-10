@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+[package]
+name = "uring-access"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+description = "Host io_uring access policy (kernel.io_uring_disabled / io_uring_group, seccomp): why io_uring_setup is refused and the exact host fix"
+
+[lints]
+workspace = true

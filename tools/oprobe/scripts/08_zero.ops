@@ -1,0 +1,28 @@
+# zero: inside (size unchanged), tail (shrinks to offset), past end (no-op), missing (not created)
+writefull rep:100:x
+---
+zero 10 5
+---
+read 8 10; stat
+---
+# zero reaching the end behaves like truncate(offset)
+zero 50 1000
+---
+stat
+---
+# offset beyond size: no-op success
+zero 500 10
+---
+stat
+---
+# length 0: no-op
+zero 5 0
+---
+read 0 12
+---
+delete
+---
+# missing object: success, not created
+zero 0 10
+---
+stat

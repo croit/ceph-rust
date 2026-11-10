@@ -1,0 +1,20 @@
+# rbdrec_group_snapshots__rbd_group_header-none
+# t=1791735734
+> call rbd group_snap_remove hex:0100000078
+result=-2
+[0] rval=-2 out=
+> call rbd group_snap_get_by_id hex:0100000078
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

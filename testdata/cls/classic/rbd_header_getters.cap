@@ -1,0 +1,77 @@
+# rbd_header_getters
+# t=1791560685
+> call rbd create hex:0000004000000000163d000000000000000c0000007262645f646174612e616263
+result=0
+[0] rval=0 out=
+> call rbd get_features hex:0000000000000000
+result=0
+[0] rval=0 out=3d000000000000003d00000000000000
+> call rbd get_features hex:000000000000000001
+result=0
+[0] rval=0 out=3d000000000000000100000000000000
+> call rbd get_features hex:01
+result=-22
+[0] rval=-22 out=
+> call rbd get_size hex:feffffffffffffff
+result=0
+[0] rval=0 out=160000004000000000
+> call rbd get_size hex:0900000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd get_size hex:0000
+result=-22
+[0] rval=-22 out=
+> call rbd get_object_prefix
+result=0
+[0] rval=0 out=0c0000007262645f646174612e616263
+> call rbd get_data_pool
+result=0
+[0] rval=0 out=ffffffffffffffff
+> call rbd get_all_features
+result=0
+[0] rval=0 out=ff0f000000000000
+> call rbd get_create_timestamp
+result=0
+[0] rval=0 out=ed0bc96afce4340c
+> call rbd get_access_timestamp
+result=0
+[0] rval=0 out=ed0bc96afce4340c
+> call rbd get_modify_timestamp
+result=0
+[0] rval=0 out=ed0bc96afce4340c
+> call rbd get_flags hex:feffffffffffffff
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd get_flags hex:0300000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd get_snapcontext
+result=0
+[0] rval=0 out=000000000000000000000000
+> call rbd op_features_get
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd snapshot_get_limit
+result=0
+[0] rval=0 out=ffffffffffffffff
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010c000000ffffffffffffffff00000000
+> call rbd parent_get
+result=0
+[0] rval=0 out=010118000000ffffffffffffffff0000000000000000feffffffffffffff
+> call rbd parent_overlap_get hex:feffffffffffffff
+result=0
+[0] rval=0 out=00
+> call rbd metadata_list hex:000000000000000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd get_stripe_unit_count
+result=-8
+[0] rval=-8 out=
+> call rbd get_stripe_unit_count
+result=-8
+[0] rval=-8 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=08000000100000006163636573735f74696d657374616d7008000000ed0bc96afce4340c100000006372656174655f74696d657374616d7008000000ed0bc96afce4340c080000006665617475726573080000003d00000000000000100000006d6f646966795f74696d657374616d7008000000ed0bc96afce4340c0d0000006f626a6563745f707265666978100000000c0000007262645f646174612e616263050000006f7264657201000000160400000073697a6508000000000000400000000008000000736e61705f73657108000000000000000000000000

@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "ecwire"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+crc = { path = "../../../crates/crc" }
+denc = { path = "../../../crates/denc" }
+messages = { path = "../../../crates/messages" }
+pgwire = { path = "../../../services/osd/pgwire" }
+replwire = { path = "../../../services/osd/replwire" }
+bytes = "1.12.1"

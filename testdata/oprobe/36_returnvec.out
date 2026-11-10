@@ -1,0 +1,28 @@
+# 36_returnvec
+> writefull rep:100:a
+result=0
+  [0] writefull rval=0 out=<empty>
+> write 0 b; read 0 3; stat
+result=0
+  [0] write rval=0 out=<empty>
+  [1] read rval=0 out=<empty>
+  [2] stat rval=0 out=<empty>
+> @flags=returnvec; write 0 c; read 0 64
+result=0
+  [0] write rval=0 out=<empty>
+  [1] read rval=0 len=64 "baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"...(+16B) crc32c=a8753452
+> @flags=returnvec; write 0 d; read 0 65
+result=-75(EOVERFLOW)
+  [0] write rval=0 out=<empty>
+  [1] read rval=-75(EOVERFLOW) out=<empty>
+> read 0 100
+result=0
+  [0] read rval=0 len=100 "caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"...(+52B) crc32c=cedb7784
+> write 0 ""; read 0 3
+result=0
+  [0] write rval=0 out=<empty>
+  [1] read rval=0 out=<empty>
+> @flags=returnvec; write 1 e; stat
+result=0
+  [0] write rval=0 out=<empty>
+  [1] stat rval=0 size=100 mtime=<t>

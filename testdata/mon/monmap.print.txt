@@ -1,0 +1,12 @@
+monmaptool: monmap file /tmp/monmap.bin
+epoch 1
+fsid 6d2f4f0e-6e1a-4a64-9a55-6e766d65736f
+last_changed 2026-10-09T10:01:56.313706+0000
+created 2026-10-09T10:01:56.313706+0000
+min_mon_release 21 (umbrella)
+election_strategy: 1
+0: v2:172.28.0.10:3300/0 mon.a
+auth_epoch 0
+auth_service_cipher aes256k
+auth_allowed_ciphers aes256k
+auth_preferred_cipher aes256k

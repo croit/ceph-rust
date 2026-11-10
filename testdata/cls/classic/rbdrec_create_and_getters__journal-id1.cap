@@ -1,0 +1,44 @@
+# rbdrec_create_and_getters__journal-id1
+# t=1791735734
+> call journal get_order
+result=-2
+[0] rval=0 out=
+> call journal create hex:18040700000000000000
+result=0
+[0] rval=0 out=
+> call journal create hex:01010100000000000000
+result=-17
+[0] rval=-17 out=
+> call journal get_order
+result=0
+[0] rval=0 out=18
+> call journal get_splay_width
+result=0
+[0] rval=0 out=04
+> call journal get_pool_id
+result=0
+[0] rval=0 out=0700000000000000
+> call journal get_minimum_set
+result=0
+[0] rval=0 out=0000000000000000
+> call journal get_active_set
+result=0
+[0] rval=0 out=0000000000000000
+> call journal get_next_tag_tid
+result=0
+[0] rval=0 out=0000000000000000
+> call journal create hex:0102
+result=-22
+[0] rval=-22 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=070000000a0000006163746976655f7365740800000000000000000000000b0000006d696e696d756d5f7365740800000000000000000000000e0000006e6578745f7461675f636c6173730800000000000000000000000c0000006e6578745f7461675f746964080000000000000000000000050000006f72646572010000001807000000706f6f6c5f69640800000007000000000000000b00000073706c61795f7769647468010000000400
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6ad0bb2516

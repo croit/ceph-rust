@@ -1,0 +1,43 @@
+{
+    "up_from": 0,
+    "seq": 0,
+    "num_pgs": 0,
+    "num_osds": 0,
+    "num_per_pool_osds": 0,
+    "num_per_pool_omap_osds": 0,
+    "kb": 0,
+    "kb_used": 0,
+    "kb_used_data": 0,
+    "kb_used_omap": 0,
+    "kb_used_meta": 0,
+    "kb_avail": 0,
+    "statfs": {
+        "total": 0,
+        "available": 0,
+        "internally_reserved": 0,
+        "allocated": 0,
+        "data_stored": 0,
+        "data_compressed": 0,
+        "data_compressed_allocated": 0,
+        "data_compressed_original": 0,
+        "omap_allocated": 0,
+        "internal_metadata": 0
+    },
+    "hb_peers": [],
+    "snap_trim_queue_len": 0,
+    "num_snap_trimming": 0,
+    "num_shards_repaired": 0,
+    "op_queue_age_hist": {
+        "histogram": [],
+        "upper_bound": 1
+    },
+    "perf_stat": {
+        "commit_latency_ms": 0,
+        "apply_latency_ms": 0,
+        "commit_latency_ns": 0,
+        "apply_latency_ns": 0
+    },
+    "alerts": [],
+    "network_ping_times": []
+}
+

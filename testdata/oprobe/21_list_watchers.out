@@ -1,0 +1,16 @@
+# 21_list_watchers
+> list-watchers
+result=-2(ENOENT)
+  [0] list-watchers rval=0 out=<empty>
+> create
+result=0
+  [0] create rval=0 out=<empty>
+> list-watchers
+result=0
+  [0] list-watchers rval=0 watchers=[]
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> list-watchers
+result=-2(ENOENT)
+  [0] list-watchers rval=0 out=<empty>

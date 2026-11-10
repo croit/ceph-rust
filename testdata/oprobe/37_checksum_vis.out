@@ -1,0 +1,12 @@
+# 37_checksum_vis
+> writefull abcdef
+result=0
+  [0] writefull rval=0 out=<empty>
+> @flags=returnvec; write 0 ZZ; checksum crc32c 0 6 6; read 0 6
+result=0
+  [0] write rval=0 out=<empty>
+  [1] checksum rval=0 csum[1]=[0x496937b]
+  [2] read rval=0 len=6 "abcdef"
+> checksum crc32c 0 6 6
+result=0
+  [0] checksum rval=0 csum[1]=[0x4439b918]

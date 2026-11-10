@@ -1,0 +1,4 @@
+{
+    "summary": "osd_op_reply(0 obj1 [set-alloc-hint object_size 4194304 write_size 4194304,write 4096~100,setxattr (5),call] v250'18 uv13 ondisk = 0 redirect: { object other, locator{@2} })"
+}
+

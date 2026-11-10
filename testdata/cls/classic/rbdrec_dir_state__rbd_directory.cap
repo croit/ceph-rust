@@ -1,0 +1,50 @@
+# rbdrec_dir_state__rbd_directory
+# t=1791735734
+> call rbd dir_state_assert hex:00
+result=-2
+[0] rval=0 out=
+> call rbd dir_state_set hex:00
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:00
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:01
+result=-2
+[0] rval=-2 out=
+> call rbd dir_state_assert
+result=-22
+[0] rval=-22 out=
+> call rbd dir_state_set hex:01
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:01
+result=0
+[0] rval=0 out=
+> call rbd dir_state_set hex:02
+result=-22
+[0] rval=-22 out=
+> call rbd dir_state_set hex:00
+result=0
+[0] rval=0 out=
+> call rbd dir_add_image hex:010000006e020000006931
+result=0
+[0] rval=0 out=
+> call rbd dir_state_set hex:01
+result=-16
+[0] rval=-16 out=
+> call rbd dir_state_assert hex:00
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=030000000500000069645f693105000000010000006e060000006e616d655f6e06000000020000006931050000007374617465010000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a1bcc871c

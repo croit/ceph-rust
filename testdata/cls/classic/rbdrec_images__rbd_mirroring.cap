@@ -1,0 +1,71 @@
+# rbdrec_images__rbd_mirroring
+# t=1791735734
+> call rbd mirror_image_get hex:020000006931
+result=-2
+[0] rval=0 out=
+> call rbd mirror_image_get_image_id hex:020000006731
+result=-2
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310000
+result=-2
+[0] rval=-2 out=
+> call rbd mirror_image_set hex:01
+result=-22
+[0] rval=-22 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310101
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069320201080000000200000067320300
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310101
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069330201080000000200000067310100
+result=-17
+[0] rval=-17 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067580100
+result=-22
+[0] rval=-22 out=
+> call rbd mirror_image_get hex:020000006931
+result=0
+[0] rval=0 out=0201080000000200000067310101
+> call rbd mirror_image_get_image_id hex:020000006732
+result=0
+[0] rval=0 out=020000006932
+> call rbd mirror_image_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=02000000020000006931020000006731020000006932020000006732
+> call rbd mirror_image_list hex:000000000100000000000000
+result=0
+[0] rval=0 out=01000000020000006931020000006731
+> call rbd mirror_image_list hex:0200000069310a00000000000000
+result=0
+[0] rval=0 out=01000000020000006932020000006732
+> call rbd mirror_image_list hex:000000000000000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd mirror_image_remove hex:020000007a7a
+result=-2
+[0] rval=-2 out=
+> call rbd mirror_image_remove hex:020000006931
+result=-16
+[0] rval=-16 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_remove hex:020000006931
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0200000009000000676c6f62616c5f67320600000002000000693208000000696d6167655f69320e000000020108000000020000006732030000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a5488292d

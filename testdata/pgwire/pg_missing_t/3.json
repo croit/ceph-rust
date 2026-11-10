@@ -1,0 +1,13 @@
+{
+    "missing": [
+        {
+            "object": "0:13800000:::foo:7b",
+            "need": "5'6",
+            "have": "5'1",
+            "flags": "delete",
+            "clean_regions": "clean_offsets: [], clean_omap: false, new_object: true"
+        }
+    ],
+    "may_include_deletes": true
+}
+

@@ -1,0 +1,44 @@
+# rgw_account_resources_add_get_rm_limit__account-roles
+# t=1791707457
+> call user account_resource_add hex:01012200000001011700000005000000416c696365030000002f612f030000000102030102000000
+result=0
+[0] rval=0 out=
+> call user account_resource_add hex:01012200000001011700000005000000414c494345030000002f782f030000000102030102000000
+result=-17
+[0] rval=-17 out=
+> call user account_resource_add hex:01012200000001011700000005000000414c494345030000002f782f030000000102030002000000
+result=0
+[0] rval=0 out=
+> call user account_resource_add hex:01012000000001011500000003000000626f62030000002f622f030000000102030002000000
+result=0
+[0] rval=0 out=
+> call user account_resource_add hex:010122000000010117000000050000006361726f6c030000002f632f030000000102030002000000
+result=-87
+[0] rval=-87 out=
+> call user account_resource_get hex:01010900000005000000614c694365
+result=0
+[0] rval=0 out=01011d00000001011700000005000000414c494345030000002f782f03000000010203
+> call user account_resource_get hex:010107000000030000007a6564
+result=-2
+[0] rval=-2 out=
+> call user account_resource_rm hex:010107000000030000005a4544
+result=-2
+[0] rval=-2 out=
+> call user account_resource_rm hex:01010700000003000000424f42
+result=0
+[0] rval=0 out=
+> call user account_resource_rm hex:01010900000005000000616c696365
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=01010400000000000000
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=00000000000000004149cb6ac5c59223

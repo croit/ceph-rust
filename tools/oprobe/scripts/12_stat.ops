@@ -1,0 +1,18 @@
+# stat sizes through the life of an object
+stat
+---
+write 0 "abc"
+---
+stat
+---
+append "de"
+---
+stat
+---
+truncate 100
+---
+stat
+---
+writefull "z"
+---
+stat

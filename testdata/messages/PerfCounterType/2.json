@@ -1,0 +1,9 @@
+{
+    "path": "mycounter",
+    "description": "mycounter description",
+    "nick": "mycounter nick",
+    "type": 8,
+    "priority": 10,
+    "unit": 0
+}
+

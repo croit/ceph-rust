@@ -1,0 +1,48 @@
+# 18_omap_cmp
+> omap-set k=5
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> omap-cmp k eq 5
+result=0
+  [0] omap-cmp rval=0 out=<empty>
+> omap-cmp k eq 6
+result=-125(ECANCELED)
+  [0] omap-cmp rval=-125(ECANCELED) out=<empty>
+> omap-cmp k gt 4
+result=-22(EINVAL)
+  [0] omap-cmp rval=-22(EINVAL) out=<empty>
+> omap-cmp k gt 6
+result=-22(EINVAL)
+  [0] omap-cmp rval=-22(EINVAL) out=<empty>
+> omap-cmp k lt 6
+result=-125(ECANCELED)
+  [0] omap-cmp rval=-125(ECANCELED) out=<empty>
+> omap-cmp k lt 4
+result=0
+  [0] omap-cmp rval=0 out=<empty>
+> omap-cmp nope eq ""
+result=0
+  [0] omap-cmp rval=0 out=<empty>
+> omap-cmp nope eq x
+result=-125(ECANCELED)
+  [0] omap-cmp rval=-125(ECANCELED) out=<empty>
+> omap-cmp k 9 5
+result=-22(EINVAL)
+  [0] omap-cmp rval=-22(EINVAL) out=<empty>
+> omap-cmp k eq 5; omap-set k=6
+result=0
+  [0] omap-cmp rval=0 out=<empty>
+  [1] omap-set-vals rval=0 out=<empty>
+> omap-cmp k eq 5; omap-set k=7
+result=-125(ECANCELED)
+  [0] omap-cmp rval=-125(ECANCELED) out=<empty>
+  [1] omap-set-vals rval=0 out=<empty>
+> omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"k"="6"} truncated=false
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> omap-cmp k eq 5
+result=-2(ENOENT)
+  [0] omap-cmp rval=0 out=<empty>

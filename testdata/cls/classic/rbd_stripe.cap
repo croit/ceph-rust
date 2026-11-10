@@ -1,0 +1,14 @@
+# rbd_stripe
+# t=1791560685
+> call rbd create hex:0000004000000000163d000000000000000c0000007262645f646174612e616263
+result=0
+[0] rval=0 out=
+> call rbd get_stripe_unit_count
+result=-8
+[0] rval=-8 out=
+> call rbd set_stripe_unit_count hex:00000100000000000400000000000000
+result=-8
+[0] rval=-8 out=
+> call rbd set_features hex:02000000000000000200000000000000
+result=-22
+[0] rval=-22 out=

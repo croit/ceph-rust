@@ -1,0 +1,46 @@
+{
+    "oid": {
+        "oid": "wh",
+        "key": "",
+        "snapid": -2,
+        "hash": 1,
+        "max": 0,
+        "pool": 1,
+        "namespace": ""
+    },
+    "version": "0'0",
+    "prior_version": "0'0",
+    "last_reqid": "unknown.0.0:0",
+    "user_version": 0,
+    "size": 0,
+    "mtime": "0.000000",
+    "local_mtime": "0.000000",
+    "lost": 0,
+    "flags": [
+        "whiteout",
+        "manifest",
+        "redirect_has_reference"
+    ],
+    "truncate_seq": 0,
+    "truncate_size": 0,
+    "data_digest": "0xffffffff",
+    "omap_digest": "0xffffffff",
+    "expected_object_size": 0,
+    "expected_write_size": 0,
+    "alloc_hint_flags": 0,
+    "manifest": {
+        "type": 1,
+        "redirect_target": {
+            "oid": "target",
+            "key": "",
+            "snapid": -2,
+            "hash": 9,
+            "max": 0,
+            "pool": 3,
+            "namespace": ""
+        }
+    },
+    "watchers": {},
+    "shard_versions": []
+}
+

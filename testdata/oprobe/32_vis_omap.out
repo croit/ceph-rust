@@ -1,0 +1,58 @@
+# 32_vis_omap
+> @flags=returnvec; omap-set a=1 b=2; omap-get-vals; omap-get-header
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] omap-get-vals rval=0 out=<empty>
+  [2] omap-get-header rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+> omap-set a=1
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> @flags=returnvec; omap-set b=2; omap-get-vals; omap-get-vals-by-keys a b
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] omap-get-vals rval=0 vals={"a"="1", "b"="2"} truncated=false
+  [2] omap-get-vals-by-keys rval=0 map={"a"="1", "b"="2"}
+> @flags=returnvec; omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"a"="1", "b"="2"} truncated=false
+> @flags=returnvec; omap-set-header HDR1; omap-get-header
+result=0
+  [0] omap-set-header rval=0 out=<empty>
+  [1] omap-get-header rval=0 out=<empty>
+> @flags=returnvec; omap-get-header
+result=0
+  [0] omap-get-header rval=0 len=4 "HDR1"
+> @flags=returnvec; omap-rm-keys a; omap-get-vals; omap-cmp a eq 1
+result=0
+  [0] omap-rm-keys rval=0 out=<empty>
+  [1] omap-get-vals rval=0 vals={"a"="1", "b"="2"} truncated=false
+  [2] omap-cmp rval=0 out=<empty>
+> @flags=returnvec; omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"b"="2"} truncated=false
+> @flags=returnvec; omap-clear; omap-get-vals; omap-get-header
+result=0
+  [0] omap-clear rval=0 out=<empty>
+  [1] omap-get-vals rval=0 vals={} truncated=false
+  [2] omap-get-header rval=0 out=<empty>
+> @flags=returnvec; omap-get-vals; omap-get-header
+result=0
+  [0] omap-get-vals rval=0 vals={} truncated=false
+  [1] omap-get-header rval=0 out=<empty>
+> omap-set z=5
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> @flags=returnvec; omap-set z=6; omap-cmp z eq 6
+result=-125(ECANCELED)
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] omap-cmp rval=-125(ECANCELED) out=<empty>
+> @flags=returnvec; omap-set z=6; omap-cmp z eq 5
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] omap-cmp rval=0 out=<empty>
+> @flags=returnvec; omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"z"="6"} truncated=false

@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "croit-flashstore-tool"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "croit-flashstore-tool"
+path = "src/main.rs"
+
+[features]
+rocksdb = ["osd/rocksdb", "store/rocksdb"]
+splinterdb = ["osd/splinterdb", "store/splinterdb", "storeadapt/splinterdb"]
+# Dev-only std::net driver for talking to the mon (ADR 0015 amendment); on by default for the tool.
+default = ["kernel-probe", "lab", "elastic", "kernel-nvme"]
+lab = ["osd/lab", "store/lab", "hwcheck/lab"]
+# Elastic shard capacity (adr 0021 am. 47): bench --elastic.
+elastic = ["store/elastic", "osd/elastic", "hwcheck/elastic"]
+kernel-probe = ["mon-std", "osd/kernel-probe"]
+# Production provisioning: `prepare` talks to the mon over kernel TCP (std::net, tool only; the daemon never links this).
+mon-std = ["osd/mon-std"]
+# SPDK devices (`--dev spdk:PCI`); needs the SPDK libs (lab/devcontainer).
+spdk = ["nvme/spdk", "osd/spdk", "hwcheck/spdk", "kernel-nvme"]
+# Production `kernel:` devices and provisioning (adr 0169); also implied by `spdk`.
+kernel-nvme = ["nvme/kernel", "osd/kernel-nvme"]
+# DEBUG/TESTING ONLY: open `spdk:PCI,ns=N,shared` as an SPDK multi-process secondary (adr 0463). Never in production builds.
+spdk-mp = ["spdk", "nvme/spdk-mp"]
+# mimalloc as global allocator (hot paths still allocate small objects; cuts malloc/free cost ~3x).
+mimalloc = ["dep:mimalloc", "hwcheck/mimalloc"]
+# Count heap allocations; the bench prints allocs/txn (lab only).
+alloc-count = []
+
+[dependencies]
+osddir = { path = "../../services/osd/osddir" }
+ostool = { path = "../../tools/ostool" }
+storeadapt = { path = "../../services/osd/storeadapt" }
+mimalloc = { version = "0.1.52", optional = true }
+store = { path = "../../services/osd/store" }
+osd = { path = "../../services/osd/osd" }
+nvme = { path = "../../crates/nvme" }
+hwcheck = { path = "../../crates/hwcheck", features = ["knet"] }
+outfmt = { path = "../../crates/outfmt" }
+denc = { path = "../../crates/denc" }
+opwire = { path = "../../crates/opwire" }
+cephx = { path = "../../crates/cephx" }
+monc = { path = "../../crates/monc" }
+osdmap = { path = "../../crates/osdmap" }
+messages = { path = "../../crates/messages" }
+serde_json = "1.0.151"
+md5 = "0.8.1"
+peering = { version = "0.0.0", path = "../../services/osd/peering" }
+crc = { version = "0.0.0", path = "../../crates/crc" }
+hashsum = { version = "0.0.0", path = "../../crates/hashsum" }
+rayon = "1.12.0"
+libc = "0.2.191"

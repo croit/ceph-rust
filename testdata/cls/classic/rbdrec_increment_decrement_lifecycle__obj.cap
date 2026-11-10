@@ -1,0 +1,35 @@
+# rbdrec_increment_decrement_lifecycle__obj
+# t=1791735734
+> call sem_set increment hex:01010e0000000200000001000000610100000062
+result=0
+[0] rval=0 out=
+> call sem_set increment hex:010109000000010000000100000061
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:0101110000000100000001000000610000000000000000
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:01011600000002000000010000006101000000620000000000000000
+result=0
+[0] rval=0 out=
+> call sem_set increment hex:010109000000010000000100000063
+result=0
+[0] rval=0 out=
+> call sem_set increment hex:010109000000010000000100000063
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:010117000000020000000100000063020000007a7a0000000000000000
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=010000000d000000434c535f53454d5f5345545f63160000000101100000000200000000000000000000000000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a9d04e52d

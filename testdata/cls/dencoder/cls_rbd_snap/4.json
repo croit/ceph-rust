@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "snap",
+    "image_size": 123456,
+    "protection_status": "protected",
+    "namespace": {
+        "snapshot_namespace_type": "user"
+    },
+    "timestamp": "0.000000",
+    "child_count": 543,
+    "parent_overlap": 123
+}
+

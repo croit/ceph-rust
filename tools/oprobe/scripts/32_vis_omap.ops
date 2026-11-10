@@ -1,0 +1,43 @@
+# omap-set then omap-get*/omap-cmp in one message (committed view)
+@flags=returnvec
+omap-set a=1 b=2; omap-get-vals; omap-get-header
+---
+stat
+---
+omap-set a=1
+---
+@flags=returnvec
+omap-set b=2; omap-get-vals; omap-get-vals-by-keys a b
+---
+@flags=returnvec
+omap-get-vals
+---
+@flags=returnvec
+omap-set-header "HDR1"; omap-get-header
+---
+@flags=returnvec
+omap-get-header
+---
+@flags=returnvec
+omap-rm-keys a; omap-get-vals; omap-cmp a eq 1
+---
+@flags=returnvec
+omap-get-vals
+---
+@flags=returnvec
+omap-clear; omap-get-vals; omap-get-header
+---
+@flags=returnvec
+omap-get-vals; omap-get-header
+---
+omap-set z=5
+---
+# omap-cmp compares the committed value
+@flags=returnvec
+omap-set z=6; omap-cmp z eq 6
+---
+@flags=returnvec
+omap-set z=6; omap-cmp z eq 5
+---
+@flags=returnvec
+omap-get-vals

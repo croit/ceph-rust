@@ -1,0 +1,21 @@
+# reply-data rule for mutating messages: outdata dropped unless RETURNVEC (cap 64 B per op -> EOVERFLOW)
+writefull rep:100:a
+---
+# without RETURNVEC: rvals kept, outdata dropped
+write 0 b; read 0 3; stat
+---
+@flags=returnvec
+write 0 c; read 0 64
+---
+@flags=returnvec
+write 0 d; read 0 65
+---
+# a read-only message always returns its data
+read 0 100
+---
+# a "mutating" message that changes nothing keeps its outdata
+write 0 ""; read 0 3
+---
+# stat has no data limit issues
+@flags=returnvec
+write 1 e; stat

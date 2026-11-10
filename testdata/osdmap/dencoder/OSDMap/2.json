@@ -1,0 +1,55 @@
+{
+    "epoch": 1,
+    "fsid": "00000000-0000-0000-0000-000000000000",
+    "created": "1.000000",
+    "modified": "1.000000",
+    "last_up_change": "0.000000",
+    "last_in_change": "0.000000",
+    "flags": "",
+    "flags_num": 0,
+    "flags_set": [],
+    "crush_version": 1,
+    "full_ratio": 0,
+    "backfillfull_ratio": 0,
+    "nearfull_ratio": 0,
+    "cluster_snapshot": "",
+    "pool_max": 0,
+    "max_osd": 16,
+    "require_min_compat_client": "unknown",
+    "min_compat_client": "jewel",
+    "require_osd_release": "unknown",
+    "allow_crimson": false,
+    "pools": [],
+    "osds": [],
+    "osd_xinfo": [],
+    "pg_upmap": [],
+    "pg_upmap_items": [],
+    "pg_upmap_primaries": [],
+    "pg_temp": [],
+    "primary_temp": [],
+    "blocklist": {
+        "-": "5.000000"
+    },
+    "range_blocklist": {},
+    "erasure_code_profiles": {
+        "default": {
+            "k": "2",
+            "m": "2",
+            "plugin": "isa",
+            "technique": "reed_sol_van"
+        }
+    },
+    "removed_snaps_queue": [],
+    "new_removed_snaps": [],
+    "new_purged_snaps": [],
+    "crush_node_flags": {},
+    "device_class_flags": {},
+    "stretch_mode": {
+        "stretch_mode_enabled": false,
+        "stretch_bucket_count": 0,
+        "degraded_stretch_mode": 0,
+        "recovering_stretch_mode": 0,
+        "stretch_mode_bucket": 0
+    }
+}
+

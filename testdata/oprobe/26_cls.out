@@ -1,0 +1,45 @@
+# 26_cls
+> writefull classdata; omap-set order=hex:16 size=hex:0001000000000000
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] omap-set-vals rval=0 out=<empty>
+> call nosuchclass nosuchmethod
+result=-1(EPERM)
+  [0] call rval=0 out=<empty>
+> call hello nosuchmethod
+result=-95(EOPNOTSUPP)
+  [0] call rval=0 out=<empty>
+> call hello say_hello there
+result=0
+  [0] call rval=0 len=13 "Hello, there!"
+> call hello replay
+result=0
+  [0] call rval=0 len=9 "classdata"
+> call rbd get_size hex:feffffffffffffff
+result=0
+  [0] call rval=0 len=9 hex:160001000000000000
+> call rbd get_size hex:feff
+result=-22(EINVAL)
+  [0] call rval=-22(EINVAL) out=<empty>
+> call lock get_info hex:0101050000000100000078
+result=0
+  [0] call rval=0 len=15 hex:010109000000000000000000000000
+> call lock get_info hex:00
+result=-22(EINVAL)
+  [0] call rval=-22(EINVAL) out=<empty>
+> call lock list_locks
+result=0
+  [0] call rval=0 len=10 hex:01010400000000000000
+> write 0 XX; call rbd get_size hex:feff
+result=-22(EINVAL)
+  [0] write rval=0 out=<empty>
+  [1] call rval=-22(EINVAL) out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=9 "classdata"
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> call rbd get_size hex:feffffffffffffff
+result=-2(ENOENT)
+  [0] call rval=0 out=<empty>

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+[package]
+name = "cephconf"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+description = "ceph.conf parsing and typed option values shared by the daemon, the librados C ABI and the CephFS client"
+
+[lints]
+workspace = true
+
+[dependencies]

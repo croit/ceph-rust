@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "spsc"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+description = "Bounded lock-free single-producer single-consumer ring, the cross-core channel (adr 0006)"
+
+[lints]
+workspace = true

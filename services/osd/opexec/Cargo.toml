@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "opexec"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+description = "Sans-IO primary op execution engine (client-ops spec): op executor, object ordering, snaps, watch/notify, pgls"
+
+[lints]
+workspace = true
+
+[dependencies]
+wprof = { path = "../wprof" }
+denc = { path = "../../../crates/denc" }
+crc = { path = "../../../crates/crc" }
+opwire = { path = "../../../crates/opwire" }
+replwire = { path = "../../../services/osd/replwire" }
+pgwire = { path = "../../../services/osd/pgwire" }
+peering = { path = "../../../services/osd/peering" }
+cls = { path = "../../../services/osd/cls" }
+xxhash-rust = { version = "0.8.19", features = ["xxh32", "xxh64"] }
+bytes = "1.12.1"
+foldhash = "0.2.0"
+
+[dev-dependencies]
+oprobe = { path = "../../../tools/oprobe" }

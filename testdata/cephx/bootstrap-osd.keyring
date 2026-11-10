@@ -1,0 +1,4 @@
+[client.bootstrap-osd]
+	key = AgCUu8hqf/c5ESAAu0F4zS9kNG3vKKh2kfScIb2HewYWVVF33u4zkxVJKDo=
+	caps mgr = "allow r"
+	caps mon = "profile bootstrap-osd"

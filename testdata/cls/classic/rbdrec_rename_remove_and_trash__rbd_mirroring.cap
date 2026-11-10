@@ -1,0 +1,26 @@
+# rbdrec_rename_remove_and_trash__rbd_mirroring
+# t=1791735735
+> call rbd mirror_image_get hex:080000003130616263646566
+result=-2
+[0] rval=0 out=
+> call rbd mirror_image_remove hex:080000003130616263646566
+result=-2
+[0] rval=-2 out=
+> call rbd mirror_mode_get
+result=-2
+[0] rval=0 out=
+> call rbd mirror_peer_list
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

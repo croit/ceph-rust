@@ -1,0 +1,161 @@
+# begin crush map
+tunable choose_local_tries 0
+tunable choose_local_fallback_tries 0
+tunable choose_total_tries 50
+tunable chooseleaf_descend_once 1
+tunable chooseleaf_vary_r 1
+tunable chooseleaf_stable 1
+tunable straw_calc_version 1
+tunable allowed_bucket_algs 54
+
+# devices
+device 0 osd.0
+device 1 osd.1
+device 2 osd.2
+device 3 osd.3
+device 4 osd.4
+device 5 osd.5
+device 6 osd.6
+device 7 osd.7
+device 8 osd.8
+device 9 osd.9
+device 10 osd.10
+device 11 osd.11
+
+# types
+type 0 osd
+type 1 host
+type 2 root
+
+# buckets
+host host0 {
+	id -1		# do not change unnecessarily
+	# weight 3.00000
+	alg straw2
+	hash 0	# rjenkins1
+	item osd.0 weight 1.00000
+	item osd.1 weight 1.00000
+	item osd.2 weight 1.00000
+}
+host host1 {
+	id -2		# do not change unnecessarily
+	# weight 3.00000
+	alg straw2
+	hash 0	# rjenkins1
+	item osd.3 weight 1.00000
+	item osd.4 weight 1.00000
+	item osd.5 weight 1.00000
+}
+host host2 {
+	id -3		# do not change unnecessarily
+	# weight 3.00000
+	alg straw2
+	hash 0	# rjenkins1
+	item osd.6 weight 1.00000
+	item osd.7 weight 1.00000
+	item osd.8 weight 1.00000
+}
+host host3 {
+	id -4		# do not change unnecessarily
+	# weight 3.00000
+	alg straw2
+	hash 0	# rjenkins1
+	item osd.9 weight 1.00000
+	item osd.10 weight 1.00000
+	item osd.11 weight 1.00000
+}
+root root {
+	id -5		# do not change unnecessarily
+	# weight 12.00000
+	alg straw2
+	hash 0	# rjenkins1
+	item host0 weight 3.00000
+	item host1 weight 3.00000
+	item host2 weight 3.00000
+	item host3 weight 3.00000
+}
+
+# rules
+rule replicated_rule {
+	id 0
+	type replicated
+	step take root
+	step chooseleaf firstn 0 type host
+	step emit
+}
+rule r_indep {
+	id 1
+	type erasure
+	step set_chooseleaf_tries 5
+	step set_choose_tries 100
+	step take root
+	step chooseleaf indep 0 type host
+	step emit
+}
+rule r_choose_osd {
+	id 2
+	type replicated
+	step take root
+	step choose firstn 0 type osd
+	step emit
+}
+rule r_two_indep {
+	id 3
+	type erasure
+	step take root
+	step choose indep 2 type host
+	step choose indep 2 type osd
+	step emit
+}
+rule r_two_firstn {
+	id 4
+	type replicated
+	step take root
+	step choose firstn 2 type host
+	step choose firstn 2 type osd
+	step emit
+}
+rule r_leaf_neg {
+	id 5
+	type replicated
+	step take root
+	step chooseleaf firstn -1 type host
+	step emit
+}
+rule r_tunables {
+	id 6
+	type replicated
+	step set_choose_local_tries 2
+	step set_choose_local_fallback_tries 5
+	step set_chooseleaf_vary_r 0
+	step set_chooseleaf_stable 0
+	step set_choose_tries 30
+	step take root
+	step chooseleaf firstn 0 type host
+	step emit
+}
+rule r_indep_osd {
+	id 7
+	type erasure
+	step take root
+	step choose indep 0 type osd
+	step emit
+}
+
+rule r_msr_indep {
+	id 10
+	type msr_indep
+	step take root
+	step choosemsr 2 type host
+	step choosemsr 2 type osd
+	step emit
+}
+rule r_msr_firstn {
+	id 11
+	type msr_firstn
+	step take root
+	step choosemsr 3 type host
+	step choosemsr 1 type osd
+	step emit
+}
+# end crush map

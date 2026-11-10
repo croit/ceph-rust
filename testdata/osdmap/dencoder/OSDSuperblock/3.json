@@ -1,0 +1,19 @@
+{
+    "cluster_fsid": "01010101-0101-0101-0101-010101010101",
+    "osd_fsid": "02020202-0202-0202-0202-020202020202",
+    "whoami": 3,
+    "current_epoch": 4,
+    "weight": 0,
+    "compat": {
+        "compat": {},
+        "ro_compat": {},
+        "incompat": {}
+    },
+    "clean_thru": 7,
+    "last_epoch_mounted": 8,
+    "purged_snaps_last": 0,
+    "last_purged_snaps_scrub": "0.000000",
+    "cluster_osdmap_trim_lower_bound": 0,
+    "maps": "[5~5]"
+}
+

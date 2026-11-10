@@ -1,0 +1,10 @@
+# list-watchers: empty list on an existing object; ENOENT on a missing one
+list-watchers
+---
+create
+---
+list-watchers
+---
+delete
+---
+list-watchers

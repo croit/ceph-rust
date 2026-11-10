@@ -1,0 +1,25 @@
+{
+    "entries": [
+        {
+            "watcher": "client.1",
+            "cookie": 10,
+            "timeout": 30,
+            "addr": {
+                "type": "v1",
+                "addr": "127.0.0.1:1024",
+                "nonce": 1000
+            }
+        },
+        {
+            "watcher": "client.2",
+            "cookie": 20,
+            "timeout": 60,
+            "addr": {
+                "type": "v1",
+                "addr": "127.0.0.2:1025",
+                "nonce": 1001
+            }
+        }
+    ]
+}
+

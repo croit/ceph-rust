@@ -1,0 +1,8 @@
+# Example drop-in: /etc/systemd/system/croit-flashstore-osd@4.service.d/tier-knet.conf   (adr 0056, adr 0053)
+# Kernel TCP over io_uring needs NO extra capability by default. Optional extras:
+#  - io_uring zero-copy receive (zcrx, docs/how-to/tune-host.md) needs CAP_NET_ADMIN: uncomment the two lines below.
+#  - sysctl kernel.io_uring_disabled=1 (6.6+): io_uring is limited to the group in kernel.io_uring_group; put the OSD user
+#    in it (sysctl -w kernel.io_uring_group=<gid of ceph>) or set kernel.io_uring_disabled=0. =2 blocks io_uring for everyone.
+[Service]
+# AmbientCapabilities=CAP_IPC_LOCK CAP_SYS_NICE CAP_NET_ADMIN
+# CapabilityBoundingSet=CAP_IPC_LOCK CAP_SYS_NICE CAP_SETUID CAP_SETGID CAP_AUDIT_WRITE CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_DAC_READ_SEARCH CAP_NET_ADMIN

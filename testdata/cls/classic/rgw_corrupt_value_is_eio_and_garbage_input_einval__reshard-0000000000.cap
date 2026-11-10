@@ -1,0 +1,29 @@
+# rgw_corrupt_value_is_eio_and_garbage_input_einval__reshard-0000000000
+# t=1791707457
+> call rgw reshard_list hex:0101080000000a00000000000000
+result=-2
+[0] rval=0 out=
+> call rgw reshard_add hex:ff
+result=-22
+[0] rval=-22 out=
+> call rgw reshard_list hex:ff
+result=-2
+[0] rval=0 out=
+> call rgw reshard_get hex:ff
+result=-2
+[0] rval=0 out=
+> call rgw reshard_remove hex:ff
+result=-22
+[0] rval=-22 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

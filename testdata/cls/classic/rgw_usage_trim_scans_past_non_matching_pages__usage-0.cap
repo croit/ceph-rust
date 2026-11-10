@@ -1,0 +1,20 @@
+# rgw_usage_trim_scans_past_non_matching_pages__usage-0
+# t=1791707460
+> call rgw user_usage_log_trim hex:03021e0000000000000000000000ffffffffffffffff000000000600000077616e746564
+result=-2
+[0] rval=-2 out=
+> call rgw user_usage_log_trim hex:03021e0000000000000000000000ffffffffffffffff000000000600000077616e746564
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

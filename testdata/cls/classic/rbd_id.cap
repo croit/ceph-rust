@@ -1,0 +1,36 @@
+# rbd_id
+# t=1791560685
+> call rbd get_id
+result=-2
+[0] rval=0 out=
+> create; call rbd set_id hex:03000000612062
+result=-22
+[0] rval=0 out=
+[1] rval=-22 out=
+> create; call rbd set_id hex:01
+result=-22
+[0] rval=0 out=
+[1] rval=-22 out=
+> call rbd set_id hex:03000000616263
+result=-2
+[0] rval=-2 out=
+> create excl; call rbd set_id hex:06000000616263313233
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> call rbd get_id
+result=0
+[0] rval=0 out=06000000616263313233
+> read 0 0
+result=0
+[0] rval=0 out=06000000616263313233
+> create; call rbd set_id hex:050000006f74686572
+result=-17
+[0] rval=0 out=
+[1] rval=-17 out=
+> call rbd get_id
+result=0
+[0] rval=0 out=06000000616263313233
+> stat
+result=0
+[0] rval=0 out=0a00000000000000ed0bc96a3d24f710

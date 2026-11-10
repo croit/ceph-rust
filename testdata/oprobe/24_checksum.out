@@ -1,0 +1,37 @@
+# 24_checksum
+> writefull abcdefghijklmnop
+result=0
+  [0] writefull rval=0 out=<empty>
+> checksum crc32c 0 16 16
+result=0
+  [0] checksum rval=0 csum[1]=[0xe1d7640f]
+> checksum crc32c 0 16 4
+result=0
+  [0] checksum rval=0 csum[4]=[0xdaaf41f6,0x3c9a7a13,0x37787a2,0xf51c7b28]
+> checksum crc32c 0 16 4 0xffffffff
+result=0
+  [0] checksum rval=0 csum[4]=[0x6d37f5ce,0x8b02ce2b,0xb4ef339a,0x4284cf10]
+> checksum xxhash32 0 16 8
+result=0
+  [0] checksum rval=0 csum[2]=[0xbb3c6bb,0x546142a4]
+> checksum xxhash64 0 16 8
+result=0
+  [0] checksum rval=0 csum[2]=[0x3ad351775b4634b7,0xca6867cb433bfae9]
+> checksum crc32c 0 0 16
+result=-22(EINVAL)
+  [0] checksum rval=-22(EINVAL) out=<empty>
+> checksum crc32c 0 10 4
+result=-22(EINVAL)
+  [0] checksum rval=-22(EINVAL) out=<empty>
+> checksum crc32c 100 8 8
+result=0
+  [0] checksum rval=0 out=<empty>
+> checksum crc32c 8 16 8
+result=0
+  [0] checksum rval=0 csum[1]=[0xe64d7801]
+> checksum crc32c 0 16 0
+result=0
+  [0] checksum rval=0 csum[1]=[0xe1d7640f]
+> checksum 9 0 8 8
+result=-22(EINVAL)
+  [0] checksum rval=-22(EINVAL) out=<empty>

@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "opwire"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+ingress = { path = "../ingress" }
+bytes = "1.12.1"
+denc = { path = "../../crates/denc" }
+messages = { path = "../../crates/messages" }
+crc = { path = "../../crates/crc" }
+
+[dev-dependencies]
+msgr2 = { path = "../../crates/msgr2" }

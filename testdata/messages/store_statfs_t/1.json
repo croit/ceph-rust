@@ -1,0 +1,13 @@
+{
+    "total": 0,
+    "available": 0,
+    "internally_reserved": 0,
+    "allocated": 0,
+    "data_stored": 0,
+    "data_compressed": 0,
+    "data_compressed_allocated": 0,
+    "data_compressed_original": 0,
+    "omap_allocated": 0,
+    "internal_metadata": 0
+}
+

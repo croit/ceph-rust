@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "eal-heap"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# Without `spdk` the crate is empty, so workspace builds need no DPDK install.
+spdk = ["dep:dpdk-link"]
+
+[dependencies]
+crossbeam-queue = "0.3.14"
+# the DPDK archives SPDK's env needs; the one owner of the native DPDK link line
+dpdk-link = { path = "../dpdk-link", features = ["spdk"], optional = true }
+
+[build-dependencies]
+cc = "1.6.0"

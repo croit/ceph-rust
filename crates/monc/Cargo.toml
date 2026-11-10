@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "monc"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = []
+# Failed-map capture for private lab diagnosis; absent from production.
+lab = []
+
+[dependencies]
+deadline = { path = "../../crates/deadline" }
+diag = { path = "../diag" }
+denc = { path = "../../crates/denc" }
+msgr2 = { path = "../../crates/msgr2" }
+messages = { path = "../../crates/messages" }
+cephx = { path = "../../crates/cephx" }
+osdmap = { path = "../../crates/osdmap" }
+foldhash = "0.2.0"

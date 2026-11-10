@@ -1,0 +1,21 @@
+{
+    "handle": "-1:40000000::key:hi:1",
+    "entries": [
+        {
+            "namespace": "",
+            "object": "one",
+            "key": ""
+        },
+        {
+            "namespace": "",
+            "object": "two",
+            "key": "twokey"
+        },
+        {
+            "namespace": "",
+            "object": "three",
+            "key": ""
+        }
+    ]
+}
+

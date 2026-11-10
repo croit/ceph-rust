@@ -1,0 +1,113 @@
+# rbd_dir
+# t=1791560685
+> call rbd dir_add_image hex:04000000696d673106000000616263313233
+result=0
+[0] rval=0 out=
+> call rbd dir_add_image hex:04000000696d6731030000007a7a7a
+result=-17
+[0] rval=-17 out=
+> call rbd dir_add_image hex:04000000696d673906000000616263313233
+result=-9
+[0] rval=-9 out=
+> call rbd dir_add_image hex:00000000020000007131
+result=-22
+[0] rval=-22 out=
+> call rbd dir_add_image hex:0300000062616403000000612d62
+result=-22
+[0] rval=-22 out=
+> call rbd dir_add_image hex:0300000062616400000000
+result=-22
+[0] rval=-22 out=
+> call rbd dir_add_image hex:04000000696d673206000000646566343536
+result=0
+[0] rval=0 out=
+> call rbd dir_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0200000004000000696d67310600000061626331323304000000696d673206000000646566343536
+> call rbd dir_list hex:04000000696d67310100000000000000
+result=0
+[0] rval=0 out=0100000004000000696d673206000000646566343536
+> call rbd dir_list hex:000000000000000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd dir_list hex:030000007a7a7a0500000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd dir_get_id hex:04000000696d6731
+result=0
+[0] rval=0 out=06000000616263313233
+> call rbd dir_get_id hex:040000006e6f6e65
+result=-2
+[0] rval=-2 out=
+> call rbd dir_get_name hex:06000000646566343536
+result=0
+[0] rval=0 out=04000000696d6732
+> call rbd dir_get_name hex:040000006e6f6e65
+result=-2
+[0] rval=-2 out=
+> call rbd dir_rename_image hex:04000000696d673104000000696d673306000000616263313233
+result=0
+[0] rval=0 out=
+> call rbd dir_rename_image hex:04000000696d673104000000696d673406000000616263313233
+result=-2
+[0] rval=-2 out=
+> call rbd dir_rename_image hex:04000000696d673304000000696d673206000000616263313233
+result=-17
+[0] rval=-17 out=
+> call rbd dir_rename_image hex:04000000696d673304000000696d67350700000077726f6e676964
+result=-2
+[0] rval=-2 out=
+> call rbd dir_rename_image hex:04000000696d67330000000006000000616263313233
+result=-22
+[0] rval=-22 out=
+> call rbd dir_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0200000004000000696d67320600000064656634353604000000696d673306000000616263313233
+> call rbd dir_remove_image hex:04000000696d673306000000616263313233
+result=0
+[0] rval=0 out=
+> call rbd dir_remove_image hex:04000000696d673306000000616263313233
+result=-2
+[0] rval=-2 out=
+> call rbd dir_remove_image hex:04000000696d673206000000616263393939
+result=-2
+[0] rval=-2 out=
+> call rbd dir_remove_image hex:04000000696d673206000000646566343536
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> call rbd dir_state_assert hex:00
+result=-2
+[0] rval=-2 out=
+> call rbd dir_state_set hex:01
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:01
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:00
+result=-2
+[0] rval=-2 out=
+> call rbd dir_add_image hex:040000006c61746503000000696431
+result=0
+[0] rval=0 out=
+> call rbd dir_state_set hex:07
+result=-22
+[0] rval=-22 out=
+> call rbd dir_state_set hex:00
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:00
+result=0
+[0] rval=0 out=
+> call rbd dir_add_image hex:010000006103000000696432
+result=0
+[0] rval=0 out=
+> call rbd dir_state_set hex:01
+result=-16
+[0] rval=-16 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=050000000600000069645f69643108000000040000006c6174650600000069645f696432050000000100000061060000006e616d655f610700000003000000696432090000006e616d655f6c6174650700000003000000696431050000007374617465010000000000

@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "oprobe"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+description = "Dev-only RADOS client for differential op testing (kernel TCP; never linked into the daemon, adr 0015 amendment)"
+
+[lints]
+workspace = true
+
+[features]
+default = []
+native-read = ["dep:rustyrados"]
+native-bootstrap = ["dep:rustyrados"]
+
+[dependencies]
+denc = { path = "../../crates/denc" }
+crc = { path = "../../crates/crc" }
+msgr2 = { path = "../../crates/msgr2" }
+messages = { path = "../../crates/messages" }
+cephx = { path = "../../crates/cephx" }
+monc = { path = "../../crates/monc" }
+osdmap = { path = "../../crates/osdmap" }
+opwire = { path = "../../crates/opwire" }
+hashsum = { version = "0.0.0", path = "../../crates/hashsum" }
+rustyrados = { path = "../../crates/rustyrados", optional = true }
+outfmt = { version = "0.0.0", path = "../../crates/outfmt" }
+serde_json = "1.0.154"
+socket2 = "0.6.5"
+
+[[example]]
+name = "native-read"
+required-features = ["native-read"]
+
+[[example]]
+name = "native-write"
+required-features = ["native-read"]
+
+[[example]]
+name = "native-compound"
+required-features = ["native-read"]
+
+[[example]]
+name = "native-watch"
+required-features = ["native-read"]
+
+[[example]]
+name = "native-backoff"
+required-features = ["native-read"]
+
+[[example]]
+name = "native-bootstrap"
+required-features = ["native-bootstrap"]

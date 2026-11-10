@@ -1,0 +1,17 @@
+{
+    "id": 1,
+    "namespace": {
+        "type": "mirror",
+        "state": "primary",
+        "complete": false,
+        "mirror_peer_uuids": [
+            "1",
+            "2"
+        ],
+        "clean_since_snap_id": 18446744073709551614
+    },
+    "name": "snap1",
+    "image_size": 123,
+    "timestamp": "123456.000000"
+}
+

@@ -1,0 +1,20 @@
+# rbdrec_legacy_urgent_recomputes_reserved_size__q
+# t=1791735734
+> call 2pc_queue 2pc_queue_init hex:010115000000a08601000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000050000000000000001000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=9100000000000000b6b7cb6a58e7a931

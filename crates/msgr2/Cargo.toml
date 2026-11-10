@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "msgr2"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+libc = { version = "0.2.190", optional = true }
+ingress = { path = "../ingress" }
+crc = { path = "../../crates/crc" }
+diag = { path = "../diag" }
+aws-lc-rs = "1.18.1"
+aws-lc-sys = "0.45.0"
+denc = { version = "0.0.0", path = "../../crates/denc" }
+foldhash = "0.2.0"
+bytes = "1.12.1"
+zeroize = { version = "1.9.1", features = ["derive"] }
+
+[features]
+profile = ["dep:libc"]
+# In-process harness hooks (`Conn::ack_all_sent`); test builds of the services only, never production.
+test-hooks = []
+
+[dev-dependencies]
+msgr2 = { path = ".", features = ["test-hooks"] }
+crc = { path = "../../crates/crc" }
+serde_json = "1.0.154"
+proptest = "1.12.0"

@@ -1,0 +1,14 @@
+# 25_alloc_hint
+> alloc-hint 4096 4096 0
+result=0
+  [0] set-alloc-hint rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+> write 0 x; alloc-hint 8192 4096 3
+result=0
+  [0] write rval=0 out=<empty>
+  [1] set-alloc-hint rval=0 out=<empty>
+> read 0 4
+result=0
+  [0] read rval=0 len=1 "x"

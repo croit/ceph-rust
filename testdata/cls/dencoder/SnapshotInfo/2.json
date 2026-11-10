@@ -1,0 +1,13 @@
+{
+    "id": 2,
+    "namespace": {
+        "type": "group",
+        "group_pool": 567,
+        "group_id": "group1",
+        "group_snapshot_id": "snap1"
+    },
+    "name": "snap1",
+    "image_size": 123,
+    "timestamp": "123456.000000"
+}
+

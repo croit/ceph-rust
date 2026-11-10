@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "rt"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+# TODO P0 part B: drop this block, use `workspace = true` (allow_attributes = deny)
+
+[dependencies]
+daemon-io = { path = "../daemon-io" }
+bytes = "1.12.1"
+ingress = { path = "../ingress" }
+libc = "0.2.190"
+mimalloc = { version = "0.1.52", optional = true }
+crc = { path = "../crc" }
+spsc = { path = "../spsc" }
+rdma = { path = "../rdma", optional = true }
+osd = { path = "../../services/osd/osd" }
+store = { path = "../../services/osd/store" }
+nvme = { path = "../nvme", optional = true }
+msgr2 = { path = "../msgr2" }
+uring-access = { path = "../uring-access", optional = true }
+eal-heap = { path = "../eal-heap", optional = true }
+foldhash = "0.2.0"
+
+[features]
+# Payload hugepage heap diagnostics (crate eal-heap, linked with the SPDK DPDK env): EAL heap calls in the NV_PHASE stall lines.
+eal-heap = ["dep:eal-heap", "eal-heap/spdk"]
+# mimalloc as the global allocator of the benchmark examples (thread-caching; cross-thread frees are cheap).
+mimalloc = ["dep:mimalloc"]
+# Kernel TCP tier over io_uring (Linux only, adr 0053): any NIC, bonding, VLAN, routing.
+knet = ["dep:io-uring", "dep:uring-access"]
+# LAB ONLY: chunk arrival / send drain probe of large frames on the kernel tier (stderr `CUTPROBE` lines; doc/perf/cut-through-20261021.md).
+cut-probe = ["knet"]
+# RDMA (RoCEv2) upgrade of knet connections (0469-rdma-transport, msgr2 spec 18): links the static rdma-core of RDMA_CORE_DIR
+# (feature `verbs` of the rdma crate). `memory-windows` provides the placement WRITE-to-reply owner (spec
+# rdma-placement-runtime.md) on the same RC SQ. Off = knet declines every RDMA command, no code of it is compiled.
+rdma = ["knet", "dep:rdma", "rdma/verbs", "rdma/memory-windows"]
+# `kernel:` store devices (adr 0169): the knet loop flushes the per-thread device ring and sleeps on its completions.
+kernel-nvme = ["dep:nvme", "nvme/kernel"]
+
+[dev-dependencies]
+denc = { path = "../../crates/denc" }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+io-uring = { version = "0.7.15", optional = true }
+
+[[example]]
+name = "knet_bench"
+required-features = ["knet"]
+
+[[test]]
+name = "rdma_read_buffer"
+required-features = ["rdma", "kernel-nvme"]

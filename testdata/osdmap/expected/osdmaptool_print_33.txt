@@ -1,0 +1,30 @@
+epoch 33
+fsid 6d2f4f0e-6e1a-4a64-9a55-6e766d65736f
+created 2026-10-09T10:01:56.819165+0000
+modified 2026-10-09T10:12:46.803189+0000
+flags sortbitwise,recovery_deletes,purged_snapdirs,pglog_hardlimit
+crush_version 9
+full_ratio 0.95
+backfillfull_ratio 0.9
+nearfull_ratio 0.85
+require_min_compat_client luminous
+min_compat_client jewel
+require_osd_release umbrella
+stretch_mode_enabled false
+
+pool 1 'rbd' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 14 flags hashpspool,selfmanaged_snaps,split_reads,supports_omap stripe_width 0 application rbd read_balance_score 1.22
+pool 2 '.mgr' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 1 pgp_num 1 autoscale_mode on last_change 17 flags hashpspool,split_reads,supports_omap stripe_width 0 pg_num_max 32 pg_num_min 1 application mgr read_balance_score 3.00
+pool 3 'nv_rep1' replicated size 1 min_size 1 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 28 flags hashpspool,split_reads,supports_omap stripe_width 0 read_balance_score 1.88
+pool 4 'nv_rep2' replicated size 2 min_size 2 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 30 flags hashpspool,split_reads,supports_omap stripe_width 0 read_balance_score 1.50
+pool 5 'nv_rep3' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 33 flags hashpspool,creating,split_reads,supports_omap stripe_width 0 read_balance_score 1.13
+
+max_osd 3
+osd.0 up   in  weight 1 up_from 21 up_thru 32 down_at 19 last_clean_interval [5,18) v2:172.28.0.20:6800/3492367927 v2:172.28.0.20:6801/3492367927 exists,up de57c85a-e4bb-44c6-91a8-c0732ae1f0c6
+osd.1 up   in  weight 1 up_from 22 up_thru 32 down_at 20 last_clean_interval [7,19) v2:172.28.0.21:6800/2798736266 v2:172.28.0.21:6801/2798736266 exists,up 33bf2952-8149-4927-a009-2a80f64d4bbd
+osd.2 up   in  weight 1 up_from 23 up_thru 32 down_at 22 last_clean_interval [9,19) v2:172.28.0.22:6800/727354591 v2:172.28.0.22:6801/727354591 exists,up 75165f9e-9202-46d6-afed-e2064ec33e2d
+
+blocklist 172.28.0.11:0/1091893688 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/169017496 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/3346861092 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:6800/220783113 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/105039625 expires 2026-10-10T10:03:21.610262+0000

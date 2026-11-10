@@ -1,0 +1,23 @@
+# rbdrec_migration_v2_flow__nohdr
+# t=1791735735
+> call rbd migration_set hex:030147000000010300000000000000020000006e730300000073726304000000616263640100000004000000000000000900000000000000000010000000000001000101000000780100000000
+result=-6
+[0] rval=-6 out=
+> call rbd migration_set_state hex:0100000000
+result=-6
+[0] rval=-6 out=
+> call rbd migration_remove
+result=-6
+[0] rval=-6 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

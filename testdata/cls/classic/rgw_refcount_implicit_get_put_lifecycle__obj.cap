@@ -1,0 +1,41 @@
+# rgw_refcount_implicit_get_put_lifecycle__obj
+# t=1791707459
+> call refcount read hex:01010100000001
+result=-2
+[0] rval=0 out=
+> call refcount read hex:01010100000000
+result=-2
+[0] rval=0 out=
+> call refcount get hex:01010700000002000000743101
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000001
+result=-2
+[0] rval=0 out=
+> call refcount put hex:01010700000002000000743101
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000001
+result=-2
+[0] rval=0 out=
+> call refcount put hex:01010700000002000000743101
+result=-2
+[0] rval=-2 out=
+> call refcount read hex:01010100000001
+result=-2
+[0] rval=0 out=
+> call refcount put hex:01010a000000050000006f7468657201
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

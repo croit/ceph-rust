@@ -1,0 +1,51 @@
+# cmpxattr: rval 1 on true, ECANCELED on false; string and u64 modes
+writefull x; setxattr s abc; setxattr n 5
+---
+cmpxattr s abc
+---
+cmpxattr s abd
+---
+cmpxattr s abd ne
+---
+cmpxattr s abd gt
+---
+cmpxattr s abb gt
+---
+cmpxattr s abc gte
+---
+cmpxattr s abc lt
+---
+cmpxattr s abd lt
+---
+cmpxattr s abc lte
+---
+# missing attribute compares as empty
+cmpxattr nope "" eq
+---
+cmpxattr nope "x" eq
+---
+cmpxattr nope "x" ne
+---
+# u64 mode: stored value is decimal text
+cmpxattr n 5 eq u64
+---
+cmpxattr n 6 eq u64
+---
+cmpxattr n 4 gt u64
+---
+cmpxattr n 6 lt u64
+---
+# non-numeric stored value in u64 mode -> EINVAL
+cmpxattr s 1 eq u64
+---
+# invalid cmp op / mode -> EINVAL
+cmpxattr s abc 9
+---
+cmpxattr s abc eq 7
+---
+# guard use in a mutating message
+cmpxattr s abc; write 0 "ok"
+---
+cmpxattr s zzz; write 0 "no"
+---
+read 0 10

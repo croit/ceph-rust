@@ -1,0 +1,20 @@
+{
+    "cloneid": 1,
+    "snapshots": [
+        {
+            "id": 1
+        }
+    ],
+    "overlaps": [
+        {
+            "offset": 0,
+            "length": 4096
+        },
+        {
+            "offset": 8192,
+            "length": 4096
+        }
+    ],
+    "size": 16384
+}
+

@@ -1,0 +1,14 @@
+{
+    "length": 123,
+    "oid": {
+        "oid": "foo",
+        "key": "",
+        "snapid": 123,
+        "hash": 456,
+        "max": 0,
+        "pool": -1,
+        "namespace": ""
+    },
+    "flags": 1
+}
+

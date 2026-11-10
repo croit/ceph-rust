@@ -1,0 +1,50 @@
+# READ VISIBILITY (cls.md s4): content reads inside a message see the committed state at message
+# start; size/existence come from the working state. RETURNVEC makes read outdata visible.
+@flags=returnvec
+# missing object: write then read -> ENOENT (store has nothing), message aborts
+write 0 "abc"; read 0 3
+---
+@flags=returnvec
+stat
+---
+@flags=returnvec
+writefull "XXXXXXXX"
+---
+# write then read same range: OLD bytes
+@flags=returnvec
+write 0 "abc"; read 0 8; read 0 3
+---
+@flags=returnvec
+read 0 8
+---
+# append: stat sees new size, read is clipped to the new size but data comes from the store
+@flags=returnvec
+append "zz"; read 0 100; stat
+---
+# truncate: read clipped by the new size
+@flags=returnvec
+truncate 2; read 0 8; stat
+---
+@flags=returnvec
+writefull "NEWDATA"; read 0 20; stat
+---
+# zero does not show
+@flags=returnvec
+zero 0 3; read 0 20
+---
+@flags=returnvec
+read 0 20
+---
+# write past the end: read returns the store's (shorter) content
+@flags=returnvec
+write 10 "TAIL"; read 0 20; sparse-read 0 20
+---
+@flags=returnvec
+stat; write 100 "Q"; stat
+---
+# delete then read: success, empty (size overlay 0)
+@flags=returnvec
+delete; read 0 5
+---
+@flags=returnvec
+stat

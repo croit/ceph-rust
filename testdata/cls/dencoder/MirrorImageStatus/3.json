@@ -1,0 +1,13 @@
+{
+    "state": "down+stopped",
+    "description": "",
+    "last_update": "0.000000",
+    "remotes": [
+        {
+            "state": "down+replaying",
+            "description": "",
+            "last_update": "0.000000"
+        }
+    ]
+}
+

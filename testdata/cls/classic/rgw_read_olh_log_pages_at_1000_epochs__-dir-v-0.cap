@@ -1,0 +1,23 @@
+# rgw_read_olh_log_pages_at_1000_epochs__-dir-v-0
+# t=1791707459
+> call rgw bucket_init_index
+result=0
+[0] rval=0 out=
+> call rgw bucket_read_olh_log hex:02011d000000010109000000010000006b000000000000000000000000010000007401
+result=-125
+[0] rval=-125 out=
+> call rgw bucket_read_olh_log hex:02011d000000010109000000010000006b00000000e803000000000000010000007401
+result=-125
+[0] rval=-125 out=
+> omap-get-header
+result=0
+[0] rval=0 out=08023400000000000000000000000000000001000000000000000000000000000000000000000301090000000000000000ffffffff0000000000
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=00000000000000004349cb6ad6de780e

@@ -1,0 +1,30 @@
+# checksum ops (crc32c, xxhash32, xxhash64), chunking, errors
+writefull "abcdefghijklmnop"
+---
+checksum crc32c 0 16 16
+---
+checksum crc32c 0 16 4
+---
+checksum crc32c 0 16 4 0xffffffff
+---
+checksum xxhash32 0 16 8
+---
+checksum xxhash64 0 16 8
+---
+# offset 0 / length 0 = whole object
+checksum crc32c 0 0 16
+---
+# length not a multiple of chunk size -> EINVAL
+checksum crc32c 0 10 4
+---
+# offset past end -> success, zero chunks
+checksum crc32c 100 8 8
+---
+# clipped to object size then re-validated
+checksum crc32c 8 16 8
+---
+# chunk_size 0 = one chunk over the range
+checksum crc32c 0 16 0
+---
+# unknown checksum type -> EINVAL
+checksum 9 0 8 8

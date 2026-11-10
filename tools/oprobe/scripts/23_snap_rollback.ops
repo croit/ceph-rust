@@ -1,0 +1,14 @@
+# rollback to a clone (the clone made by the snap-3 write holds "original")
+@snapc=2:2
+writefull "original"
+---
+@snapc=3:3,2
+writefull "changed!!"
+---
+@snapc=3:3,2
+rollback 3
+---
+read 0 20
+---
+@snapid=snapdir
+list-snaps

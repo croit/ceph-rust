@@ -1,0 +1,15 @@
+{
+    "first": 4,
+    "last": 5,
+    "maybe_went_rw": 1,
+    "up": [
+        1
+    ],
+    "acting": [
+        2,
+        3
+    ],
+    "primary": -1,
+    "up_primary": -1
+}
+

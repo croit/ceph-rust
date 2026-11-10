@@ -1,0 +1,10 @@
+{
+    "cookie": 0,
+    "timeout_seconds": 0,
+    "addr": {
+        "type": "none",
+        "addr": "(unrecognized address family 0)",
+        "nonce": 0
+    }
+}
+

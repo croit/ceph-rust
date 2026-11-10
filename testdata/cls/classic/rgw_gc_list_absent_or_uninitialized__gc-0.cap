@@ -1,0 +1,20 @@
+# rgw_gc_list_absent_or_uninitialized__gc-0
+# t=1791707458
+> call rgw_gc rgw_gc_queue_list_entries hex:020109000000000000000000000001
+result=-2
+[0] rval=0 out=
+> call rgw_gc rgw_gc_queue_list_entries hex:020109000000000000000000000001
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

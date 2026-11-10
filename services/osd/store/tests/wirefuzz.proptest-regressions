@@ -1,0 +1,8 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 43ea8b8799cda35c52e69ea788fb1326c23c213156ddb948d251b2e88b497862 # shrinks to o = Onode { size: 0, flags: 0, comp: 0, comp_orig: 0, dv: 1 }
+cc 95cdb7496ffa10cee694fb7eb9dc1a42b93e2ffbf5ae71ff3b800fd20c76df48 # shrinks to r = RootSlot { shard: 0, seq: 0, epoch: 0, ckpt_lsn: 0, wal_tail_pos: 0, wal_tail_prev_crc: 305419896, tree_root: 0, tree_crc: 0, tree_height: 0, meta_bitmap_addr: 0, meta_bitmap_len: 0, meta_bitmap_crc: 0, next_onode_id: 1, used_blocks: 0, meta_pages_used: 0, wal_tail_lsn: 0, run_floor: 0 }

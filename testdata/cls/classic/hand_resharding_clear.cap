@@ -1,0 +1,20 @@
+# hand_resharding_clear
+# t=1791707652
+> call rgw bucket_init_index
+result=0
+[0] rval=0 out=
+> call rgw set_bucket_resharding hex:01010f0000000301090000000300000000ffffffff
+result=0
+[0] rval=0 out=
+> call rgw get_bucket_resharding hex:010100000000
+result=0
+[0] rval=0 out=01010f0000000301090000000300000000ffffffff
+> call rgw clear_bucket_resharding hex:010100000000
+result=0
+[0] rval=0 out=
+> call rgw get_bucket_resharding hex:010100000000
+result=0
+[0] rval=0 out=01010f0000000301090000000000000000ffffffff
+> omap-get-header
+result=0
+[0] rval=0 out=08023400000000000000000000000000000003000000000000000000000000000000000000000301090000000000000000ffffffff0000000000

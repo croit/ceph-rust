@@ -1,0 +1,47 @@
+{
+    "valid_through": "5'17",
+    "incremental_since": "0'0",
+    "objects": [
+        {
+            "name": "b",
+            "hash": 2,
+            "key": "",
+            "snapid": 3,
+            "size": -1,
+            "negative": 0,
+            "attrs": []
+        },
+        {
+            "name": "a",
+            "hash": 1,
+            "key": "",
+            "snapid": -2,
+            "size": 4096,
+            "negative": 0,
+            "attrs": [
+                {
+                    "name": "_",
+                    "length": 3
+                },
+                {
+                    "name": "_user",
+                    "length": 1
+                },
+                {
+                    "name": "snapset",
+                    "length": 2
+                }
+            ]
+        },
+        {
+            "name": "c",
+            "hash": 3,
+            "key": "",
+            "snapid": -2,
+            "size": -1,
+            "negative": 0,
+            "attrs": []
+        }
+    ]
+}
+

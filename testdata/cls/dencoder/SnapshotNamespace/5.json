@@ -1,0 +1,10 @@
+{
+    "snapshot_namespace_type": "mirror",
+    "state": "primary",
+    "complete": false,
+    "mirror_peer_uuids": [
+        "peer uuid"
+    ],
+    "clean_since_snap_id": 18446744073709551614
+}
+

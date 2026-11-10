@@ -1,0 +1,36 @@
+# omap basics
+omap-get-vals
+---
+omap-set a=1 b=2 c=3
+---
+omap-get-vals
+---
+omap-get-keys
+---
+omap-get-vals-by-keys a c nope
+---
+omap-set-header "HDR"
+---
+omap-get-header
+---
+omap-rm-keys b nope
+---
+omap-get-vals
+---
+omap-set aa=x ab=y ba=z
+---
+omap-rm-range aa b
+---
+omap-get-keys
+---
+# binary values
+omap-set bin=hex:00ff10
+---
+omap-get-vals-by-keys bin
+---
+omap-clear
+---
+omap-get-vals; omap-get-header
+---
+# omap ops do not touch data
+stat

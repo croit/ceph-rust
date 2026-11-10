@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "messages"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+bytes = "1.12.1"
+crc = { path = "../../crates/crc" }
+denc = { path = "../../crates/denc" }
+serde_json = "1.0.154"
+
+[dev-dependencies]
+msgr2 = { path = "../../crates/msgr2" }
+proptest = "1.12.0"

@@ -1,0 +1,20 @@
+# rgw_obj_remove_keeps_prefixed_attrs_only__head
+# t=1791707459
+> call rgw obj_remove hex:010125000000020000000d000000757365722e7267772e6f6c682e0c0000006e6f6e6578697374656e742e
+result=-2
+[0] rval=-2 out=
+> call rgw obj_remove hex:010125000000020000000d000000757365722e7267772e6f6c682e0c0000006e6f6e6578697374656e742e
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

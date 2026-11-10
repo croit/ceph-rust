@@ -1,0 +1,12 @@
+# hand-made: set -> get -> clear -> get of the bucket resharding status (clear_bucket_resharding has no recorded scenario)
+call rgw bucket_init_index
+---
+call rgw set_bucket_resharding hex:01010f0000000301090000000300000000ffffffff
+---
+call rgw get_bucket_resharding hex:010100000000
+---
+call rgw clear_bucket_resharding hex:010100000000
+---
+call rgw get_bucket_resharding hex:010100000000
+---
+omap-get-header

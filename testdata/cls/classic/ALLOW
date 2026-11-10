@@ -1,0 +1,35 @@
+# Known, explained divergences between the classic 21.1.1 captures and nvmeosd (target: Ceph main). `<script> <msg|*>  # reason`;
+# a trailing `*` on the script name is a prefix match. Used by tests/differential.rs and examples/capdiff.rs.
+rgw_batch_filling_exactly_does_not_overwrite_front__q * # upstream bug (multi-entry exact-fill overwrites the front) NOT copied, adr/0044
+# classic 21.1.1 sizes the rgw_gc queue head 1 KiB + 384 B * num_deferred_entries (offsets/markers/object size differ); main removed deferred entries (head = 1 KiB)
+rgw_gc_enqueue_sets_time_and_lists_expired_only__gc-0 *
+rgw_gc_remove_entries_removes_a_prefix__gc-0 *
+rgw_gc_update_entry_without_deferral_slots_is_enospc__gc-0 *
+rgw_queue_gc_raw_tags_markers_are_bytes__q *
+# bucket_refresh_instance does not exist in 21.1.1 (-EOPNOTSUPP); implemented from main
+rgw_refresh_instance_* *
+rgw_guard_blocks_while_resharding__-dir-v-0 4
+# --- in-process replay only (`inproc`): MemStore has a fixed pg version / deterministic RNG / hand-picked marker values; the live nvmeosd
+# run (capdiff) agrees with classic on all of these
+rgw_bi_log_list_pages_after_marker__-dir-bi-0 13 inproc # marker "<ver>.0.<n>" vs the pg version of the recording cluster
+rgw_bi_log_list_pages_after_marker__-dir-bi-0 14 inproc
+rgw_create_meta_variants__fifo-meta 2 inproc # MemStore RNG repeats the generated oid prefix, a real OSD does not (-EEXIST)
+rgw_legacy_gc_raw_tags_and_markers__gc-0 3 inproc # expiry order depends on the clock difference to the recording
+rgw_legacy_gc_raw_tags_and_markers__gc-0 4 inproc
+rgw_log_add_monotonic_clamp_and_non_monotonic__o 2 inproc # list position after a marker that embeds the recording's pg version
+rgw_log_list_paging_marker_boundary__o 11
+rgw_methods_reject_garbage__head 0 inproc # unknown method: message result -95, op rval 0 on classic (harness reports the op rval of MemStore)
+rgw_unlink_delete_marker_removes_its_instance_entry__-dir-v-0 6 inproc # bilog/ver bytes derived from the pg version
+rgw_log_list_paging_marker_boundary__o 12 # the marker embeds the pg version of the recording environment (MemStore 412), classic positions differ
+# --- rbd T0 recordings
+# classic accepts a 2pc reservation of u64::MAX (size + reserved_size + entries*10 wraps; upstream integer overflow bug) NOT copied (we answer -ENOSPC); the rest of the script diverges by that state
+rbdrec_reserve_limits__q *
+# step_size 0: classic trims every earlier check at the next call (real time advances), MemStore time is frozen so the check is still in the window
+rbdrec_set_keeps_state_and_step_zero_is_safe__otp_obj 5 inproc
+# environment: the hello xattr embeds the caller's name/addr
+rbdrec_hello_say_and_record_replay__obj 12
+# environment: random mirror peer uuid / watcher addr + timestamps in omap values
+rbdrec_ping__rbd_mirroring 16
+rbdrec_status_summary__rbd_mirroring 15
+# get_current_time returns the wall clock
+rbdrec_current_time_after_set__* 1

@@ -1,0 +1,10 @@
+{
+    "name": "name",
+    "type": "shared",
+    "cookie": "cookie",
+    "tag": "tag",
+    "description": "description",
+    "duration": "5.000000",
+    "flags": 1
+}
+

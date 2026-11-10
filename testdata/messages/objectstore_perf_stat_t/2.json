@@ -1,0 +1,7 @@
+{
+    "commit_latency_ms": 20,
+    "apply_latency_ms": 30,
+    "commit_latency_ns": 20000000,
+    "apply_latency_ns": 30000000
+}
+

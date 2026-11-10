@@ -1,0 +1,36 @@
+# 19_omap_missing
+> omap-get-vals
+result=-2(ENOENT)
+  [0] omap-get-vals rval=0 out=<empty>
+> omap-get-header
+result=-2(ENOENT)
+  [0] omap-get-header rval=0 out=<empty>
+> omap-clear
+result=-2(ENOENT)
+  [0] omap-clear rval=-2(ENOENT) out=<empty>
+> omap-rm-keys a
+result=-2(ENOENT)
+  [0] omap-rm-keys rval=-2(ENOENT) out=<empty>
+> omap-rm-range a z
+result=-2(ENOENT)
+  [0] omap-rm-key-range rval=-2(ENOENT) out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> omap-set-header H
+result=0
+  [0] omap-set-header rval=0 out=<empty>
+> stat; omap-get-header
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+  [1] omap-get-header rval=0 len=1 "H"
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> omap-set a=1
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> stat; omap-get-vals
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+  [1] omap-get-vals rval=0 vals={"a"="1"} truncated=false

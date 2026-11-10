@@ -1,0 +1,48 @@
+{
+    "epoch": 1,
+    "auth_epoch": 0,
+    "auth_service_cipher": {
+        "name": "none",
+        "value": 0
+    },
+    "auth_allowed_ciphers": [
+        {
+            "name": "none",
+            "value": 0
+        }
+    ],
+    "auth_preferred_cipher": {
+        "name": "none",
+        "value": 0
+    },
+    "fsid": "00000000-0000-0000-0000-000000000000",
+    "modified": "123.000000",
+    "created": "789.000101",
+    "min_mon_release": 0,
+    "min_mon_release_name": "unknown",
+    "election_strategy": 1,
+    "disallowed_leaders": "",
+    "stretch_mode": false,
+    "tiebreaker_mon": "",
+    "removed_ranks": "",
+    "features": {
+        "persistent": [],
+        "optional": []
+    },
+    "mons": [
+        {
+            "rank": 0,
+            "name": "one",
+            "public_addrs": {
+                "addrvec": []
+            },
+            "addr": "(unrecognized address family 0)/0",
+            "public_addr": "(unrecognized address family 0)/0",
+            "priority": 0,
+            "weight": 0,
+            "time_added": "1970-01-01T00:41:08:000000+0000",
+            "crush_location": []
+        }
+    ]
+}
+

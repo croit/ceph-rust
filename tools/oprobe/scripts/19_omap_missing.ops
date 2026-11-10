@@ -1,0 +1,22 @@
+# omap ops on a missing object: reads/clear/rm -> ENOENT, writes create
+omap-get-vals
+---
+omap-get-header
+---
+omap-clear
+---
+omap-rm-keys a
+---
+omap-rm-range a z
+---
+stat
+---
+omap-set-header "H"
+---
+stat; omap-get-header
+---
+delete
+---
+omap-set a=1
+---
+stat; omap-get-vals

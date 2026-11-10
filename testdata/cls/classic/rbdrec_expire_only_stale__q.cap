@@ -1,0 +1,32 @@
+# rbdrec_expire_only_stale__q
+# t=1791735734
+> call 2pc_queue 2pc_queue_init hex:010115000000a08601000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c0000000a0000000000000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000140000000000000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_expire_reservations hex:01010800000000d2496b88130000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_expire_reservations hex:01010800000032d2496b00000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_list_reservations
+result=0
+[0] rval=0 out=01010400000000000000
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=af00000000000000b6b7cb6a6f594b1f

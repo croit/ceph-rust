@@ -1,0 +1,89 @@
+probe	rc	output
+profile-set isamap_DD	0	 
+pool-create isamap_DD	0	pool 'isamap_DD' created 
+put isamap_DD	0	 
+profile-set isamapD	0	 
+pool-create isamapD	0	pool 'isamapD' created 
+put isamapD	0	 
+profile-set jermap_DD	22	Error EINVAL: mapping _DD maps 6 chunks instead of the expected 3 and will be ignored 
+profile-set jermaphalf (k+m = 2*|mapping|)	22	Error EINVAL: mapping _D maps 2 chunks instead of the expected 4 and will be ignored 
+profile-set claymap_DD_	0	load: clay 
+pool-create claymap_DD_	0	pool 'claymap_DD_' created 
+put claymap_DD_	0	 
+profile-set shecmap_DD	0	load: shec 
+pool-create shecmap_DD	0	pool 'shecmap_DD' created 
+put shecmap_DD	0	 
+profile-set isaplus	0	 
+pool-create isaplus	0	pool 'isaplus' created 
+put isaplus	0	 
+profile-set jergeneric	0	load: jerasure_generic 
+pool-create jergeneric	0	pool 'jergeneric' created 
+put jergeneric	0	 
+profile-set shecgeneric	0	load: shec_generic 
+pool-create shecgeneric	0	pool 'shecgeneric' created 
+put shecgeneric	0	 
+profile-set shec111	0	 
+pool-create shec111	0	pool 'shec111' created 
+put shec111	0	 
+profile-set shecw16	0	 
+pool-create shecw16	0	pool 'shecw16' created 
+put shecw16	0	 
+profile-set shecw32	0	 
+pool-create shecw32	0	pool 'shecw32' created 
+put shecw32	0	 
+profile-set lib7	0	 
+pool-create lib7	0	pool 'lib7' created 
+put lib7	0	 
+profile-set clayshec435	0	 
+pool-create clayshec435	0	pool 'clayshec435' created 
+put clayshec435	0	 
+profile-set clayshec436	0	 
+pool-create clayshec436	0	pool 'clayshec436' created 
+put clayshec436	0	 
+profile-set claycg425	0	 
+pool-create claycg425	0	pool 'claycg425' created 
+put claycg425	0	 
+profile-set clayco425	0	 
+pool-create clayco425	0	pool 'clayco425' created 
+put clayco425	0	 
+profile-set clayl8425	0	 
+pool-create clayl8425	0	pool 'clayl8425' created 
+put clayl8425	0	 
+profile-set claycg324	0	 
+pool-create claycg324	0	pool 'claycg324' created 
+put claycg324	0	 
+profile-set lrcexpl	0	 
+pool-create lrcexpl	0	pool 'lrcexpl' created 
+put lrcexpl	0	 
+profile-set lrccOnD	0	 
+pool-create lrccOnD	0	pool 'lrccOnD' created 
+put lrccOnD	0	 
+profile-set lrckml	0	 
+pool-create lrckml	0	pool 'lrckml' created 
+put lrckml	0	 
+profile-set stretchleg	0	 
+pool-create stretchleg	0	pool 'stretchleg' created 
+put stretchleg	0	 
+profile-set stretchopt	0	 
+pool-create stretchopt	0	pool 'stretchopt' created 
+put stretchopt	0	 
+allow_ec_optimizations stretchopt	0	set pool 22 allow_ec_optimizations to true 
+stretch-set stretchleg	0	pool stretchleg stretch values are set successfully 
+stretch-set stretchopt	0	pool stretchopt stretch values are set successfully 
+profile-set minsz	0	 
+pool-create minsz	0	pool 'minsz' created 
+put minsz	0	 
+set min_size 1 minsz	22	Error EINVAL: pool min_size must be between 2 and size, which is set to 3 
+stretch-set minsz size3 min1	0	pool minsz stretch values are set successfully 
+pool get minsz min_size	0	min_size: 1 
+set size 4 minsz	95	Error ENOTSUP: can not change the size of an erasure-coded pool 
+profile-set omapleg	0	 
+pool-create omapleg	0	pool 'omapleg' created 
+put omapleg	0	 
+set_pool_flags FLAG_OMAP omapleg	0	set pool 24 set_pool_flags to 2097152 
+profile-set sizemm	0	 
+pool-create sizemm	0	pool 'sizemm' created 
+put sizemm	0	 
+profile-set shecw32b	0	 
+pool-create shecw32b	0	pool 'shecw32b' created 
+put shecw32b	0	 

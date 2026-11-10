@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "outfmt"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+description = "Shared --format plain|json|json-pretty|jsonl argument parser and renderers for CLI tools"
+
+[lints]
+workspace = true
+
+[dependencies]
+serde_json = "1.0.151"

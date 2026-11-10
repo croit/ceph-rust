@@ -1,0 +1,94 @@
+# 34_atomic_failure
+> write 0 base; setxattr k v
+result=0
+  [0] write rval=0 out=<empty>
+  [1] setxattr rval=0 out=<empty>
+> write 0 ZZZ; cmpxattr k nope; write 3 YYY
+result=-125(ECANCELED)
+  [0] write rval=0 out=<empty>
+  [1] cmpxattr rval=-125(ECANCELED) out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20; getxattr k
+result=0
+  [0] read rval=0 len=4 "base"
+  [1] getxattr rval=0 len=1 "v"
+> write 0 FFF; cmpxattr k nope !failok; write 3 GGG
+result=0
+  [0] write rval=0 out=<empty>
+  [1] cmpxattr rval=-125(ECANCELED) out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "FFFGGG"
+> write 0 HHH; cmpxattr k v; write 3 III
+result=0
+  [0] write rval=0 out=<empty>
+  [1] cmpxattr rval=1 out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "HHHIII"
+> write 0 JJJ; getxattr missing; write 3 KKK
+result=-61(ENODATA)
+  [0] write rval=0 out=<empty>
+  [1] getxattr rval=-61(ENODATA) out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "HHHIII"
+> write 0 LLL; getxattr missing !failok; write 3 MMM
+result=0
+  [0] write rval=0 out=<empty>
+  [1] getxattr rval=-61(ENODATA) out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "LLLMMM"
+> write 0 NNN; cmpext 0 xxx; write 3 OOO
+result=-4095(cmpext-mismatch@0)
+  [0] write rval=0 out=<empty>
+  [1] cmpext rval=-4095(cmpext-mismatch@0) out=<empty>
+  [2] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "LLLMMM"
+> write 0 AAA; cmpext 0 LLL
+result=0
+  [0] write rval=0 out=<empty>
+  [1] cmpext rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "AAAMMM"
+> write 0 BBB; cmpext 0 AAA
+result=0
+  [0] write rval=0 out=<empty>
+  [1] cmpext rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "BBBMMM"
+> write 0 PPP; assert-version 1; write 3 QQQ
+result=-34(ERANGE)
+  [0] write rval=0 out=<empty>
+  [1] assert-version rval=-34(ERANGE) out=<empty>
+  [2] write rval=0 out=<empty>
+> cmpxattr k nope; read 0 3
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+  [1] read rval=0 out=<empty>
+> getxattr missing; read 0 3; stat
+result=-61(ENODATA)
+  [0] getxattr rval=-61(ENODATA) out=<empty>
+  [1] read rval=0 out=<empty>
+  [2] stat rval=0 out=<empty>
+> omap-set g=1
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> omap-cmp g eq 2; omap-set g=9; write 0 never
+result=-125(ECANCELED)
+  [0] omap-cmp rval=-125(ECANCELED) out=<empty>
+  [1] omap-set-vals rval=0 out=<empty>
+  [2] write rval=0 out=<empty>
+> omap-get-vals; read 0 3
+result=0
+  [0] omap-get-vals rval=0 vals={"g"="1"} truncated=false
+  [1] read rval=0 len=3 "BBB"

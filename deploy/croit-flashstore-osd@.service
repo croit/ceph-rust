@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+# croit-flashstore-osd osd.%i (adr 0034, doc/ops/deploy.md). Install: /etc/systemd/system/croit-flashstore-osd@.service
+# Binaries: /usr/bin/croit-flashstore-osd, /usr/bin/croit-flashstore-tool. Config: /etc/ceph/${CLUSTER}.conf ([osd.%i] flashstore_* keys) + /var/lib/ceph/osd/${CLUSTER}-%i.
+# Per-instance CPU pinning: drop-in, see croit-flashstore-osd@.service.d/cpuaffinity.conf.example (the daemon pins one core thread per allowed CPU).
+[Unit]
+Description=croit-flashstore-osd osd.%i
+Documentation=file:///usr/share/doc/croit-flashstore-osd/README.md
+After=network-online.target local-fs.target time-sync.target croit-flashstore-prep@%i.service
+Wants=network-online.target
+Requires=croit-flashstore-prep@%i.service
+PartOf=ceph-osd.target
+# classic ceph-osd@ policy: 3 starts per 30 min, then stay failed (a crash loop must not flap the map)
+StartLimitBurst=3
+StartLimitIntervalSec=30min
+
+[Service]
+# READY=1 once core 0 runs (store mounted; preboot waits such as noup or a mon outage never trip TimeoutStartSec, adr 0034 am. 5);
+# STATUS=active when up; WATCHDOG=1 from the liveness checker thread (src: croit-flashstore-osd sdnotify.rs)
+Type=notify
+NotifyAccess=main
+WatchdogSec=60
+Environment=CLUSTER=ceph
+EnvironmentFile=-/etc/default/ceph
+EnvironmentFile=-/etc/default/croit-flashstore-osd
+# non-root (adr 0056): user ceph + ambient IPC_LOCK/SYS_NICE; vfio group nodes, hugetlbfs, run/log/crash/data dirs are handed to it by croit-flashstore-prep@.
+# Needs vfio-pci with an IOMMU. uio fallback / NOIOMMU lab: drop-in root.conf.example. NIC tiers needing more caps: tier-knet .conf.example.
+User=ceph
+Group=ceph
+AmbientCapabilities=CAP_IPC_LOCK CAP_SYS_NICE
+# SMART (adr 0056 am. 2): the daemon itself never holds the extra caps; the bounding set only lets the root children of the
+# classic `sudo -n smartctl` / `sudo -n nvme .. smart-log-add` rules (/etc/sudoers.d/ceph-smartctl) get them (sudo: SETUID SETGID
+# AUDIT_WRITE, DAC_READ_SEARCH so pam_unix can read /etc/shadow (mode 0000 on EL9); smartctl: SYS_ADMIN for the NVMe admin
+# passthrough, SYS_RAWIO). Kernel tier only; SPDK reads SMART on its own queue.
+CapabilityBoundingSet=CAP_IPC_LOCK CAP_SYS_NICE CAP_SETUID CAP_SETGID CAP_AUDIT_WRITE CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_DAC_READ_SEARCH
+# DPDK runtime files (not /var/run/dpdk, root only)
+RuntimeDirectory=croit-flashstore-%i
+Environment=XDG_RUNTIME_DIR=/run/croit-flashstore-%i
+ExecStartPre=/usr/bin/croit-flashstore-tool activate --id %i --cluster ${CLUSTER}
+ExecStart=/usr/bin/croit-flashstore-osd run --id %i --cluster ${CLUSTER} -f
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10s
+# exit 2 = usage, 3 = configuration/precondition error, 78 = store format needs `croit-flashstore-tool upgrade` (or is newer): restarting cannot help
+RestartPreventExitStatus=2 3 78
+KillMode=control-group
+# covers activate + store mount/replay only (READY comes before the mon boot)
+TimeoutStartSec=300
+TimeoutStopSec=60
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitMEMLOCK=infinity
+# crash dumps via the crash module (/var/lib/ceph/crash), never core files (they contain keys + data)
+LimitCORE=0
+TasksMax=infinity
+SyslogIdentifier=croit-flashstore-%i
+StandardOutput=journal
+StandardError=journal
+# false like classic ceph-osd@ ("need NewPrivileges via sudo smartctl"): sudo is setuid
+NoNewPrivileges=false
+# Cross-process claim locks live in /run/croit-flashstore-osd (root:ceph 1770, from tmpfiles.d/croit-flashstore-osd.conf and croit-flashstore-prep@), shared
+# with croit-flashstore-tool and containers; PrivateTmp keeps /var/tmp (and SPDK's own lock there) private to the unit. /run stays
+# writable under ProtectSystem=full, so no ReadWritePaths is needed (adr 0649 am. 1).
+PrivateTmp=true
+# Hardening (adr 0651): read-only /usr, /boot, /etc; no home, cgroupfs write, kernel log, module load,
+# hostname set, personality change or setuid/setgid file creation. Device nodes, /dev/vfio, hugetlbfs, mlock and io_uring
+# are untouched; MemoryDenyWriteExecute, ProtectKernelTunables, ProtectClock and a syscall filter are NOT set (SPDK/DPDK,
+# vfio, RDMA and the kernel tier are not verified against them, see the ADR).
+ProtectSystem=full
+ProtectHome=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectHostname=true
+LockPersonality=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target ceph-osd.target

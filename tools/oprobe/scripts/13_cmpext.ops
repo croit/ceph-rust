@@ -1,0 +1,29 @@
+# cmpext: match, mismatch index, beyond end compares as zeros
+writefull "abcdef"
+---
+cmpext 0 "abc"
+---
+cmpext 3 "def"
+---
+# first differing byte index is encoded as -(4095+i)
+cmpext 0 "abd"
+---
+cmpext 0 "xbc"
+---
+# bytes past the end compare as zero
+cmpext 6 hex:0000
+---
+cmpext 6 "a"
+---
+# partially past the end
+cmpext 4 hex:656600
+---
+# in a mutating message the mismatch aborts everything (atomic)
+write 0 "ZZZ"; cmpext 0 "nope"
+---
+read 0 10
+---
+# cmpext as a guard: success lets the write apply
+cmpext 0 "abc"; write 0 "ABC"
+---
+read 0 10

@@ -1,0 +1,39 @@
+# 13_cmpext
+> writefull abcdef
+result=0
+  [0] writefull rval=0 out=<empty>
+> cmpext 0 abc
+result=0
+  [0] cmpext rval=0 out=<empty>
+> cmpext 3 def
+result=0
+  [0] cmpext rval=0 out=<empty>
+> cmpext 0 abd
+result=-4097(cmpext-mismatch@2)
+  [0] cmpext rval=-4097(cmpext-mismatch@2) out=<empty>
+> cmpext 0 xbc
+result=-4095(cmpext-mismatch@0)
+  [0] cmpext rval=-4095(cmpext-mismatch@0) out=<empty>
+> cmpext 6 hex:0000
+result=0
+  [0] cmpext rval=0 out=<empty>
+> cmpext 6 a
+result=-4095(cmpext-mismatch@0)
+  [0] cmpext rval=-4095(cmpext-mismatch@0) out=<empty>
+> cmpext 4 hex:656600
+result=0
+  [0] cmpext rval=0 out=<empty>
+> write 0 ZZZ; cmpext 0 nope
+result=-4095(cmpext-mismatch@0)
+  [0] write rval=0 out=<empty>
+  [1] cmpext rval=-4095(cmpext-mismatch@0) out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=6 "abcdef"
+> cmpext 0 abc; write 0 ABC
+result=0
+  [0] cmpext rval=0 out=<empty>
+  [1] write rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=6 "ABCdef"

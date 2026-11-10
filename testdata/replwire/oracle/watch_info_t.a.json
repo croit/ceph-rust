@@ -1,0 +1,10 @@
+{
+    "cookie": 7,
+    "timeout_seconds": 30,
+    "addr": {
+        "type": "v2",
+        "addr": "172.28.0.40:6800",
+        "nonce": 1234
+    }
+}
+

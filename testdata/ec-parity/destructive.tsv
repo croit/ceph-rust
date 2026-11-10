@@ -1,0 +1,30 @@
+probe	result
+degraded-read clayshec435 lost shard(s) 0	rc=0 ok
+degraded-read clayshec435 lost shard(s) 1	rc=0 ok
+degraded-read clayshec436 lost shard(s) 0	rc=0 ok
+degraded-read clayshec436 lost shard(s) 1	rc=0 ok
+degraded-read claycg425 lost shard(s) 0	rc=0 ok
+degraded-read claycg425 lost shard(s) 1	rc=0 ok
+degraded-read clayl8425 lost shard(s) 0	rc=0 ok
+degraded-read clayl8425 lost shard(s) 1	rc=0 ok
+degraded-read shecw16 lost shard(s) 0	rc=0 ok
+degraded-read shecw16 lost shard(s) 1	rc=0 ok
+degraded-read clayshec435 lost shard(s) 0 1	rc=0 ok
+degraded-read clayshec435 lost shard(s) 0 4	rc=1 MISMATCH
+degraded-read clayshec435 lost shard(s) 1 5	rc=0 ok
+degraded-read clayshec435 lost shard(s) 2 3	rc=0 ok
+degraded-read clayshec436 lost shard(s) 0 1	rc=0 ok
+degraded-read clayshec436 lost shard(s) 0 4	rc=0 ok
+degraded-read clayshec436 lost shard(s) 1 5	rc=0 ok
+degraded-read clayshec436 lost shard(s) 2 3	rc=0 ok
+degraded-read shecw16 lost shard(s) 0 1	rc=0 ok
+degraded-read shecw16 lost shard(s) 0 5	rc=0 ok
+shecw32b write+readback (all up)	ok
+shecw32b restart acting osd.1: crash lines	0 frames: 
+shecw32b after: osds up	8 osds: 8 up (since 29s), 8 in (since 10m); epoch: e281 
+stretch-set sizemm size4 (k+m=3)	rc=0 pool sizemm stretch values are set successfully 
+sizemm after: crash lines	12 frames: ECLegacy::ECBackendL::RecoveryBackend::handle_recovery_read_complete( ECLegacy::ECBackendL::_handle_message( ECLegacy::ECBackendL::handle_sub_read_reply( ECLegacy::ECCommonL::ReadPipeline::complete_read_op( ECLegacy::ECUtilL::decode( OSD::ShardedOpWQ::_process( OSD::dequeue_op( PGBackend::handle_message( PrimaryLogPG::do_request( ceph::__ceph_assert_fail( ceph::osd::scheduler::PGOpItem::run( ceph_assert(out_bls.count(j->first) 
+sizemm after: osds up	8 osds: 5 up (since 12s), 8 in (since 11m); epoch: e291 
+omap write on legacy EC with FLAG_OMAP	rc=124  
+omapleg after: crash lines	8 frames: ECLegacy::ECBackendL::submit_transaction( ECLegacy::ECCommonL::RMWPipeline::check_ops( ECLegacy::ECCommonL::RMWPipeline::try_reads_to_commit( ECLegacy::ECTransactionL::generate_transactions( OSD::dequeue_op( PrimaryLogPG::do_op( PrimaryLogPG::do_op_impl( PrimaryLogPG::execute_ctx( PrimaryLogPG::issue_repop( ceph::__ceph_assert_fail( ceph_assert(op.omap_updates.empty() 
+omapleg after: osds up	8 osds: 6 up (since 2m), 8 in (since 13m); epoch: e302; 1 remapped pgs 

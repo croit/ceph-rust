@@ -1,0 +1,18 @@
+# sparse-read: harness compares the zero-filled view, extents may legitimately differ
+writefull "head"
+---
+write 8192 "tail"
+---
+sparse-read 0 10000
+---
+sparse-read 0 4
+---
+# range inside the hole
+sparse-read 100 100
+---
+# offset == size is success (strict > rule), empty
+sparse-read 8196 10
+---
+sparse-read 9000 10
+---
+sparse-read 8190 100

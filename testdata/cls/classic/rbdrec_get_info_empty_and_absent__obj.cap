@@ -1,0 +1,23 @@
+# rbdrec_get_info_empty_and_absent__obj
+# t=1791735734
+> call lock get_info hex:010105000000010000006c
+result=-2
+[0] rval=0 out=
+> call lock get_info hex:010105000000010000006c
+result=-2
+[0] rval=0 out=
+> call lock get_info hex:00
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

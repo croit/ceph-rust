@@ -1,0 +1,220 @@
+{
+    "ops": [
+        {
+            "op_num": 0,
+            "op_name": "remove",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:7#"
+        },
+        {
+            "op_num": 1,
+            "op_name": "clone",
+            "collection": "5.1f_head",
+            "src_oid": "#5:f8000000:::head:head#",
+            "dst_oid": "#5:f8000000:::head:7#"
+        },
+        {
+            "op_num": 2,
+            "op_name": "rmattr",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:7#",
+            "name": "snapset"
+        },
+        {
+            "op_num": 3,
+            "op_name": "setattrs",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:7#",
+            "attr_lens": {
+                "_": 40
+            }
+        },
+        {
+            "op_num": 4,
+            "op_name": "create",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#"
+        },
+        {
+            "op_num": 5,
+            "op_name": "touch",
+            "collection": "5.1f_head",
+            "oid": "#-7:f8000000:::temp_5.1f_0_12_1:head#"
+        },
+        {
+            "op_num": 6,
+            "op_name": "truncate",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "offset": 1048576
+        },
+        {
+            "op_num": 7,
+            "op_name": "setattrs",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "attr_lens": {
+                "_": 100,
+                "_user": 0,
+                "snapset": 20
+            }
+        },
+        {
+            "op_num": 8,
+            "op_name": "setattr",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "name": "one",
+            "length": 1
+        },
+        {
+            "op_num": 9,
+            "op_name": "omap_clear",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#"
+        },
+        {
+            "op_num": 10,
+            "op_name": "omap_setheader",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "header_length": "6"
+        },
+        {
+            "op_num": 11,
+            "op_name": "omap_setkeys",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "attr_lens": {
+                "a": 1,
+                "b": 300
+            }
+        },
+        {
+            "op_num": 12,
+            "op_name": "omap_rmkeys",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "attrs": [
+                "x",
+                "y"
+            ]
+        },
+        {
+            "op_num": 13,
+            "op_name": "op_omap_rmkeyrange",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "first": "k0",
+            "last": "k9"
+        },
+        {
+            "op_num": 14,
+            "op_name": "op_setallochint",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "expected_object_size": "4194304",
+            "expected_write_size": "4194304",
+            "alloc_hint_flags": "sequential_write+random_write"
+        },
+        {
+            "op_num": 15,
+            "op_name": "write",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "length": 100,
+            "offset": 7,
+            "bufferlist length": 100
+        },
+        {
+            "op_num": 16,
+            "op_name": "write",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "length": 4096,
+            "offset": 4096,
+            "bufferlist length": 4096
+        },
+        {
+            "op_num": 17,
+            "op_name": "write",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "length": 12288,
+            "offset": 4608,
+            "bufferlist length": 12288
+        },
+        {
+            "op_num": 18,
+            "op_name": "write",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "length": 65536,
+            "offset": 1048576,
+            "bufferlist length": 65536
+        },
+        {
+            "op_num": 19,
+            "op_name": "zero",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#",
+            "offset": 22,
+            "length": 33
+        },
+        {
+            "op_num": 20,
+            "op_name": "clonerange2",
+            "collection": "5.1f_head",
+            "src_oid": "#5:f8000000:::head:head#",
+            "dst_oid": "#-7:f8000000:::temp_5.1f_0_12_1:head#",
+            "src_offset": 1,
+            "len": 12,
+            "dst_offset": 99
+        },
+        {
+            "op_num": 21,
+            "op_name": "op_coll_move_rename",
+            "old_collection": "5.1f_head",
+            "old_oid": "#-7:f8000000:::temp_5.1f_0_12_1:head#",
+            "new_collection": "5.1f_head",
+            "new_oid": "#5:f8000000:::head:head#"
+        },
+        {
+            "op_num": 22,
+            "op_name": "op_coll_move_rename",
+            "collection": "5.1f_head",
+            "old_oid": "#-7:f8000000:::temp_5.1f_0_12_1:head#",
+            "new_oid": "#5:f8000000:::head:head#"
+        },
+        {
+            "op_num": 23,
+            "op_name": "rmattrs",
+            "collection": "5.1f_head",
+            "oid": "#5:f8000000:::head:head#"
+        },
+        {
+            "op_num": 24,
+            "op_name": "coll_hint",
+            "collection": "5.1f_head",
+            "type": 1,
+            "pg_num": 863484672,
+            "expected_num_objects": 1249356225492462575
+        },
+        {
+            "op_num": 25,
+            "op_name": "mkcoll",
+            "collection": "5.1f_head"
+        },
+        {
+            "op_num": 26,
+            "op_name": "coll_set_bits",
+            "collection": "5.1f_head",
+            "bits": 6
+        },
+        {
+            "op_num": 27,
+            "op_name": "nop"
+        }
+    ]
+}
+

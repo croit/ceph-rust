@@ -1,0 +1,9 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 6e08c6b21484e86e3f2b3f9b025025c3448aa4bf0eebe30d72419bbf33579800 # shrinks to v = CompatSet { compat: FeatureSet { mask: 0, names: {} }, ro_compat: FeatureSet { mask: 10583588999879117869, names: {} }, incompat: FeatureSet { mask: 0, names: {} } }
+cc 00b2603468a12906b71af3d4c1ddc0babe7f8d6d05aaf57b7cd2c968a19be97f # shrinks to v = FeatureSet { mask: 889752464568645745, names: {} }
+cc 0e30b7c1e4d6c308aa890f390722294ea1ae210e6ec6aa51578fbdd79326ca92 # shrinks to m = MOSDBoot(MOSDBoot { version: 0, sb: OsdSuperblock { cluster_fsid: Uuid([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), whoami: 0, current_epoch: 0, weight: 0.0, compat_features: CompatSet { compat: FeatureSet { mask: 0, names: {} }, ro_compat: FeatureSet { mask: 0, names: {} }, incompat: FeatureSet { mask: 1533980530073235689, names: {} } }, clean_thru: 0, mounted: 0, osd_fsid: Uuid([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), purged_snaps_last: 0, last_purged_snaps_scrub: UTime { sec: 0, nsec: 0 }, cluster_osdmap_trim_lower_bound: 0, mapc: {} }, hb_back_addrs: EntityAddrVec([]), cluster_addrs: EntityAddrVec([]), boot_epoch: 0, hb_front_addrs: EntityAddrVec([]), metadata: {}, osd_features: 0 })

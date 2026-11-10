@@ -1,0 +1,12 @@
+# Example drop-in: /etc/systemd/system/croit-flashstore-osd@4.service.d/root.conf   (adr 0056)
+# Back to root: ONLY for hosts without an IOMMU (vfio noiommu / uio_pci_generic, `flashstore_driver = uio_pci_generic`):
+# the PCI BAR mmap through sysfs and physical addresses (/proc/self/pagemap, iova-mode=pa) need root there.
+# Also croit-flashstore-prep leaves ownership alone when `flashstore_user = root` is set in [osd.N].
+[Service]
+User=root
+Group=root
+AmbientCapabilities=
+# empty + inverted empty = no bounding set restriction (root keeps everything)
+CapabilityBoundingSet=
+CapabilityBoundingSet=~
+RuntimeDirectory=

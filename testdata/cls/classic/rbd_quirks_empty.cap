@@ -1,0 +1,104 @@
+# rbd_quirks_empty
+# t=1791560685
+> create
+result=0
+[0] rval=0 out=
+> call rbd metadata_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd dir_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd trash_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd namespace_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd mirror_image_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd snapshot_get_limit
+result=0
+[0] rval=0 out=ffffffffffffffff
+> call rbd get_flags hex:feffffffffffffff
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd get_data_pool
+result=0
+[0] rval=0 out=ffffffffffffffff
+> call rbd get_create_timestamp
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd op_features_get
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010c000000ffffffffffffffff00000000
+> call rbd parent_overlap_get hex:feffffffffffffff
+result=0
+[0] rval=0 out=00
+> call rbd parent_get
+result=0
+[0] rval=0 out=010118000000ffffffffffffffff0000000000000000feffffffffffffff
+> call rbd get_snapcontext
+result=-2
+[0] rval=-2 out=
+> call rbd children_list hex:0400000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd get_size hex:feffffffffffffff
+result=-2
+[0] rval=-2 out=
+> call rbd set_size hex:0100000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd set_features hex:04000000000000000400000000000000
+result=0
+[0] rval=0 out=
+> call rbd op_features_set hex:01000000000000000100000000000000
+result=0
+[0] rval=0 out=
+> call rbd set_protection_status hex:040000000000000001
+result=-8
+[0] rval=-8 out=
+> call rbd get_protection_status hex:0400000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd snapshot_add hex:01000000730100000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd set_access_timestamp
+result=0
+[0] rval=0 out=
+> call rbd get_stripe_unit_count
+result=-8
+[0] rval=-8 out=
+> call rbd set_stripe_unit_count hex:01000000000000000100000000000000
+result=-8
+[0] rval=-8 out=
+> call rbd snapshot_set_limit hex:0300000000000000
+result=0
+[0] rval=0 out=
+> call rbd snapshot_set_limit hex:ffffffffffffffff
+result=0
+[0] rval=0 out=
+> call rbd dir_state_set hex:01
+result=0
+[0] rval=0 out=
+> call rbd dir_state_assert hex:01
+result=0
+[0] rval=0 out=
+> call rbd parent_detach
+result=-8
+[0] rval=-8 out=
+> call rbd set_flags hex:01000000000000000100000000000000
+result=0
+[0] rval=0 out=
+> call rbd image_group_remove hex:01010d00000001000000000000000100000067
+result=-2
+[0] rval=-2 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=05000000100000006163636573735f74696d657374616d7008000000ed0bc96a1ee1de2108000000666561747572657308000000040100000000000005000000666c6167730800000001000000000000000b0000006f705f6665617475726573080000000100000000000000050000007374617465010000000100

@@ -1,0 +1,2 @@
+osdmaptool: osdmap file '/tmp/mf.bin'
+{}

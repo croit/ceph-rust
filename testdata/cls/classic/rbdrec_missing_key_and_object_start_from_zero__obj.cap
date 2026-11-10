@@ -1,0 +1,20 @@
+# rbdrec_missing_key_and_object_start_from_zero__obj
+# t=1791735735
+> call numops add hex:060000006d792d6b657903000000302e35
+result=0
+[0] rval=0 out=
+> call numops mul hex:050000006f746865720100000033
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=02000000060000006d792d6b657903000000302e35050000006f74686572010000003000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b7b7cb6a3a6e7610

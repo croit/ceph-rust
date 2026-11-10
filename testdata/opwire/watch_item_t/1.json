@@ -1,0 +1,11 @@
+{
+    "watcher": "client.1",
+    "cookie": 10,
+    "timeout": 30,
+    "addr": {
+        "type": "v1",
+        "addr": "127.0.0.1:1024",
+        "nonce": 1000
+    }
+}
+

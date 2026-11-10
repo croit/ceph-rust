@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "rdma"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# libibverbs transport (Linux): compiles csrc/shim.c and links the static rdma-core archives of RDMA_CORE_DIR
+# (default /opt/rdma-core, adr 0052 am. 5) with all providers. Without it only the sans-IO parts build.
+verbs = []
+# Unadvertised host type-2 binding/invalidation on the existing RC SQ. Does not enable placement.
+memory-windows = ["verbs", "dep:crc"]
+# DMA-BUF (GPU) memory registration for GPUDirect RDMA (adr 0665). Linux with rdma-core; opt-in.
+gpu = ["verbs", "dep:libc"]
+# TEST ONLY (adr 0024): `fault` module = process-wide armed faults (QP to ERR) consumed by the next poll of a core with connections. Off in production.
+fault-inject = ["verbs"]
+
+[dependencies]
+diag = { path = "../diag" }
+spsc = { path = "../spsc" }
+serde_json = "1.0.154"
+bytes = "1.12.1"
+crc = { path = "../crc", optional = true }
+libc = { version = "0.2.191", optional = true }
+
+[dev-dependencies]
+outfmt = { path = "../outfmt" }
+
+[build-dependencies]
+cc = "1.6.0"
+shlex = "2.0.1"
+
+[[example]]
+name = "rdma_pipe"
+required-features = ["verbs"]
+
+[[bin]]
+name = "gpu_probe"
+required-features = ["gpu"]

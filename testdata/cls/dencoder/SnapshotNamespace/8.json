@@ -1,0 +1,13 @@
+{
+    "snapshot_namespace_type": "mirror",
+    "state": "non-primary (demoted)",
+    "complete": false,
+    "mirror_peer_uuids": [
+        "peer uuid"
+    ],
+    "primary_mirror_uuid": "uuid",
+    "primary_snap_id": 123,
+    "last_copied_object_number": 0,
+    "snap_seqs": "{}"
+}
+

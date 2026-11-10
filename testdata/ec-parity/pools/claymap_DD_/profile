@@ -1,0 +1,10 @@
+crush-device-class=
+crush-failure-domain=osd
+crush-num-failure-domains=0
+crush-osds-per-failure-domain=0
+crush-root=default
+d=3
+k=2
+m=2
+mapping=_DD_
+plugin=clay

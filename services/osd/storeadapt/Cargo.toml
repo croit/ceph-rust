@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "storeadapt"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+rocksdb = ["store/rocksdb"]
+lab = ["store/lab"]
+splinterdb = ["store/splinterdb"]
+# TEST ONLY: fault knobs (deletion NoSpace) for the integration tests; never in production builds (adr 0024).
+test-knobs = []
+# Elastic shard capacity (adr 0021 am. 53): pool messages between per-core stores. Default off.
+elastic = ["store/elastic"]
+
+[dependencies]
+wprof = { path = "../wprof" }
+store = { version = "0.0.0", path = "../../../services/osd/store" }
+peering = { version = "0.0.0", path = "../../../services/osd/peering" }
+ec = { path = "../../../crates/ec" }
+opexec = { version = "0.0.0", path = "../../../services/osd/opexec" }
+opwire = { path = "../../../crates/opwire" }
+replwire = { version = "0.0.0", path = "../../../services/osd/replwire" }
+pgwire = { version = "0.0.0", path = "../../../services/osd/pgwire" }
+denc = { version = "0.0.0", path = "../../../crates/denc" }
+bytes = "1.12.1"
+foldhash = "0.2.0"
+crc = { path = "../../../crates/crc" }
+md-5 = "0.11.0"
+sha2 = "0.11.1"
+
+[dev-dependencies]
+ecback = { path = "../ecback" }
+storeadapt = { path = ".", features = ["test-knobs"] }
+messages = { version = "0.0.0", path = "../../../crates/messages" }

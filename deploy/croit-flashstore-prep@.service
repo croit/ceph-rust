@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+# Host preparation for osd.%i: hugepages + hugetlbfs + driver bind of ONLY the PCI devices configured for this OSD
+# (flashstore_dev in [osd.%i] of /etc/ceph/${CLUSTER}.conf). NICs remain on kernel drivers. A failure blocks croit-flashstore-osd@%i with a
+# clear unit failure instead of a DPDK stack trace. Install the script as /usr/libexec/croit-flashstore-osd/croit-flashstore-prep.sh.
+[Unit]
+Description=croit-flashstore-osd host preparation for osd.%i
+Before=croit-flashstore-osd@%i.service
+PartOf=croit-flashstore-osd@%i.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=CLUSTER=ceph
+EnvironmentFile=-/etc/default/ceph
+EnvironmentFile=-/etc/default/croit-flashstore-osd
+ExecStart=/usr/libexec/croit-flashstore-osd/croit-flashstore-prep.sh %i
+SyslogIdentifier=croit-flashstore-prep-%i
+
+[Install]
+WantedBy=ceph-osd.target

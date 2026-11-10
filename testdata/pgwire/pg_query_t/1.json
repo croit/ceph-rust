@@ -1,0 +1,33 @@
+{
+    "from": -1,
+    "to": -1,
+    "type": "???",
+    "since": "0'0",
+    "epoch_sent": "0",
+    "history": {
+        "epoch_created": 0,
+        "epoch_pool_created": 0,
+        "last_epoch_started": 0,
+        "last_interval_started": 0,
+        "last_epoch_clean": 0,
+        "last_interval_clean": 0,
+        "last_epoch_split": 0,
+        "last_epoch_marked_full": 0,
+        "same_up_since": 0,
+        "same_interval_since": 0,
+        "same_primary_since": 0,
+        "last_scrub": "0'0",
+        "last_scrub_stamp": "0.000000",
+        "last_deep_scrub": "0'0",
+        "last_deep_scrub_stamp": "0.000000",
+        "last_clean_scrub_stamp": "0.000000",
+        "prior_readable_until_ub": 0,
+        "last_degraded": "0.000000",
+        "last_clean": "0.000000",
+        "vuln_window_reported": "0.000000",
+        "last_rebuild_active_start": "0.000000",
+        "rebuild_span_reported": "0.000000",
+        "rebuild_active_accum": "0.000000"
+    }
+}
+

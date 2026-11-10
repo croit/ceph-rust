@@ -1,0 +1,8 @@
+{
+    "pool_id": 1,
+    "pool_namespace": "ns",
+    "image_id": "image id",
+    "snap_id": 234,
+    "head_overlap": 123
+}
+

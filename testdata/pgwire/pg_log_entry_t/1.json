@@ -1,0 +1,26 @@
+{
+    "op": "unknown",
+    "object": "MIN",
+    "version": "0'0",
+    "prior_version": "0'0",
+    "reqid": "unknown.0.0:0",
+    "extra_reqids": [],
+    "mtime": "0.000000",
+    "return_code": 0,
+    "written_shards": "{}",
+    "mod_desc": {
+        "object_mod_desc": {
+            "can_local_rollback": true,
+            "rollback_info_completed": false,
+            "ops": []
+        }
+    },
+    "clean_regions": {
+        "object_clean_regions": {
+            "clean_offsets": "[0~18446744073709551615]",
+            "clean_omap": true,
+            "new_object": false
+        }
+    }
+}
+

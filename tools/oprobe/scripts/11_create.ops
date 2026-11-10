@@ -1,0 +1,19 @@
+# create / create excl
+create
+---
+stat
+---
+# existing, non-excl: success
+create
+---
+create excl
+---
+# create must not touch data
+write 0 "keep"
+---
+create
+---
+read 0 10
+---
+# !excl modifier form on the op flags
+create !excl

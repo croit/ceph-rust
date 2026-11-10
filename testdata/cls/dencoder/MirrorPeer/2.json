@@ -1,0 +1,9 @@
+{
+    "uuid": "uuid-123",
+    "direction": "RX",
+    "site_name": "site A",
+    "mirror_uuid": "",
+    "client_name": "client name",
+    "last_seen": "0.000000"
+}
+

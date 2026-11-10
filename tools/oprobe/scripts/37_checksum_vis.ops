@@ -1,0 +1,7 @@
+# checksum inside a mutating message reads the committed content
+writefull "abcdef"
+---
+@flags=returnvec
+write 0 ZZ; checksum crc32c 0 6 6; read 0 6
+---
+checksum crc32c 0 6 6

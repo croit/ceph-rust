@@ -1,0 +1,26 @@
+# write-same: pattern repeated; error cases
+writesame 0 12 "ab"
+---
+read 0 20; stat
+---
+writesame 3 4 "xy"
+---
+read 0 20
+---
+# length not a multiple of the pattern -> EINVAL
+writesame 0 5 "ab"
+---
+# empty pattern -> EINVAL
+writesame 0 4 ""
+---
+# length 0 -> success, nothing happens
+writesame 0 0 "ab"
+---
+read 0 20
+---
+# on a missing object, length 0 must not create it
+delete
+---
+writesame 0 0 "ab"
+---
+stat

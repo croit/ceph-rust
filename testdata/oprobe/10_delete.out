@@ -1,0 +1,27 @@
+# 10_delete
+> delete
+result=-2(ENOENT)
+  [0] delete rval=-2(ENOENT) out=<empty>
+> writefull data; setxattr k v; omap-set a=1
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] setxattr rval=0 out=<empty>
+  [2] omap-set-vals rval=0 out=<empty>
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> delete
+result=-2(ENOENT)
+  [0] delete rval=-2(ENOENT) out=<empty>
+> write 0 n
+result=0
+  [0] write rval=0 out=<empty>
+> getxattrs
+result=0
+  [0] getxattrs rval=0 map={}
+> omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={} truncated=false

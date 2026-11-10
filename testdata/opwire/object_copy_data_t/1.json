@@ -1,0 +1,21 @@
+{
+    "cursor": {
+        "attr_complete": 0,
+        "data_offset": 0,
+        "data_complete": 0,
+        "omap_offset": "",
+        "omap_complete": 0
+    },
+    "size": -1,
+    "mtime": "0.000000",
+    "attrs_size": 0,
+    "flags": 0,
+    "data_digest": 4294967295,
+    "omap_digest": 4294967295,
+    "omap_data_length": 0,
+    "omap_header_length": 0,
+    "data_length": 0,
+    "snaps": [],
+    "reqids": []
+}
+

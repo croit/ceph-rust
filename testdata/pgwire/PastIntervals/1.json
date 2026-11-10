@@ -1,0 +1,50 @@
+{
+    "PastIntervals::compact_rep": {
+        "first": "10",
+        "last": "50",
+        "all_participants": [
+            {
+                "osd": 0,
+                "shard": 0
+            },
+            {
+                "osd": 1,
+                "shard": 0
+            },
+            {
+                "osd": 1,
+                "shard": 1
+            },
+            {
+                "osd": 2,
+                "shard": 0
+            },
+            {
+                "osd": 2,
+                "shard": 1
+            },
+            {
+                "osd": 2,
+                "shard": 2
+            }
+        ],
+        "intervals": [
+            {
+                "first": "10",
+                "last": "20",
+                "acting": "0(0),1(1),2(2)"
+            },
+            {
+                "first": "21",
+                "last": "30",
+                "acting": "1(0),2(1)"
+            },
+            {
+                "first": "36",
+                "last": "50",
+                "acting": "0(0),2(1)"
+            }
+        ]
+    }
+}
+

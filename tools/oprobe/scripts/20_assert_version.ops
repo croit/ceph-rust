@@ -1,0 +1,13 @@
+# assert-version compares the USER version; only deterministic cases are scripted
+writefull "x"
+---
+# ver 0 -> EINVAL
+assert-version 0
+---
+# ver far above the object's user_version -> EOVERFLOW
+assert-version 0xfffffffffff
+---
+# as a guard in a mutating message: failure aborts the write
+assert-version 0xfffffffffff; write 0 "no"
+---
+read 0 10

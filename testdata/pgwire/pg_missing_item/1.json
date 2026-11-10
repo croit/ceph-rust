@@ -1,0 +1,7 @@
+{
+    "need": "0'0",
+    "have": "0'0",
+    "flags": "none",
+    "clean_regions": "clean_offsets: [0~18446744073709551615], clean_omap: true, new_object: false"
+}
+

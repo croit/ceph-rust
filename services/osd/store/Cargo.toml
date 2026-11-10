@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "store"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+# TODO P0 part B: drop this block, use `workspace = true` (allow_attributes = deny)
+
+[dependencies]
+bytes = "1.12.1"
+wprof = { path = "../wprof" }
+crc = { version = "0.0.0", path = "../../../crates/crc" }
+denc = { version = "0.0.0", path = "../../../crates/denc" }
+nvme = { version = "0.0.0", path = "../../../crates/nvme" }
+zstd = { version = "0.14.2", features = ["experimental"] }
+snap = "1.1.2"
+lz4 = "1.28.1"
+flate2 = { version = "1.1.10", default-features = false, features = ["zlib-rs"] }
+libc = "0.2.191"
+rocksdb-lib = { package = "rocksdb", version = "0.25.0", default-features = false, features = ["bindgen-runtime", "lz4"], optional = true }
+splinterdb-lib = { package = "nvmeosd-splinterdb", path = "../../../crates/splinterdb", features = ["native"], optional = true }
+rtrb = { version = "0.4.1", optional = true }
+
+[dev-dependencies]
+lz4_flex = "0.14.0"
+fastlz-rs = "0.0.3"
+miniz_oxide = "0.9.1"
+proptest = "1.12.0"
+mimalloc = "0.1.52"
+
+[features]
+rocksdb = ["dep:rocksdb-lib", "dep:rtrb", "nvme/kprobe", "nvme/kernel"]
+splinterdb = ["dep:splinterdb-lib", "dep:rtrb", "nvme/kprobe", "nvme/kernel"]
+# Pass-through: build the SPDK device driver (crate nvme, see lab/devcontainer).
+spdk = ["nvme/spdk"]
+# LAB ONLY: blocking tree-miss statistics (`dbg::MISS_*`, `dbg::PREP_MISS`; croit-flashstore-tool bench-purge). Never in production builds.
+lab = []
+# Elastic shard capacity (adr 0021 am. 47, doc/design/elastic-shards-plan.md): chunk-table data region. Default off: code absent, mkfs of a chunked store refused, a chunked store refused at mount.
+elastic = []
+
+# Integration targets that drive lab-only hooks (`olsm::labdev`, `Shard::lab_stall_dev_clock`): skipped without `lab`.
+[[test]]
+name = "olsm"
+required-features = ["lab"]
+
+[[test]]
+name = "runs"
+required-features = ["lab"]

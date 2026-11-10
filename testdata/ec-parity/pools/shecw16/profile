@@ -1,0 +1,11 @@
+c=2
+crush-device-class=
+crush-failure-domain=osd
+crush-num-failure-domains=0
+crush-osds-per-failure-domain=0
+crush-root=default
+k=4
+m=3
+plugin=shec
+technique=multiple
+w=16

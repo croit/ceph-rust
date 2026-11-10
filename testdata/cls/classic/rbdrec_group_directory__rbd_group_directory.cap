@@ -1,0 +1,59 @@
+# rbdrec_group_directory__rbd_group_directory
+# t=1791735734
+> call rbd group_dir_list hex:000000000a00000000000000
+result=-2
+[0] rval=0 out=
+> call rbd group_dir_add hex:05000000672d6f6e650400000061626331
+result=0
+[0] rval=0 out=
+> call rbd group_dir_add hex:05000000672d74776f0400000061626332
+result=0
+[0] rval=0 out=
+> call rbd group_dir_add hex:05000000672d6f6e650400000061626339
+result=-17
+[0] rval=-17 out=
+> call rbd group_dir_add hex:05000000672d6e65770400000061626331
+result=-9
+[0] rval=-9 out=
+> call rbd group_dir_add hex:03000000672d7803000000612d62
+result=-22
+[0] rval=-22 out=
+> call rbd group_dir_add hex:000000000400000061626333
+result=-22
+[0] rval=-22 out=
+> call rbd group_dir_add hex:0100000078
+result=-22
+[0] rval=-22 out=
+> call rbd group_dir_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0200000005000000672d6f6e65040000006162633105000000672d74776f0400000061626332
+> call rbd group_dir_list hex:05000000672d6f6e650a00000000000000
+result=0
+[0] rval=0 out=0100000005000000672d74776f0400000061626332
+> call rbd group_dir_rename hex:05000000672d6f6e6503000000672d310400000061626331
+result=0
+[0] rval=0 out=
+> call rbd group_dir_rename hex:03000000672d3105000000672d74776f0400000061626331
+result=-17
+[0] rval=-17 out=
+> call rbd group_dir_remove hex:03000000672d310400000061626332
+result=-116
+[0] rval=-116 out=
+> call rbd group_dir_remove hex:040000006e6f70650400000061626331
+result=-2
+[0] rval=-2 out=
+> call rbd group_dir_remove hex:03000000672d310400000061626331
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=020000000700000069645f616263320900000005000000672d74776f0a0000006e616d655f672d74776f08000000040000006162633200
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a5d854525

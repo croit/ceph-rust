@@ -1,0 +1,113 @@
+# rbd_snap_basic
+# t=1791560685
+> call rbd create hex:0000004000000000163d000000000000000c0000007262645f646174612e616263
+result=0
+[0] rval=0 out=
+> call rbd snapshot_add hex:0200000073310400000000000000
+result=0
+[0] rval=0 out=
+> call rbd snapshot_add hex:0200000073320500000000000000
+result=0
+[0] rval=0 out=
+> call rbd snapshot_add hex:0200000073310600000000000000
+result=-17
+[0] rval=-17 out=
+> call rbd snapshot_add hex:0200000073330500000000000000
+result=-17
+[0] rval=-17 out=
+> call rbd snapshot_add hex:0200000073330300000000000000
+result=-116
+[0] rval=-116 out=
+> call rbd snapshot_add hex:020000007334feffffffffffffff
+result=-22
+[0] rval=-22 out=
+> call rbd snapshot_add hex:0100000075090000000000000001010400000009000000
+result=-22
+[0] rval=-22 out=
+> call rbd snapshot_add hex:0102
+result=-22
+[0] rval=-22 out=
+> call rbd get_snapcontext
+result=0
+[0] rval=0 out=05000000000000000200000005000000000000000400000000000000
+> call rbd snapshot_get hex:0400000000000000
+result=0
+[0] rval=0 out=01012c0000000400000000000000010104000000000000000200000073310000004000000000ed0bc96a0578da2200000000
+> call rbd snapshot_get hex:0500000000000000
+result=0
+[0] rval=0 out=01012c0000000500000000000000010104000000000000000200000073320000004000000000ed0bc96a63a3ec2200000000
+> call rbd snapshot_get hex:0600000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd snapshot_get hex:feffffffffffffff
+result=-22
+[0] rval=-22 out=
+> call rbd get_snapshot_name hex:0400000000000000
+result=0
+[0] rval=0 out=020000007331
+> call rbd get_snapshot_timestamp hex:0400000000000000
+result=0
+[0] rval=0 out=ed0bc96a0578da22
+> call rbd get_size hex:0400000000000000
+result=0
+[0] rval=0 out=160000004000000000
+> call rbd get_flags hex:0400000000000000
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd set_flags hex:020000000000000002000000000000000400000000000000
+result=0
+[0] rval=0 out=
+> call rbd get_flags hex:0400000000000000
+result=0
+[0] rval=0 out=0200000000000000
+> call rbd snapshot_rename hex:0400000000000000020000007335
+result=0
+[0] rval=0 out=
+> call rbd snapshot_rename hex:0400000000000000020000007332
+result=-17
+[0] rval=-17 out=
+> call rbd snapshot_rename hex:4d00000000000000020000007336
+result=-2
+[0] rval=-2 out=
+> call rbd snapshot_rename hex:0400000000000000020000007335
+result=-17
+[0] rval=-17 out=
+> call rbd set_protection_status hex:040000000000000002
+result=0
+[0] rval=0 out=
+> call rbd set_protection_status hex:040000000000000003
+result=-22
+[0] rval=-22 out=
+> call rbd set_protection_status hex:feffffffffffffff01
+result=-22
+[0] rval=-22 out=
+> call rbd set_protection_status hex:630000000000000001
+result=-2
+[0] rval=-2 out=
+> call rbd get_protection_status hex:0400000000000000
+result=0
+[0] rval=0 out=02
+> call rbd get_protection_status hex:6300000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd get_protection_status hex:feffffffffffffff
+result=-22
+[0] rval=-22 out=
+> call rbd snapshot_remove hex:0400000000000000
+result=-16
+[0] rval=-16 out=
+> call rbd set_protection_status hex:040000000000000000
+result=0
+[0] rval=0 out=
+> call rbd snapshot_remove hex:0400000000000000
+result=0
+[0] rval=0 out=
+> call rbd snapshot_remove hex:0400000000000000
+result=-2
+[0] rval=-2 out=
+> call rbd get_snapcontext
+result=0
+[0] rval=0 out=0500000000000000010000000500000000000000
+> omap-get-vals
+result=0
+[0] rval=0 out=09000000100000006163636573735f74696d657374616d7008000000ed0bc96a7a0ec822100000006372656174655f74696d657374616d7008000000ed0bc96a7a0ec822080000006665617475726573080000003d00000000000000100000006d6f646966795f74696d657374616d7008000000ed0bc96a7a0ec8220d0000006f626a6563745f707265666978100000000c0000007262645f646174612e616263050000006f7264657201000000160400000073697a6508000000000000400000000008000000736e61705f73657108000000050000000000000019000000736e617073686f745f303030303030303030303030303030353c0000000808360000000500000000000000020000007332000000400000000000000000000000000001010400000000000000ed0bc96a63a3ec22000000000000

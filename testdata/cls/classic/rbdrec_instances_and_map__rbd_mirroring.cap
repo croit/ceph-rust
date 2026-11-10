@@ -1,0 +1,59 @@
+# rbdrec_instances_and_map__rbd_mirroring
+# t=1791735734
+> call rbd mirror_instances_list
+result=-2
+[0] rval=0 out=
+> call rbd mirror_instances_add hex:0400000034373131
+result=0
+[0] rval=0 out=
+> call rbd mirror_instances_add hex:03000000313030
+result=0
+[0] rval=0 out=
+> call rbd mirror_instances_add hex:03000000313030
+result=0
+[0] rval=0 out=
+> call rbd mirror_instances_list
+result=0
+[0] rval=0 out=02000000030000003130300400000034373131
+> call rbd mirror_instances_remove hex:03000000313030
+result=0
+[0] rval=0 out=
+> call rbd mirror_instances_remove hex:03000000313030
+result=0
+[0] rval=0 out=
+> call rbd mirror_instances_list
+result=0
+[0] rval=0 out=010000000400000034373131
+> call rbd mirror_image_map_update hex:0200000067310101170000000400000034373131050000000600000003000000010203
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_map_update hex:02000000673201011000000000000000000000000000000000000000
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_map_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=02000000020000006731010117000000040000003437313105000000060000000300000001020302000000673201011000000000000000000000000000000000000000
+> call rbd mirror_image_map_list hex:0200000067310a00000000000000
+result=0
+[0] rval=0 out=0100000002000000673201011000000000000000000000000000000000000000
+> call rbd mirror_image_map_remove hex:020000006731
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_map_remove hex:020000006731
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_map_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0100000002000000673201011000000000000000000000000000000000000000
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=020000000c000000696d6167655f6d61705f673216000000010110000000000000000000000000000000000000000d000000696e7374616e63655f343731310000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a59b0bd2f

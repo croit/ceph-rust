@@ -1,0 +1,21 @@
+# omap-get-keys / vals paging, start_after, prefix filter, truncated flag
+omap-set a1=v a2=v a3=v b1=v b2=v
+---
+omap-get-keys "" 2
+---
+omap-get-keys a2 10
+---
+omap-get-keys b2 10
+---
+omap-get-vals "" 3
+---
+omap-get-vals a1 2
+---
+omap-get-vals "" 10 b
+---
+omap-get-vals a3 10 a
+---
+omap-get-vals "" 10 zzz
+---
+# max_return 0
+omap-get-keys "" 0

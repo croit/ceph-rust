@@ -1,0 +1,44 @@
+# rbdrec_namespaces__rbd_namespace
+# t=1791735735
+> call rbd namespace_add hex:0100000062
+result=0
+[0] rval=0 out=
+> call rbd namespace_add hex:0100000061
+result=0
+[0] rval=0 out=
+> call rbd namespace_add hex:0100000061
+result=-17
+[0] rval=-17 out=
+> call rbd namespace_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0200000001000000610100000062
+> call rbd namespace_list hex:01000000610a00000000000000
+result=0
+[0] rval=0 out=010000000100000062
+> call rbd namespace_list hex:000000000000000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd namespace_remove hex:0100000061
+result=0
+[0] rval=0 out=
+> call rbd namespace_remove hex:0100000061
+result=-2
+[0] rval=-2 out=
+> call rbd namespace_add hex:01
+result=-22
+[0] rval=-22 out=
+> call rbd namespace_list hex:080000006f6e6c792d6f6e65
+result=-22
+[0] rval=-22 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=01000000060000006e616d655f620000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b7b7cb6a1a35ba11

@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "cephx"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+aws-lc-rs = "1.18.1"
+base64 = "0.23.1"
+denc = { version = "0.0.0", path = "../../crates/denc" }
+zeroize = "1.9.1"
+
+[dev-dependencies]
+proptest = "1.12.0"

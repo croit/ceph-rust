@@ -1,0 +1,33 @@
+# object classes: unknown class/method, hello class, rbd getters, lock get_info
+writefull "classdata"; omap-set order=hex:16 size=hex:0001000000000000
+---
+call nosuchclass nosuchmethod
+---
+call hello nosuchmethod
+---
+call hello say_hello "there"
+---
+call hello replay
+---
+call rbd get_size hex:feffffffffffffff
+---
+# truncated input -> EINVAL
+call rbd get_size hex:feff
+---
+# lock get_info on an object without the lock xattr: success, empty
+call lock get_info hex:0101050000000100000078
+---
+# bad input
+call lock get_info hex:00
+---
+call lock list_locks
+---
+# method failure inside a mutating message aborts the whole message
+write 0 "XX"; call rbd get_size hex:feff
+---
+read 0 20
+---
+# missing object: rbd getter ENOENT
+delete
+---
+call rbd get_size hex:feffffffffffffff

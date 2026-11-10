@@ -1,0 +1,19 @@
+{
+    "size": 4096,
+    "negative": 0,
+    "attrs": [
+        {
+            "name": "_",
+            "length": 3
+        },
+        {
+            "name": "_user",
+            "length": 1
+        },
+        {
+            "name": "snapset",
+            "length": 2
+        }
+    ]
+}
+

@@ -1,0 +1,13 @@
+{
+    "oid": "oname2",
+    "key": "okey",
+    "snapid": -2,
+    "hash": 67,
+    "max": 0,
+    "pool": 0,
+    "namespace": "n1",
+    "generation": 1,
+    "shard_id": 1,
+    "max": 0
+}
+

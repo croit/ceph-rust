@@ -1,0 +1,83 @@
+{
+    "head": "1'2",
+    "tail": "3'4",
+    "log": [
+        {
+            "op": "unknown",
+            "object": "MIN",
+            "version": "0'0",
+            "prior_version": "0'0",
+            "reqid": "unknown.0.0:0",
+            "extra_reqids": [],
+            "mtime": "0.000000",
+            "return_code": 0,
+            "written_shards": "{}",
+            "mod_desc": {
+                "object_mod_desc": {
+                    "can_local_rollback": true,
+                    "rollback_info_completed": false,
+                    "ops": []
+                }
+            },
+            "clean_regions": {
+                "object_clean_regions": {
+                    "clean_offsets": "[0~18446744073709551615]",
+                    "clean_omap": true,
+                    "new_object": false
+                }
+            }
+        },
+        {
+            "op": "modify",
+            "object": "0:13800000::key:objname:7b",
+            "version": "1'2",
+            "prior_version": "3'4",
+            "reqid": "client.777.8:999",
+            "extra_reqids": [],
+            "mtime": "8.000000",
+            "return_code": 0,
+            "written_shards": "{}",
+            "mod_desc": {
+                "object_mod_desc": {
+                    "can_local_rollback": true,
+                    "rollback_info_completed": false,
+                    "ops": []
+                }
+            },
+            "clean_regions": {
+                "object_clean_regions": {
+                    "clean_offsets": "[0~18446744073709551615]",
+                    "clean_omap": true,
+                    "new_object": false
+                }
+            }
+        },
+        {
+            "op": "error",
+            "object": "0:13800000::key:objname:7b",
+            "version": "1'2",
+            "prior_version": "3'4",
+            "reqid": "client.777.8:999",
+            "extra_reqids": [],
+            "mtime": "8.000000",
+            "return_code": -2,
+            "written_shards": "{}",
+            "mod_desc": {
+                "object_mod_desc": {
+                    "can_local_rollback": true,
+                    "rollback_info_completed": false,
+                    "ops": []
+                }
+            },
+            "clean_regions": {
+                "object_clean_regions": {
+                    "clean_offsets": "[0~18446744073709551615]",
+                    "clean_omap": true,
+                    "new_object": false
+                }
+            }
+        }
+    ],
+    "dups": []
+}
+

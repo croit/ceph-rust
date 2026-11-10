@@ -1,0 +1,25 @@
+# 03_sparse_read
+> writefull head
+result=0
+  [0] writefull rval=0 out=<empty>
+> write 8192 tail
+result=0
+  [0] write rval=0 out=<empty>
+> sparse-read 0 10000
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=8196 data=hex:686561640000000000000000000000000000000000000000000000000000000000000000000000000000000000000000...(+8148B) crc32c=2dca027a
+> sparse-read 0 4
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=4 data="head"
+> sparse-read 100 100
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=0 data=<empty>
+> sparse-read 8196 10
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=0 data=<empty>
+> sparse-read 9000 10
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=0 data=<empty>
+> sparse-read 8190 100
+result=0
+  [0] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=6 data=hex:00007461696c

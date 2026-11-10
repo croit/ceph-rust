@@ -1,0 +1,7 @@
+# Example drop-in: /etc/systemd/system/croit-flashstore-osd@4.service.d/cpuaffinity.conf   (written per instance by the deploy tool)
+# One core thread per allowed CPU (adr 0031). Pick CPUs of the NUMA node of the NVMe and the NIC VF; do not share
+# them with classic ceph-osd or the kernel IRQ housekeeping CPUs.
+[Service]
+CPUAffinity=8-15
+# NUMAPolicy=bind
+# NUMAMask=0

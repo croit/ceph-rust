@@ -1,0 +1,25 @@
+# 11_create
+> create
+result=0
+  [0] create rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+> create
+result=0
+  [0] create rval=0 out=<empty>
+> create excl
+result=-17(EEXIST)
+  [0] create rval=-17(EEXIST) out=<empty>
+> write 0 keep
+result=0
+  [0] write rval=0 out=<empty>
+> create
+result=0
+  [0] create rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=4 "keep"
+> create !excl
+result=-17(EEXIST)
+  [0] create rval=-17(EEXIST) out=<empty>

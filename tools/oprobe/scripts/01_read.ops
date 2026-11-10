@@ -1,0 +1,26 @@
+# read / sync-read edge cases on an existing object (client-ops 7.1)
+writefull "hello world"
+---
+read 0 5
+---
+read 6 100
+---
+# offset == size -> 0 bytes, success
+read 11 5
+---
+# offset past end -> 0 bytes, success
+read 100 5
+---
+# length 0 = to end of object
+read 0 0
+---
+read 3 0
+---
+sync-read 0 5
+---
+# empty object
+writefull ""
+---
+read 0 10
+---
+read 0 0

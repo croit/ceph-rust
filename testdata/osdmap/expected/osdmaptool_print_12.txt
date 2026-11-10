@@ -1,0 +1,21 @@
+epoch 12
+fsid 6d2f4f0e-6e1a-4a64-9a55-6e766d65736f
+created 2026-10-09T10:01:56.819165+0000
+modified 2026-10-09T10:02:32.950299+0000
+flags sortbitwise,recovery_deletes,purged_snapdirs,pglog_hardlimit
+crush_version 7
+full_ratio 0.95
+backfillfull_ratio 0.9
+nearfull_ratio 0.85
+require_min_compat_client luminous
+min_compat_client jewel
+require_osd_release umbrella
+stretch_mode_enabled false
+
+pool 1 'rbd' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 12 flags hashpspool,creating,split_reads,supports_omap stripe_width 0 application rbd read_balance_score 1.22
+
+max_osd 3
+osd.0 up   in  weight 1 up_from 5 up_thru 11 down_at 0 last_clean_interval [0,0) v2:172.28.0.20:6800/263549666 v2:172.28.0.20:6801/263549666 exists,up de57c85a-e4bb-44c6-91a8-c0732ae1f0c6
+osd.1 up   in  weight 1 up_from 7 up_thru 11 down_at 0 last_clean_interval [0,0) v2:172.28.0.21:6800/3134534817 v2:172.28.0.21:6801/3134534817 exists,up 33bf2952-8149-4927-a009-2a80f64d4bbd
+osd.2 up   in  weight 1 up_from 9 up_thru 11 down_at 0 last_clean_interval [0,0) v2:172.28.0.22:6800/3507417217 v2:172.28.0.22:6801/3507417217 exists,up 75165f9e-9202-46d6-afed-e2064ec33e2d
+

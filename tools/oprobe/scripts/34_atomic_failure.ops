@@ -1,0 +1,53 @@
+# failing op in the middle: nothing applied, later ops not executed (rval 0), message errno = op errno
+write 0 base; setxattr k v
+---
+write 0 ZZZ; cmpxattr k nope; write 3 YYY
+---
+read 0 20; getxattr k
+---
+# FAILOK: failure recorded in rval, message succeeds, remaining ops run and apply
+write 0 FFF; cmpxattr k nope !failok; write 3 GGG
+---
+read 0 20
+---
+# successful cmpxattr has rval 1
+write 0 HHH; cmpxattr k v; write 3 III
+---
+read 0 20
+---
+# getxattr ENODATA in the middle aborts
+write 0 JJJ; getxattr missing; write 3 KKK
+---
+read 0 20
+---
+write 0 LLL; getxattr missing !failok; write 3 MMM
+---
+read 0 20
+---
+# cmpext mismatch in the middle (compares the committed content "LLLMMM")
+write 0 NNN; cmpext 0 xxx; write 3 OOO
+---
+read 0 20
+---
+# cmpext sees the OLD content: passes although the same message overwrites it
+write 0 AAA; cmpext 0 LLL
+---
+read 0 20
+---
+write 0 BBB; cmpext 0 AAA
+---
+read 0 20
+---
+write 0 PPP; assert-version 1; write 3 QQQ
+---
+# read-only failing first op: later ops not executed
+cmpxattr k nope; read 0 3
+---
+getxattr missing; read 0 3; stat
+---
+# omap guard failure leaves everything untouched
+omap-set g=1
+---
+omap-cmp g eq 2; omap-set g=9; write 0 "never"
+---
+omap-get-vals; read 0 3

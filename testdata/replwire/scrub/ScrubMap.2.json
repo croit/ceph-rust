@@ -1,0 +1,34 @@
+{
+    "valid_through": "1'2",
+    "incremental_since": "3'4",
+    "objects": [
+        {
+            "name": "bar",
+            "hash": 456,
+            "key": "",
+            "snapid": 123,
+            "size": -1,
+            "negative": 1,
+            "attrs": []
+        },
+        {
+            "name": "foo",
+            "hash": 456,
+            "key": "fookey",
+            "snapid": 123,
+            "size": 123,
+            "negative": 0,
+            "attrs": [
+                {
+                    "name": "bar",
+                    "length": 6
+                },
+                {
+                    "name": "foo",
+                    "length": 3
+                }
+            ]
+        }
+    ]
+}
+

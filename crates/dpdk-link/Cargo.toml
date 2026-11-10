@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "dpdk-link"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+# `links` makes cargo refuse a second package that links DPDK: this crate is the ONE owner of the native DPDK archives.
+links = "dpdk"
+
+[lints]
+workspace = true
+
+[features]
+# Link the DPDK archives SPDK needs (rte_* list taken from SPDK's pkg-config files): crates/nvme feature `spdk`.
+spdk = []

@@ -1,0 +1,13 @@
+{
+    "name": "",
+    "public_addrs": {
+        "addrvec": []
+    },
+    "addr": "(unrecognized address family 0)/0",
+    "public_addr": "(unrecognized address family 0)/0",
+    "priority": 0,
+    "weight": 0,
+    "time_added": "1970-01-01T00:00:00:000000+0000",
+    "crush_location": []
+}
+

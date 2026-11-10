@@ -1,0 +1,17 @@
+# append creates a missing object, appends at current size
+append "one"
+---
+append "two"
+---
+read 0 20; stat
+---
+append ""
+---
+stat
+---
+# append after truncate uses the truncated size
+truncate 2
+---
+append "X"
+---
+read 0 20

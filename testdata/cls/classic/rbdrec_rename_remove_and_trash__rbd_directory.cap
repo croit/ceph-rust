@@ -1,0 +1,41 @@
+# rbdrec_rename_remove_and_trash__rbd_directory
+# t=1791735735
+> call rbd dir_add_image hex:03000000696d67080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_rename_image hex:03000000696d6704000000696d6732080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_get_id hex:03000000696d67
+result=-2
+[0] rval=-2 out=
+> call rbd dir_get_id hex:04000000696d6732
+result=0
+[0] rval=0 out=080000003130616263646566
+> call rbd dir_list hex:000000006400000000000000
+result=0
+[0] rval=0 out=0100000004000000696d6732080000003130616263646566
+> call rbd dir_remove_image hex:04000000696d6732080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_add_image hex:04000000696d6732080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_remove_image hex:04000000696d6732080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_remove_image hex:04000000696d6732080000003130616263646566
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b7b7cb6a4bdfba2e

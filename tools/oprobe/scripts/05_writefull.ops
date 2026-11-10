@@ -1,0 +1,19 @@
+# writefull replaces data, keeps xattrs and omap
+writefull "0123456789"; setxattr k v; omap-set a=1
+---
+writefull "ab"
+---
+read 0 20; stat
+---
+getxattr k; omap-get-vals
+---
+writefull ""
+---
+stat; read 0 10
+---
+# on a missing object it creates
+delete
+---
+writefull "new"
+---
+read 0 10

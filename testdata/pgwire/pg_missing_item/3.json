@@ -1,0 +1,7 @@
+{
+    "need": "3'5",
+    "have": "3'4",
+    "flags": "delete",
+    "clean_regions": "clean_offsets: [0~4096,12288~18446744073709539327], clean_omap: false, new_object: false"
+}
+

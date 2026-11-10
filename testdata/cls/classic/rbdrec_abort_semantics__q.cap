@@ -1,0 +1,32 @@
+# rbdrec_abort_semantics__q
+# t=1791735734
+> call 2pc_queue 2pc_queue_init hex:010115000000a08601000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_abort hex:01010400000005000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c0000000a0000000000000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000140000000000000002000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_abort hex:01010400000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_abort hex:01010400000001000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=af00000000000000b6b7cb6a35e31405

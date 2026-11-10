@@ -1,0 +1,22 @@
+# truncate: missing (no-op, not created), shrink, extend (zero fill), EFBIG
+truncate 10
+---
+stat
+---
+write 0 "abcdefghij"
+---
+truncate 4
+---
+read 0 20; stat
+---
+truncate 8
+---
+read 0 20; stat
+---
+truncate 0
+---
+stat
+---
+truncate 0x8000000
+---
+stat

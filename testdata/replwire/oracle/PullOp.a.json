@@ -1,0 +1,91 @@
+{
+    "soid": "5:f77db57b:::rbd_data.abc.0000000000000001:head",
+    "recovery_info": {
+        "object": "5:f77db57b:::rbd_data.abc.0000000000000001:head",
+        "at_version": "12'345",
+        "size": "4194304",
+        "object_info": {
+            "oid": {
+                "oid": "rbd_data.abc.0000000000000001",
+                "key": "",
+                "snapid": -2,
+                "hash": 3735928559,
+                "max": 0,
+                "pool": 5,
+                "namespace": ""
+            },
+            "version": "12'345",
+            "prior_version": "12'300",
+            "last_reqid": "client.4123.1:77",
+            "user_version": 999,
+            "size": 4194304,
+            "mtime": "2023-11-14T22:13:20.123456+0000",
+            "local_mtime": "2023-11-14T22:13:21.000000+0000",
+            "lost": 0,
+            "flags": [
+                "dirty",
+                "omap",
+                "data_digest",
+                "omap_digest"
+            ],
+            "truncate_seq": 3,
+            "truncate_size": 4194304,
+            "data_digest": "0x12345678",
+            "omap_digest": "0x9abcdef0",
+            "expected_object_size": 4194304,
+            "expected_write_size": 65536,
+            "alloc_hint_flags": 3,
+            "manifest": {
+                "type": 0
+            },
+            "watchers": {
+                "client.4100": {
+                    "cookie": 7,
+                    "timeout_seconds": 30,
+                    "addr": {
+                        "type": "v2",
+                        "addr": "172.28.0.40:6800",
+                        "nonce": 1234
+                    }
+                }
+            },
+            "shard_versions": []
+        },
+        "snapset": {
+            "seq": 12,
+            "clones": [
+                {
+                    "snap": 4,
+                    "size": 12288,
+                    "overlap": "[0~4096,8192~100]",
+                    "snaps": [
+                        3,
+                        2
+                    ]
+                },
+                {
+                    "snap": 9,
+                    "size": 0,
+                    "overlap": "[]",
+                    "snaps": [
+                        9,
+                        8,
+                        5
+                    ]
+                }
+            ]
+        },
+        "copy_subset": "[0~8192,65536~4096]",
+        "clone_subset": "{1:e0000000:::head:3=[0~100,4096~4096]}",
+        "object_exist": "1",
+        "num_omap_keys": 17
+    },
+    "recovery_progress": {
+        "first?": 0,
+        "data_complete?": 1,
+        "data_recovered_to": 8388608,
+        "omap_complete?": 0,
+        "omap_recovered_to": "key_0042"
+    }
+}
+

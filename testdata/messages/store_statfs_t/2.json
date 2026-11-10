@@ -1,0 +1,13 @@
+{
+    "total": 234,
+    "available": 123,
+    "internally_reserved": 33,
+    "allocated": 32,
+    "data_stored": 44,
+    "data_compressed": 21,
+    "data_compressed_allocated": 12,
+    "data_compressed_original": 13,
+    "omap_allocated": 14,
+    "internal_metadata": 15
+}
+

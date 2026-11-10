@@ -1,0 +1,5 @@
+## allow croit-flashstore-osd (runs as user ceph) to collect device health metrics, like the ceph packages' ceph-smartctl
+## (own file name: both packages can be installed side by side without a file conflict)
+
+ceph ALL=NOPASSWD: /usr/sbin/smartctl -x --json=o /dev/*
+ceph ALL=NOPASSWD: /usr/sbin/nvme * smart-log-add --json /dev/*

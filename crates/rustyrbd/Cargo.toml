@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+[package]
+name = "rustyrbd"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = []
+# In-memory journal backend and image for native journal tests
+# (crates/rustyrbd/src/journal_mem.rs); compiled out of non-test builds.
+journal-testkit = []
+# In-memory migration store executing the real cls_rbd handlers
+# (crates/rustyrbd/src/migration_mem.rs); compiled out of production builds.
+migration-testkit = ["dep:cls"]
+
+[dependencies]
+aes = { version = "0.9.3", features = ["zeroize"] }
+# Test-only in-memory cls_rbd executor (LGPL, tests only, never shipped);
+# enabled by `migration-testkit`, see ADR 0700/0705.
+cls = { path = "../../services/osd/cls", features = ["mem"], optional = true }
+argon2 = "0.6.0"
+base64 = "0.23.1"
+bytes = "1.12.1"
+cipher = "0.5.2"
+cls-lock = { path = "../cls-lock" }
+crc = { version = "0.0.0", path = "../crc" }
+deadline = { version = "0.0.0", path = "../deadline" }
+denc = { version = "0.0.0", path = "../denc" }
+diag = { version = "0.0.0", path = "../diag" }
+hex = "0.4.3"
+libc = "0.2.191"
+opwire = { path = "../opwire" }
+pbkdf2 = "0.13.0"
+rand = "0.10.3"
+rustyrados = { path = "../rustyrados" }
+serde_json = "1.0.154"
+sha2 = "0.11.1"
+xts-mode = "0.6.0"
+zeroize = "1.9.1"
+serde = "1.0.229"
+
+[dev-dependencies]
+crc = { version = "0.0.0", path = "../crc" }
+outfmt = { path = "../outfmt" }

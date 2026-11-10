@@ -1,0 +1,11 @@
+crush-device-class=
+crush-failure-domain=osd
+crush-num-failure-domains=0
+crush-osds-per-failure-domain=0
+crush-root=default
+jerasure-per-chunk-alignment=false
+k=2
+m=1
+plugin=jerasure_generic
+technique=reed_sol_van
+w=8

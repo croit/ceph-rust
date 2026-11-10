@@ -1,0 +1,49 @@
+# self-managed snap contexts: clone on first write after a newer snap; list-snaps on SNAPDIR
+@snapc=2:2
+writefull "v1"
+---
+@snapc=3:3,2
+writefull "v2-longer"
+---
+@snapid=snapdir
+list-snaps
+---
+# read the clone (covers snap 3: the data before the snap-3 write) and the head
+@snapid=3
+read 0 20
+---
+read 0 20
+---
+@snapid=3
+stat
+---
+@snapc=3:3,2
+write 0 "V2"
+---
+@snapid=snapdir
+list-snaps
+---
+# list-snaps off SNAPDIR -> EINVAL ; other ops on SNAPDIR -> EINVAL
+list-snaps
+---
+@snapid=snapdir
+read 0 10
+---
+# writes must use NOSNAP
+@snapid=5
+write 0 "x"
+---
+# invalid snapc: snaps not descending / snaps[0] > seq -> EINVAL
+@snapc=5:3,4
+write 0 "x"
+---
+@snapc=2:3
+write 0 "x"
+---
+# snap 2 predates the first write: no data there
+@snapid=2
+read 0 20
+---
+# read of a snap that has no clone covering it
+@snapid=1
+read 0 20

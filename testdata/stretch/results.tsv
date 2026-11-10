@@ -1,0 +1,59 @@
+phase	key	value
+setup	crush ids	dc1=-3 dc2=-10 datacenter_type=8
+P0	stretch set pst 2 2 datacenter size4 min2	rc=0 pool pst stretch values are set successfully
+P0	pool pst [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+P0	pst states	8 active+clean
+P0	write pst all up	rc=0
+P0	pst pg 0 mapping	up=[2,3,0,1] acting=[2,3,0,1] state=active+clean
+P1	pst states (dc2 OSDs down, count 2, min_size 2)	1 undersized+degraded+peered; 7 undersized+peered
+P1	write pst	rc=124
+P1	pst pg 0 mapping	up=[0,1] acting=[0,1] state=undersized+degraded+peered
+P2	stretch set pst count 1	rc=0 pool pst stretch values are set successfully
+P2	pool pst [size,min_size,count,target,barrier,member]	[4,2,1,2,8,2147483647]
+P2	pst states (count 1)	7 active+undersized; 1 active+undersized+degraded
+P2	write pst	rc=0
+P3	stretch set pst count 3 (no confirm)	rc=1 Error EPERM: peering_crush_bucket_count=3 > datacenter=2 can lead to data unavailability, pass --yes-i-really-mean-it to proceed
+P3	stretch set pst count 3 confirmed	rc=0 pool pst stretch values are set successfully
+P3	pst states (count 3 > 2 sites, all OSDs up)	8 clean+peered
+P3	write pst	rc=124
+P3	stretch set pst count 2 back	rc=0
+P3	pst states (count 2, all up)	8 active+clean
+P3	stretch unset pst	rc=0 pool pst is no longer a stretch pool, all stretch values are unset successfully
+P3	pool pst [size,min_size,count,target,barrier,member]	[4,2,0,0,0,2147483647]
+P3	stretch set pst again	rc=0
+M0	election_strategy connectivity	rc=0 
+M0	enable_stretch_mode	rc=0 
+M0	stretch_mode	{"stretch_mode_enabled":true,"stretch_bucket_count":2,"degraded_stretch_mode":0,"recovering_stretch_mode":0,"stretch_mode_bucket":8}
+M0	pool pst [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M0	pool .mgr [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M0	create replicated pool sm	rc=0 pool 'sm' created
+M0	pool sm [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M0	create EC pool in stretch mode	rc=22 Error EINVAL: prepare_pool_size: we are in stretch mode; cannot create EC pools!
+M0	create pool sm3 (rule stretch_rule, expected_num_objects 0, size 3)	rc=0 pool 'sm3' created
+M0	pool sm3 [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M0	sm states	8 active+clean
+M0	write sm	rc=0
+M0	mon log: OSD sessions discarded (foreign zone) so far	4
+M1	stretch_mode (dc2 OSDs down, dc2 mon up)	{"stretch_mode_enabled":true,"stretch_bucket_count":2,"degraded_stretch_mode":0,"recovering_stretch_mode":0,"stretch_mode_bucket":8}
+M1	sm states	1 undersized+degraded+peered; 7 undersized+peered
+M1	write sm	rc=124
+M1	pool sm [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M2	stretch_mode (dc2 mon down)	{"stretch_mode_enabled":true,"stretch_bucket_count":2,"degraded_stretch_mode":1,"recovering_stretch_mode":0,"stretch_mode_bucket":8}
+M2	pool sm [size,min_size,count,target,barrier,member]	[4,1,1,2,8,-3]
+M2	pool pst [size,min_size,count,target,barrier,member]	[4,1,1,2,8,-3]
+M2	sm states	7 active+undersized; 1 active+undersized+degraded
+M2	write sm	rc=0
+M2	sm pg 0 mapping	up=[1,0] acting=[1,0] state=active+undersized
+M2	create pool in degraded mode	rc=0 pool 'smdeg' created
+M2	pool smdeg [size,min_size,count,target,barrier,member]	[2,1,1,1,8,2147483647]
+M2	health	HEALTH_WARN mon is allowing insecure global_id reclaim; We are missing stretch mode buckets, only requiring 1 of 2 buckets to peer; 1/3 mons down, quorum a,e; 1 datacenter (2 osds) down; 2 osds down; 2 hosts (2 osds) down; Degraded data redundancy: 12/24 objects degraded (50.000%), 4 pgs degraded
+M3	stretch_mode (recovering seen)	{"stretch_mode_enabled":true,"stretch_bucket_count":2,"degraded_stretch_mode":1,"recovering_stretch_mode":1,"stretch_mode_bucket":8}
+M3	pool sm [size,min_size,count,target,barrier,member]	[4,1,1,2,8,-3]
+M3	stretch_mode (after dc2 back)	{"stretch_mode_enabled":true,"stretch_bucket_count":2,"degraded_stretch_mode":0,"recovering_stretch_mode":0,"stretch_mode_bucket":8}
+M3	pool sm [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M3	pool smdeg [size,min_size,count,target,barrier,member]	[2,2,2,1,8,2147483647]
+M3	pool pst [size,min_size,count,target,barrier,member]	[4,2,2,2,8,2147483647]
+M3	sm states	8 active+clean
+M3	smdeg states	8 clean+peered
+M3	mon log: OSD sessions discarded (foreign zone) total	20
+M3	osd crash lines	0

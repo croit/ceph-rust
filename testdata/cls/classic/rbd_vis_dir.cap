@@ -1,0 +1,23 @@
+# rbd_vis_dir
+# t=1791560685
+> call rbd dir_add_image hex:010000006103000000696431
+result=0
+[0] rval=0 out=
+> call rbd dir_rename_image hex:0100000061010000006203000000696431; call rbd dir_get_id hex:0100000062
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> call rbd dir_remove_image hex:010000006203000000696431; call rbd dir_add_image hex:010000006203000000696431
+result=-2
+[0] rval=-2 out=
+[1] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=020000000600000069645f696431050000000100000061060000006e616d655f61070000000300000069643100
+> call rbd dir_remove_image hex:010000006203000000696431; call rbd dir_remove_image hex:010000006203000000696431
+result=-2
+[0] rval=-2 out=
+[1] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=020000000600000069645f696431050000000100000061060000006e616d655f61070000000300000069643100

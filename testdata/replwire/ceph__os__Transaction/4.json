@@ -1,0 +1,78 @@
+{
+    "ops": [
+        {
+            "op_num": 0,
+            "op_name": "setattr",
+            "collection": "2.1_head",
+            "oid": "#-1:13800000:::obj:7b#",
+            "name": "key",
+            "length": 9
+        },
+        {
+            "op_num": 1,
+            "op_name": "setattrs",
+            "collection": "2.1_head",
+            "oid": "#-1:13800000:::obj:7b#",
+            "attr_lens": {
+                "a": 4,
+                "b": 4
+            }
+        },
+        {
+            "op_num": 2,
+            "op_name": "rmattr",
+            "collection": "2.1_head",
+            "oid": "#-1:13800000:::obj:7b#",
+            "name": "b"
+        },
+        {
+            "op_num": 3,
+            "op_name": "rmattrs",
+            "collection": "2.1_head",
+            "oid": "#-1:13800000:::obj:7b#"
+        },
+        {
+            "op_num": 4,
+            "op_name": "clone",
+            "collection": "2.1_head",
+            "src_oid": "#-1:13800000:::obj:7b#",
+            "dst_oid": "#-1:13800000:::obj2:7b#"
+        },
+        {
+            "op_num": 5,
+            "op_name": "clone",
+            "collection": "2.1_head",
+            "src_oid": "#-1:13800000:::obj:7b#",
+            "dst_oid": "#-1:13800000:::obj3:7b#"
+        },
+        {
+            "op_num": 6,
+            "op_name": "clonerange2",
+            "collection": "2.1_head",
+            "src_oid": "#-1:13800000:::obj:7b#",
+            "dst_oid": "#-1:13800000:::obj2:7b#",
+            "src_offset": 1,
+            "len": 12,
+            "dst_offset": 99
+        },
+        {
+            "op_num": 7,
+            "op_name": "mkcoll",
+            "collection": "2.1_head"
+        },
+        {
+            "op_num": 8,
+            "op_name": "op_coll_move_rename",
+            "old_collection": "2.1_head",
+            "old_oid": "#-1:13800000:::obj2:7b#",
+            "new_collection": "5.4_head",
+            "new_oid": "#-1:13800000:::obj3:7b#"
+        },
+        {
+            "op_num": 9,
+            "op_name": "rmcoll",
+            "collection": "2.1_head"
+        }
+    ]
+}
+

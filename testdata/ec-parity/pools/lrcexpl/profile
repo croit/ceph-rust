@@ -1,0 +1,12 @@
+crush-device-class=
+crush-failure-domain=osd
+crush-num-failure-domains=0
+crush-osds-per-failure-domain=0
+crush-root=default
+crush-steps=[["chooseleaf","osd",0]]
+k=-1
+l=-1
+layers=[["_cDD_cDD",""],["cDDD____",""],["____cDDD",""]]
+m=-1
+mapping=__DD__DD
+plugin=lrc

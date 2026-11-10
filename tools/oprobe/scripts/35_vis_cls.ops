@@ -1,0 +1,38 @@
+# cls methods read the committed state too (cls.md s4): omap, data, xattr (lock), and survive delete
+writefull "old"; omap-set order=hex:16 size=hex:0001000000000000
+---
+# omap-set new size, then rbd get_size: returns the OLD size (256)
+@flags=returnvec
+omap-set size=hex:0002000000000000; call rbd get_size hex:feffffffffffffff
+---
+call rbd get_size hex:feffffffffffffff
+---
+# write then cls read of object data
+@flags=returnvec
+writefull "NEWNEW"; call hello replay
+---
+call hello replay
+---
+# setxattr of the lock xattr then lock get_info: old (empty) lock
+@flags=returnvec
+setxattr lock.x hex:010109000000000000000100000000; call lock get_info hex:0101050000000100000078
+---
+@flags=returnvec
+call lock get_info hex:0101050000000100000078
+---
+# delete then cls read still sees the committed omap
+@flags=returnvec
+delete; call rbd get_size hex:feffffffffffffff
+---
+stat
+---
+# missing object: omap-set + cls read -> ENOENT (message aborts)
+@flags=returnvec
+omap-set order=hex:16 size=hex:0001000000000000; call rbd get_size hex:feffffffffffffff
+---
+stat
+---
+@flags=returnvec
+writefull "abc"; call hello replay
+---
+stat

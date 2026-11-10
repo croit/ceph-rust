@@ -1,0 +1,34 @@
+# 01_read
+> writefull hello world
+result=0
+  [0] writefull rval=0 out=<empty>
+> read 0 5
+result=0
+  [0] read rval=0 len=5 "hello"
+> read 6 100
+result=0
+  [0] read rval=0 len=5 "world"
+> read 11 5
+result=0
+  [0] read rval=0 out=<empty>
+> read 100 5
+result=0
+  [0] read rval=0 out=<empty>
+> read 0 0
+result=0
+  [0] read rval=0 len=11 "hello world"
+> read 3 0
+result=0
+  [0] read rval=0 len=8 "lo world"
+> sync-read 0 5
+result=0
+  [0] sync_read rval=0 len=5 "hello"
+> writefull ""
+result=0
+  [0] writefull rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 out=<empty>
+> read 0 0
+result=0
+  [0] read rval=0 out=<empty>

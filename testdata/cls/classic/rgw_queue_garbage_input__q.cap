@@ -1,0 +1,26 @@
+# rgw_queue_garbage_input__q
+# t=1791707459
+> call queue queue_init hex:0102
+result=-22
+[0] rval=-22 out=
+> call queue queue_enqueue hex:0102
+result=-22
+[0] rval=-22 out=
+> call queue queue_list_entries hex:0102
+result=-2
+[0] rval=0 out=
+> call queue queue_remove_entries hex:0102
+result=-22
+[0] rval=-22 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

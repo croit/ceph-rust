@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "cls"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+description = "Object classes (lock, rbd) as a static registry over the ClsCtx objclass surface (spec/cls.md)"
+
+[lints]
+workspace = true
+
+[features]
+# In-memory ClsCtx implementation (lab/test backend, adr 0024). Off in production.
+mem = []
+# Dev tool: examples/capture.rs records classic-OSD transcripts (needs the lab cluster).
+capture = ["dep:oprobe"]
+
+[dependencies]
+denc = { path = "../../../crates/denc" }
+crc = { path = "../../../crates/crc" }
+oprobe = { path = "../../../tools/oprobe", optional = true }
+
+[dev-dependencies]
+cls = { path = ".", features = ["mem"] }
+# captured real librbd streams (tests/captured_librbd.rs)
+opwire = { path = "../../../crates/opwire" }
+messages = { path = "../../../crates/messages" }
+msgr2 = { path = "../../../crates/msgr2" }
+
+[[example]]
+name = "capture"
+required-features = ["capture"]
+
+[[example]]
+name = "capdiff"
+required-features = ["mem"]

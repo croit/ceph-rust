@@ -1,0 +1,66 @@
+# existence and size DO reflect earlier ops of the same message
+@flags=returnvec
+write 0 abcdef; stat
+---
+stat
+---
+@flags=returnvec
+truncate 3; stat
+---
+@flags=returnvec
+truncate 100; stat
+---
+@flags=returnvec
+write 200 Z; stat; truncate 50; stat
+---
+# zero reaching the end shrinks
+@flags=returnvec
+zero 10 100; stat
+---
+stat
+---
+@flags=returnvec
+writefull xy; stat
+---
+# create excl after write -> EEXIST; before write fine
+delete
+---
+@flags=returnvec
+write 0 x; create excl
+---
+stat
+---
+@flags=returnvec
+create excl; write 0 x
+---
+stat
+---
+create excl
+---
+# delete then create excl on an existing object succeeds; delete then stat -> ENOENT
+@flags=returnvec
+delete; create excl
+---
+stat
+---
+@flags=returnvec
+delete; stat
+---
+stat
+---
+write 0 q
+---
+@flags=returnvec
+delete; write 0 abc; stat; read 0 10
+---
+@flags=returnvec
+stat; read 0 10
+---
+# delete on a missing object is ENOENT, but after a write in the same message it succeeds
+delete
+---
+delete
+---
+write 0 w; delete
+---
+stat

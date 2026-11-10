@@ -1,0 +1,53 @@
+# rbdrec_set_rules__journal-id1
+# t=1791735736
+> call journal set_active_set hex:0100000000000000
+result=-2
+[0] rval=-2 out=
+> call journal create hex:18020700000000000000
+result=0
+[0] rval=0 out=
+> call journal set_minimum_set hex:0100000000000000
+result=-22
+[0] rval=-22 out=
+> call journal set_active_set hex:0500000000000000
+result=0
+[0] rval=0 out=
+> call journal set_active_set hex:0500000000000000
+result=0
+[0] rval=0 out=
+> call journal set_active_set hex:0400000000000000
+result=-116
+[0] rval=-116 out=
+> call journal set_minimum_set hex:0300000000000000
+result=0
+[0] rval=0 out=
+> call journal set_minimum_set hex:0300000000000000
+result=0
+[0] rval=0 out=
+> call journal set_minimum_set hex:0200000000000000
+result=-116
+[0] rval=-116 out=
+> call journal set_active_set hex:0200000000000000
+result=-22
+[0] rval=-22 out=
+> call journal get_minimum_set
+result=0
+[0] rval=0 out=0300000000000000
+> call journal get_active_set
+result=0
+[0] rval=0 out=0500000000000000
+> call journal set_active_set hex:0102
+result=-22
+[0] rval=-22 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=070000000a0000006163746976655f7365740800000005000000000000000b0000006d696e696d756d5f7365740800000003000000000000000e0000006e6578745f7461675f636c6173730800000000000000000000000c0000006e6578745f7461675f746964080000000000000000000000050000006f72646572010000001807000000706f6f6c5f69640800000007000000000000000b00000073706c61795f7769647468010000000200
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b8b7cb6a17819703

@@ -1,0 +1,15 @@
+{
+    "size": 123,
+    "negative": 0,
+    "attrs": [
+        {
+            "name": "bar",
+            "length": 6
+        },
+        {
+            "name": "foo",
+            "length": 3
+        }
+    ]
+}
+

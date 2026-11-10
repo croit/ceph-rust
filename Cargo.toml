@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[workspace]
+resolver = "3"
+members = ["crates/cephconf", "crates/cephx", "crates/cls-lock", "crates/crc", "crates/crush", "crates/daemon-io", "crates/deadline", "crates/denc", "crates/diag", "crates/dpdk-link", "crates/eal-heap", "crates/ec", "crates/hashsum", "crates/hwcheck", "crates/ingress", "crates/messages", "crates/monc", "crates/msgr2", "crates/nvme", "crates/opwire", "crates/osdmap", "crates/outfmt", "crates/rdma", "crates/rt", "crates/rustyrados", "crates/rustyrbd", "crates/splinterdb", "crates/spsc", "crates/uring-access", "services/osd/cls", "services/osd/croit-flashstore-osd", "services/osd/ecback", "services/osd/ecwire", "services/osd/opexec", "services/osd/osd", "services/osd/osddir", "services/osd/peering", "services/osd/pgwire", "services/osd/replwire", "services/osd/store", "services/osd/storeadapt", "services/osd/wprof", "tools/croit-flashstore-tool", "tools/oprobe", "tools/ostool"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+# The FFI, storage and kernel layers use unsafe code. Cargo merges package
+# lints only without the inherited workspace lints, so the scope of this
+# decision is the workspace.
+unsafe_code = "allow"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+allow_attributes = "deny"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = 1
+
+[profile.bench]
+inherits = "release"
+
+# C++ exceptions must unwind through the client ABI and its Rust cleanup frames.
+[profile.rados]
+inherits = "release"
+panic = "unwind"
+
+# C zstd at -O0 makes dictionary training (one per value class and shard) ~50x slower in debug test runs
+[profile.dev.package.zstd-sys]
+opt-level = 3
+
+# LUKS2 unlock runs argon2id (64 MiB x 3 passes) plus 200k-iteration PBKDF2 per open; at -O0 the 8 opens
+# of the encrypted-first-op review cell exceeded its live deadline (debug-profile capture)
+[profile.dev.package.argon2]
+opt-level = 3
+[profile.dev.package.blake2]
+opt-level = 3
+[profile.dev.package.sha2]
+opt-level = 3
+[profile.dev.package.hmac]
+opt-level = 3
+[profile.dev.package.pbkdf2]
+opt-level = 3

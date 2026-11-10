@@ -1,0 +1,212 @@
+# rbd_quirks_absent
+# t=1791560685
+> setxattr x y; call rbd metadata_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd dir_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd trash_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd namespace_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd mirror_image_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd mirror_peer_list
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd snapshot_get_limit
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd get_flags hex:feffffffffffffff
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd get_data_pool
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd get_create_timestamp
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd op_features_get
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd image_group_get
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd parent_overlap_get hex:feffffffffffffff
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd parent_get
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd get_snapcontext
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd children_list hex:0400000000000000
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_children hex:010000000000000001000000700400000000000000
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd dir_get_id hex:010000006e
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd metadata_get hex:010000006e
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_id
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd object_map_load
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_size hex:feffffffffffffff
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_object_prefix
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_all_features
+result=0
+[0] rval=0 out=
+[1] rval=0 out=
+> delete
+result=0
+[0] rval=0 out=
+> setxattr x y; call rbd snapshot_get hex:0400000000000000
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_protection_status hex:0400000000000000
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd dir_state_assert hex:00
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd mirror_mode_get
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_stripe_unit_count
+result=-8
+[0] rval=0 out=
+[1] rval=-8 out=
+> delete
+result=-2
+[0] rval=-2 out=
+> setxattr x y; call rbd get_features hex:0000000000000000
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=
+> delete
+result=-2
+[0] rval=-2 out=

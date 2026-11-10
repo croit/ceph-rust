@@ -1,0 +1,61 @@
+{
+    "head": "1'10",
+    "tail": "1'10",
+    "log": [
+        {
+            "op": "modify",
+            "object": "1:e7000000:::obj:head",
+            "version": "5'6",
+            "prior_version": "5'5",
+            "reqid": "unknown.0.1:7",
+            "extra_reqids": [
+                {
+                    "reqid": "unknown.0.0:8",
+                    "user_version": "3",
+                    "return_code": -5
+                }
+            ],
+            "mtime": "0.000000",
+            "return_code": 0,
+            "op_returns": [
+                {
+                    "rval": 1,
+                    "bl_length": 2
+                }
+            ],
+            "snaps": {
+                "snap": 7
+            },
+            "written_shards": "{}",
+            "mod_desc": {
+                "object_mod_desc": {
+                    "can_local_rollback": false,
+                    "rollback_info_completed": false,
+                    "ops": []
+                }
+            },
+            "clean_regions": {
+                "object_clean_regions": {
+                    "clean_offsets": "[]",
+                    "clean_omap": false,
+                    "new_object": true
+                }
+            }
+        }
+    ],
+    "dups": [
+        {
+            "reqid": "unknown.0.1:7",
+            "version": "5'6",
+            "user_version": "0",
+            "return_code": "0",
+            "op_returns": [
+                {
+                    "rval": 1,
+                    "bl_length": 2
+                }
+            ]
+        }
+    ]
+}
+

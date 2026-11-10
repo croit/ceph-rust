@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "rustyrados"
+version.workspace = true
+edition.workspace = true
+license = "MPL-2.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = []
+registered-memory = []
+# Client side of the source-pull PUT (adr 0665): a write may name a READ-only
+# window instead of carrying its bytes inline.
+source-pull = []
+# Lab-only map delivery diagnostics; absent from production.
+lab = []
+
+[dependencies]
+bytes = "1.12.1"
+cls-lock = { path = "../cls-lock" }
+denc = { path = "../denc" }
+opwire = { path = "../opwire" }
+deadline = { path = "../deadline" }
+diag = { path = "../diag" }
+monc = { path = "../monc" }
+cephx = { path = "../cephx" }
+osdmap = { path = "../osdmap" }
+msgr2 = { path = "../msgr2" }
+messages = { version = "0.0.0", path = "../messages" }
+crc = { path = "../crc" }
+arc-swap = "1.9.3"

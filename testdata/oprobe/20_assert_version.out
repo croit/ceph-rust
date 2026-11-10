@@ -1,0 +1,17 @@
+# 20_assert_version
+> writefull x
+result=0
+  [0] writefull rval=0 out=<empty>
+> assert-version 0
+result=-22(EINVAL)
+  [0] assert-version rval=-22(EINVAL) out=<empty>
+> assert-version 0xfffffffffff
+result=-75(EOVERFLOW)
+  [0] assert-version rval=-75(EOVERFLOW) out=<empty>
+> assert-version 0xfffffffffff; write 0 no
+result=-75(EOVERFLOW)
+  [0] assert-version rval=-75(EOVERFLOW) out=<empty>
+  [1] write rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=1 "x"

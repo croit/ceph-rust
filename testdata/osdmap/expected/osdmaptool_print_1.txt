@@ -1,0 +1,17 @@
+epoch 1
+fsid 6d2f4f0e-6e1a-4a64-9a55-6e766d65736f
+created 2026-10-09T10:01:56.819165+0000
+modified 2026-10-09T10:01:56.819165+0000
+flags sortbitwise,recovery_deletes,purged_snapdirs,pglog_hardlimit
+crush_version 1
+full_ratio 0.95
+backfillfull_ratio 0.9
+nearfull_ratio 0.85
+require_min_compat_client luminous
+min_compat_client jewel
+require_osd_release umbrella
+stretch_mode_enabled false
+
+
+max_osd 0
+

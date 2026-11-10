@@ -1,0 +1,93 @@
+# 33_vis_size_exist
+> @flags=returnvec; write 0 abcdef; stat
+result=0
+  [0] write rval=0 out=<empty>
+  [1] stat rval=0 size=6 mtime=<t>
+> stat
+result=0
+  [0] stat rval=0 size=6 mtime=<t>
+> @flags=returnvec; truncate 3; stat
+result=0
+  [0] truncate rval=0 out=<empty>
+  [1] stat rval=0 size=3 mtime=<t>
+> @flags=returnvec; truncate 100; stat
+result=0
+  [0] truncate rval=0 out=<empty>
+  [1] stat rval=0 size=100 mtime=<t>
+> @flags=returnvec; write 200 Z; stat; truncate 50; stat
+result=0
+  [0] write rval=0 out=<empty>
+  [1] stat rval=0 size=201 mtime=<t>
+  [2] truncate rval=0 out=<empty>
+  [3] stat rval=0 size=50 mtime=<t>
+> @flags=returnvec; zero 10 100; stat
+result=0
+  [0] truncate rval=0 out=<empty>
+  [1] stat rval=0 size=10 mtime=<t>
+> stat
+result=0
+  [0] stat rval=0 size=10 mtime=<t>
+> @flags=returnvec; writefull xy; stat
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] stat rval=0 size=2 mtime=<t>
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> @flags=returnvec; write 0 x; create excl
+result=-17(EEXIST)
+  [0] write rval=0 out=<empty>
+  [1] create rval=-17(EEXIST) out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> @flags=returnvec; create excl; write 0 x
+result=0
+  [0] create rval=0 out=<empty>
+  [1] write rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=1 mtime=<t>
+> create excl
+result=-17(EEXIST)
+  [0] create rval=-17(EEXIST) out=<empty>
+> @flags=returnvec; delete; create excl
+result=0
+  [0] delete rval=0 out=<empty>
+  [1] create rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+> @flags=returnvec; delete; stat
+result=-2(ENOENT)
+  [0] delete rval=0 out=<empty>
+  [1] stat rval=-2(ENOENT) out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+> write 0 q
+result=0
+  [0] write rval=0 out=<empty>
+> @flags=returnvec; delete; write 0 abc; stat; read 0 10
+result=0
+  [0] delete rval=0 out=<empty>
+  [1] write rval=0 out=<empty>
+  [2] stat rval=0 size=3 mtime=<t>
+  [3] read rval=0 len=1 "q"
+> @flags=returnvec; stat; read 0 10
+result=0
+  [0] stat rval=0 size=3 mtime=<t>
+  [1] read rval=0 len=3 "abc"
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> delete
+result=-2(ENOENT)
+  [0] delete rval=-2(ENOENT) out=<empty>
+> write 0 w; delete
+result=0
+  [0] write rval=0 out=<empty>
+  [1] delete rval=0 out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>

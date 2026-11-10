@@ -1,0 +1,28 @@
+# 12_stat
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> write 0 abc
+result=0
+  [0] write rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=3 mtime=<t>
+> append de
+result=0
+  [0] append rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=5 mtime=<t>
+> truncate 100
+result=0
+  [0] truncate rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=100 mtime=<t>
+> writefull z
+result=0
+  [0] writefull rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=1 mtime=<t>

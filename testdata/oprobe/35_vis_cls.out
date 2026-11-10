@@ -1,0 +1,47 @@
+# 35_vis_cls
+> writefull old; omap-set order=hex:16 size=hex:0001000000000000
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] omap-set-vals rval=0 out=<empty>
+> @flags=returnvec; omap-set size=hex:0002000000000000; call rbd get_size hex:feffffffffffffff
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] call rval=0 len=9 hex:160001000000000000
+> call rbd get_size hex:feffffffffffffff
+result=0
+  [0] call rval=0 len=9 hex:160002000000000000
+> @flags=returnvec; writefull NEWNEW; call hello replay
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] call rval=0 len=3 "old"
+> call hello replay
+result=0
+  [0] call rval=0 len=6 "NEWNEW"
+> @flags=returnvec; setxattr lock.x hex:010109000000000000000100000000; call lock get_info hex:0101050000000100000078
+result=0
+  [0] setxattr rval=0 out=<empty>
+  [1] call rval=0 len=15 hex:010109000000000000000000000000
+> @flags=returnvec; call lock get_info hex:0101050000000100000078
+result=0
+  [0] call rval=0 len=15 hex:010109000000000000000100000000
+> @flags=returnvec; delete; call rbd get_size hex:feffffffffffffff
+result=0
+  [0] delete rval=0 out=<empty>
+  [1] call rval=0 len=9 hex:160002000000000000
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> @flags=returnvec; omap-set order=hex:16 size=hex:0001000000000000; call rbd get_size hex:feffffffffffffff
+result=-2(ENOENT)
+  [0] omap-set-vals rval=0 out=<empty>
+  [1] call rval=-2(ENOENT) out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> @flags=returnvec; writefull abc; call hello replay
+result=-2(ENOENT)
+  [0] writefull rval=0 out=<empty>
+  [1] call rval=-2(ENOENT) out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>

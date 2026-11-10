@@ -1,0 +1,60 @@
+{
+  "epoch": 42,
+  "stretch_mode": {
+    "stretch_mode_enabled": true,
+    "stretch_bucket_count": 2,
+    "degraded_stretch_mode": 1,
+    "recovering_stretch_mode": 0,
+    "stretch_mode_bucket": 8
+  },
+  "pools": [
+    {
+      "pool_name": ".mgr",
+      "size": 4,
+      "min_size": 1,
+      "crush_rule": 1,
+      "peering_crush_bucket_count": 1,
+      "peering_crush_bucket_target": 2,
+      "peering_crush_bucket_barrier": 8,
+      "peering_crush_bucket_mandatory_member": -3,
+      "is_stretch_pool": true,
+      "last_force_op_resend": "41"
+    },
+    {
+      "pool_name": "pst",
+      "size": 4,
+      "min_size": 1,
+      "crush_rule": 1,
+      "peering_crush_bucket_count": 1,
+      "peering_crush_bucket_target": 2,
+      "peering_crush_bucket_barrier": 8,
+      "peering_crush_bucket_mandatory_member": -3,
+      "is_stretch_pool": true,
+      "last_force_op_resend": "41"
+    },
+    {
+      "pool_name": "sm",
+      "size": 4,
+      "min_size": 1,
+      "crush_rule": 1,
+      "peering_crush_bucket_count": 1,
+      "peering_crush_bucket_target": 2,
+      "peering_crush_bucket_barrier": 8,
+      "peering_crush_bucket_mandatory_member": -3,
+      "is_stretch_pool": true,
+      "last_force_op_resend": "41"
+    },
+    {
+      "pool_name": "sm3",
+      "size": 4,
+      "min_size": 1,
+      "crush_rule": 1,
+      "peering_crush_bucket_count": 1,
+      "peering_crush_bucket_target": 2,
+      "peering_crush_bucket_barrier": 8,
+      "peering_crush_bucket_mandatory_member": -3,
+      "is_stretch_pool": true,
+      "last_force_op_resend": "41"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+    "object_clean_regions": {
+        "clean_offsets": "[0~4096,45056~18446744073709506559]",
+        "clean_omap": false,
+        "new_object": true
+    }
+}
+

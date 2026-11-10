@@ -1,0 +1,20 @@
+# rbdrec_hello_writes_dont_return_data_after_write__obj
+# t=1791735734
+> call hello write_return_data
+result=0
+[0] rval=42 out=
+> call hello writes_dont_return_data hex:78
+result=-22
+[0] rval=-22 out=746f6f206d75636820696e707574206461746121
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=0100000003000000666f6f03000000626172
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6afde4642a

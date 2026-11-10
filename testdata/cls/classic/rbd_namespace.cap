@@ -1,0 +1,32 @@
+# rbd_namespace
+# t=1791560685
+> call rbd namespace_list hex:000000000a00000000000000
+result=-2
+[0] rval=0 out=
+> call rbd namespace_add hex:030000006e7331
+result=0
+[0] rval=0 out=
+> call rbd namespace_add hex:030000006e7331
+result=-17
+[0] rval=-17 out=
+> call rbd namespace_add hex:030000006e7330
+result=0
+[0] rval=0 out=
+> call rbd namespace_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=02000000030000006e7330030000006e7331
+> call rbd namespace_list hex:030000006e73300a00000000000000
+result=0
+[0] rval=0 out=01000000030000006e7331
+> call rbd namespace_list hex:000000000100000000000000
+result=0
+[0] rval=0 out=01000000030000006e7330
+> call rbd namespace_remove hex:030000006e7331
+result=0
+[0] rval=0 out=
+> call rbd namespace_remove hex:030000006e7331
+result=-2
+[0] rval=-2 out=
+> call rbd namespace_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=01000000030000006e7330

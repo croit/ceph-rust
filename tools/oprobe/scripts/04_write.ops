@@ -1,0 +1,31 @@
+# write: overwrite, gap (zero fill), length 0, large offset error
+write 0 "abcdef"
+---
+write 2 "XY"
+---
+read 0 20
+---
+# gap between old end and new offset reads as zeros
+write 10 "Z"
+---
+read 0 20
+---
+stat
+---
+# length 0 inside the object: no-op touch
+write 3 ""
+---
+read 0 20
+---
+# length 0 beyond end extends the object (truncate to offset)
+write 40 ""
+---
+stat
+---
+# EFBIG: offset >= 128 MiB
+write 0x8000000 "x"
+---
+# EFBIG: offset + length > max object size
+write 0x7ffffff "xx"
+---
+stat

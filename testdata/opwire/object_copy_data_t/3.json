@@ -1,0 +1,28 @@
+{
+    "cursor": {
+        "attr_complete": 0,
+        "data_offset": 0,
+        "data_complete": 0,
+        "omap_offset": "",
+        "omap_complete": 0
+    },
+    "size": 1234,
+    "mtime": "1234.000000",
+    "attrs_size": 1,
+    "flags": 0,
+    "data_digest": 4294967295,
+    "omap_digest": 4294967295,
+    "omap_data_length": 18,
+    "omap_header_length": 22,
+    "data_length": 20,
+    "snaps": [
+        123
+    ],
+    "reqids": [
+        {
+            "reqid": "unknown.0.0:0",
+            "user_version": "0"
+        }
+    ]
+}
+

@@ -1,0 +1,35 @@
+# rbdrec_add_mul__obj
+# t=1791735734
+> call numops add hex:010000006b03000000302e35
+result=0
+[0] rval=0 out=
+> call numops add hex:010000006b05000000332e303031
+result=0
+[0] rval=0 out=
+> call numops mul hex:010000006b0100000032
+result=0
+[0] rval=0 out=
+> call numops add hex:010000006b060000002d372e303032
+result=0
+[0] rval=0 out=
+> call numops mul hex:03000000626967050000003165333030
+result=0
+[0] rval=0 out=
+> call numops mul hex:010000007a00000000
+result=0
+[0] rval=0 out=
+> call numops add hex:010000007a0600000032006a756e6b
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=03000000030000006269670100000030010000006b0100000030010000007a010000003200
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a9d19f005

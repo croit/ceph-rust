@@ -1,0 +1,32 @@
+# rbdrec_cmp_vals_error_codes__obj
+# t=1791735734
+> call cmpomap cmp_vals hex:01011c0000000201010000000500000073686f727408000000010000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:0101170000000201010000000100000061070000003132333435363700
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:010118000000070101000000010000006108000000050000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:0101110000000109010000000100000061010000007800
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:01010500000001
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

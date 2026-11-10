@@ -1,0 +1,38 @@
+# rgw_reads_on_absent_objects_are_empty_not_enoent__none
+# t=1791707459
+> call rgw lc_get_head
+result=-2
+[0] rval=0 out=
+> call rgw lc_list_entries hex:0301080000000000000005000000
+result=-2
+[0] rval=0 out=
+> call rgw lc_get_next_entry hex:01010400000000000000
+result=-2
+[0] rval=0 out=
+> call rgw lc_get_entry hex:01010400000000000000
+result=-2
+[0] rval=0 out=
+> call rgw gc_list hex:020109000000000000000500000001
+result=-2
+[0] rval=0 out=
+> call rgw user_usage_log_read hex:0201200000000000000000000000ffffffffffffffff00000000000000000000000000000000
+result=-2
+[0] rval=0 out=
+> call log list hex:010118000000000000000000000000000000000000000000000005000000
+result=-2
+[0] rval=0 out=
+> call timeindex list hex:010118000000000000000000000000000000000000000000000005000000
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

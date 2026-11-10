@@ -1,0 +1,53 @@
+# 16_omap
+> omap-get-vals
+result=-2(ENOENT)
+  [0] omap-get-vals rval=0 out=<empty>
+> omap-set a=1 b=2 c=3
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"a"="1", "b"="2", "c"="3"} truncated=false
+> omap-get-keys
+result=0
+  [0] omap-get-keys rval=0 keys=["a", "b", "c"] truncated=false
+> omap-get-vals-by-keys a c nope
+result=0
+  [0] omap-get-vals-by-keys rval=0 map={"a"="1", "c"="3"}
+> omap-set-header HDR
+result=0
+  [0] omap-set-header rval=0 out=<empty>
+> omap-get-header
+result=0
+  [0] omap-get-header rval=0 len=3 "HDR"
+> omap-rm-keys b nope
+result=0
+  [0] omap-rm-keys rval=0 out=<empty>
+> omap-get-vals
+result=0
+  [0] omap-get-vals rval=0 vals={"a"="1", "c"="3"} truncated=false
+> omap-set aa=x ab=y ba=z
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> omap-rm-range aa b
+result=0
+  [0] omap-rm-key-range rval=0 out=<empty>
+> omap-get-keys
+result=0
+  [0] omap-get-keys rval=0 keys=["a", "ba", "c"] truncated=false
+> omap-set bin=hex:00ff10
+result=0
+  [0] omap-set-vals rval=0 out=<empty>
+> omap-get-vals-by-keys bin
+result=0
+  [0] omap-get-vals-by-keys rval=0 map={"bin"=hex:00ff10}
+> omap-clear
+result=0
+  [0] omap-clear rval=0 out=<empty>
+> omap-get-vals; omap-get-header
+result=0
+  [0] omap-get-vals rval=0 vals={} truncated=false
+  [1] omap-get-header rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=0 mtime=<t>

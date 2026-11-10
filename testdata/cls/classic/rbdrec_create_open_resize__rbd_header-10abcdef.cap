@@ -1,0 +1,56 @@
+# rbdrec_create_open_resize__rbd_header-10abcdef
+# t=1791735734
+> call rbd create hex:0000800200000000163d00000000000000110000007262645f646174612e3130616263646566
+result=0
+[0] rval=0 out=
+> call rbd get_size hex:feffffffffffffff
+result=0
+[0] rval=0 out=160000800200000000
+> call rbd get_features hex:000000000000000001
+result=0
+[0] rval=0 out=3d000000000000000100000000000000
+> call rbd get_object_prefix
+result=0
+[0] rval=0 out=110000007262645f646174612e3130616263646566
+> call rbd get_data_pool
+result=0
+[0] rval=0 out=ffffffffffffffff
+> call rbd get_snapcontext
+result=0
+[0] rval=0 out=000000000000000000000000
+> call rbd parent_get
+result=0
+[0] rval=0 out=010118000000ffffffffffffffff0000000000000000feffffffffffffff
+> call rbd parent_overlap_get hex:feffffffffffffff
+result=0
+[0] rval=0 out=00
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010c000000ffffffffffffffff00000000
+> call rbd get_flags hex:feffffffffffffff
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd get_create_timestamp
+result=0
+[0] rval=0 out=b6b7cb6adde09917
+> call rbd set_size hex:0000400600000000
+result=0
+[0] rval=0 out=
+> call rbd get_size hex:feffffffffffffff
+result=0
+[0] rval=0 out=160000400600000000
+> call rbd set_size hex:0000800200000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=08000000100000006163636573735f74696d657374616d7008000000b6b7cb6adde09917100000006372656174655f74696d657374616d7008000000b6b7cb6adde09917080000006665617475726573080000003d00000000000000100000006d6f646966795f74696d657374616d7008000000b6b7cb6adde099170d0000006f626a6563745f70726566697815000000110000007262645f646174612e3130616263646566050000006f7264657201000000160400000073697a6508000000000080020000000008000000736e61705f73657108000000000000000000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a9b717218

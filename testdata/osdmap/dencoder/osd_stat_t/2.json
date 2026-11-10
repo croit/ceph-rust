@@ -1,0 +1,118 @@
+{
+    "up_from": 0,
+    "seq": 0,
+    "num_pgs": 0,
+    "num_osds": 0,
+    "num_per_pool_osds": 0,
+    "num_per_pool_omap_osds": 0,
+    "kb": 0,
+    "kb_used": 0,
+    "kb_used_data": 0,
+    "kb_used_omap": 0,
+    "kb_used_meta": 0,
+    "kb_avail": 0,
+    "statfs": {
+        "total": 234,
+        "available": 123,
+        "internally_reserved": 33,
+        "allocated": 32,
+        "data_stored": 44,
+        "data_compressed": 21,
+        "data_compressed_allocated": 12,
+        "data_compressed_original": 13,
+        "omap_allocated": 14,
+        "internal_metadata": 15
+    },
+    "hb_peers": [
+        7
+    ],
+    "snap_trim_queue_len": 8,
+    "num_snap_trimming": 99,
+    "num_shards_repaired": 101,
+    "op_queue_age_hist": {
+        "histogram": [],
+        "upper_bound": 1
+    },
+    "perf_stat": {
+        "commit_latency_ms": 0,
+        "apply_latency_ms": 0,
+        "commit_latency_ns": 0,
+        "apply_latency_ns": 0
+    },
+    "alerts": [
+        " osd: 0 some alert:some alert details",
+        " osd: 1 some alert2:some alert2 details"
+    ],
+    "network_ping_times": [
+        {
+            "osd": 20,
+            "last update": "Thu Nov 29 21:33:09 1973",
+            "interfaces": [
+                {
+                    "interface": "back",
+                    "average": {
+                        "1min": 1,
+                        "5min": 0.90000000000000002,
+                        "15min": 0.80000000000000004
+                    },
+                    "min": {
+                        "1min": 0.98999999999999999,
+                        "5min": 0.89000000000000001,
+                        "15min": 0.79000000000000004
+                    },
+                    "max": {
+                        "1min": 1.01,
+                        "5min": 0.91000000000000003,
+                        "15min": 0.81000000000000005
+                    },
+                    "last": 1.0009999999999999
+                },
+                {
+                    "interface": "front",
+                    "average": {
+                        "1min": 1.1000000000000001,
+                        "5min": 1,
+                        "15min": 0.90000000000000002
+                    },
+                    "min": {
+                        "1min": 1.0900000000000001,
+                        "5min": 0.98999999999999999,
+                        "15min": 0.89000000000000001
+                    },
+                    "max": {
+                        "1min": 1.1100000000000001,
+                        "5min": 1.01,
+                        "15min": 0.91000000000000003
+                    },
+                    "last": 1.101
+                }
+            ]
+        },
+        {
+            "osd": 30,
+            "last update": "Thu Apr 19 04:25:21 2001",
+            "interfaces": [
+                {
+                    "interface": "back",
+                    "average": {
+                        "1min": 0.10000000000000001,
+                        "5min": 0.20000000000000001,
+                        "15min": 0.29999999999999999
+                    },
+                    "min": {
+                        "1min": 0.089999999999999997,
+                        "5min": 0.19,
+                        "15min": 0.28999999999999998
+                    },
+                    "max": {
+                        "1min": 0.11,
+                        "5min": 0.20999999999999999,
+                        "15min": 0.31
+                    },
+                    "last": 0.10100000000000001
+                }
+            ]
+        }
+    ]
+}
+

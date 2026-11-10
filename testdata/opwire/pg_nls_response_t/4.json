@@ -1,0 +1,36 @@
+{
+    "handle": "-1:60000000::key:hi:5",
+    "entries": [
+        {
+            "namespace": "",
+            "object": "one",
+            "key": ""
+        },
+        {
+            "namespace": "",
+            "object": "two",
+            "key": "twokey"
+        },
+        {
+            "namespace": "",
+            "object": "three",
+            "key": ""
+        },
+        {
+            "namespace": "n1",
+            "object": "n1one",
+            "key": ""
+        },
+        {
+            "namespace": "n1",
+            "object": "n1two",
+            "key": "n1twokey"
+        },
+        {
+            "namespace": "n1",
+            "object": "n1three",
+            "key": ""
+        }
+    ]
+}
+

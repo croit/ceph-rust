@@ -1,0 +1,20 @@
+# rgw_gc_init_head_has_1k_and_urgent_blob__gc-0
+# t=1791707458
+> call rgw_gc rgw_gc_queue_init hex:01011000000000fcff07000000000000000000000000
+result=0
+[0] rval=0 out=
+> call rgw_gc rgw_gc_queue_init hex:0101100000000a000000000000000000000000000000
+result=-17
+[0] rval=-17 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=6e000000000000004249cb6ada6b1103

@@ -1,0 +1,58 @@
+epoch 66
+fsid 6d2f4f0e-6e1a-4a64-9a55-6e766d65736f
+created 2026-10-09T10:01:56.819165+0000
+modified 2026-10-09T10:13:32.657648+0000
+flags sortbitwise,recovery_deletes,purged_snapdirs,pglog_hardlimit
+crush_version 12
+full_ratio 0.95
+backfillfull_ratio 0.9
+nearfull_ratio 0.85
+require_min_compat_client luminous
+min_compat_client luminous
+require_osd_release umbrella
+stretch_mode_enabled false
+
+pool 1 'rbd' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 14 flags hashpspool,selfmanaged_snaps,split_reads,supports_omap stripe_width 0 application rbd read_balance_score 1.22
+pool 2 '.mgr' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 1 pgp_num 1 autoscale_mode on last_change 17 flags hashpspool,split_reads,supports_omap stripe_width 0 pg_num_max 32 pg_num_min 1 application mgr read_balance_score 3.00
+pool 3 'nv_rep1' replicated size 1 min_size 1 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 28 flags hashpspool,split_reads,supports_omap stripe_width 0
+ ERROR: pool 3 average primary affinity is lower than 1.00, read balance score is not reliable
+pool 4 'nv_rep2' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 65 flags hashpspool,split_reads,supports_omap stripe_width 0 read_balance_score 1.13
+pool 5 'nv_rep3' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 45 flags hashpspool,pool_snaps,split_reads,supports_omap stripe_width 0 read_balance_score 2.25
+	snap 1 'nv_snap_r3' 2026-10-09T10:13:04.463589+0000
+pool 6 'nv_ec' erasure profile default ec_data_shard_count 2 ec_coding_shard_count 2 size 4 min_size 3 crush_rule 1 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 38 flags hashpspool,ec_optimizations,split_reads,supports_omap stripe_width 8192
+pool 7 'nv_ec_opt' erasure profile nv_k2m1 ec_data_shard_count 2 ec_coding_shard_count 1 size 3 min_size 2 crush_rule 2 object_hash rjenkins pg_num 8 pgp_num 8 autoscale_mode on last_change 44 flags hashpspool,ec_optimizations,split_reads,supports_omap stripe_width 8192
+pool 8 'nv_rep_tiny' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 8 pgp_num 4 pgp_num_target 8 autoscale_mode on last_change 60 lfor 0/0/60 flags hashpspool,split_reads,supports_omap stripe_width 0 read_balance_score 1.50
+
+max_osd 3
+osd.0 up   in  weight 1 up_from 64 up_thru 65 down_at 62 last_clean_interval [21,61) v2:172.28.0.20:6800/2174594581 v2:172.28.0.20:6801/2174594581 exists,up de57c85a-e4bb-44c6-91a8-c0732ae1f0c6
+osd.1 up   in  weight 1 primary_affinity 0.5 up_from 22 up_thru 65 down_at 20 last_clean_interval [7,19) v2:172.28.0.21:6800/2798736266 v2:172.28.0.21:6801/2798736266 exists,up 33bf2952-8149-4927-a009-2a80f64d4bbd
+osd.2 up   in  weight 0.799988 up_from 23 up_thru 65 down_at 22 last_clean_interval [9,19) v2:172.28.0.22:6800/727354591 v2:172.28.0.22:6801/727354591 exists,up 75165f9e-9202-46d6-afed-e2064ec33e2d
+
+pg_upmap_items 4.1 [1,0]
+pg_temp 1.4 [1,0,2]
+pg_temp 1.5 [0,1,2]
+pg_temp 1.7 [1,0,2]
+pg_temp 1.f [1,0,2]
+pg_temp 1.10 [0,1,2]
+pg_temp 1.11 [0,1,2]
+pg_temp 1.16 [0,1,2]
+pg_temp 1.1a [1,0,2]
+pg_temp 5.0 [0,1,2]
+pg_temp 5.3 [0,1,2]
+pg_temp 6.2 [1,2147483647,2,0]
+pg_temp 7.0 [1,0,2]
+pg_temp 7.1 [1,0,2]
+pg_temp 7.6 [0,2,1]
+pg_temp 7.7 [1,2,0]
+blocklist 172.28.0.77:6800/1234 expires 2026-10-09T11:13:18.813713+0000
+blocklist 172.28.0.11:0/1091893688 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/169017496 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/3346861092 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:6800/888342780 expires 2026-10-10T10:13:30.647147+0000
+blocklist 172.28.0.11:0/3072429046 expires 2026-10-10T10:13:30.647147+0000
+blocklist 172.28.0.11:0/1876067677 expires 2026-10-10T10:13:30.647147+0000
+blocklist 172.28.0.11:0/81750804 expires 2026-10-10T10:13:30.647147+0000
+blocklist 172.28.0.11:0/2129951662 expires 2026-10-10T10:13:30.647147+0000
+blocklist 172.28.0.11:6800/220783113 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.11:0/105039625 expires 2026-10-10T10:03:21.610262+0000
+blocklist 172.28.0.99:0/0 expires 2026-10-09T11:13:17.766747+0000

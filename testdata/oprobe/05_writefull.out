@@ -1,0 +1,33 @@
+# 05_writefull
+> writefull 0123456789; setxattr k v; omap-set a=1
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] setxattr rval=0 out=<empty>
+  [2] omap-set-vals rval=0 out=<empty>
+> writefull ab
+result=0
+  [0] writefull rval=0 out=<empty>
+> read 0 20; stat
+result=0
+  [0] read rval=0 len=2 "ab"
+  [1] stat rval=0 size=2 mtime=<t>
+> getxattr k; omap-get-vals
+result=0
+  [0] getxattr rval=0 len=1 "v"
+  [1] omap-get-vals rval=0 vals={"a"="1"} truncated=false
+> writefull ""
+result=0
+  [0] writefull rval=0 out=<empty>
+> stat; read 0 10
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+  [1] read rval=0 out=<empty>
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> writefull new
+result=0
+  [0] writefull rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=3 "new"

@@ -1,0 +1,8 @@
+# set-alloc-hint creates a missing object (counts as a mutation)
+alloc-hint 4096 4096 0
+---
+stat
+---
+write 0 "x"; alloc-hint 8192 4096 3
+---
+read 0 4

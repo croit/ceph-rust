@@ -1,0 +1,36 @@
+{
+  "epoch": 18,
+  "stretch_mode": {
+    "stretch_mode_enabled": false,
+    "stretch_bucket_count": 0,
+    "degraded_stretch_mode": 0,
+    "recovering_stretch_mode": 0,
+    "stretch_mode_bucket": 0
+  },
+  "pools": [
+    {
+      "pool_name": ".mgr",
+      "size": 3,
+      "min_size": 2,
+      "crush_rule": 0,
+      "peering_crush_bucket_count": 0,
+      "peering_crush_bucket_target": 0,
+      "peering_crush_bucket_barrier": 0,
+      "peering_crush_bucket_mandatory_member": 2147483647,
+      "is_stretch_pool": false,
+      "last_force_op_resend": "0"
+    },
+    {
+      "pool_name": "pst",
+      "size": 4,
+      "min_size": 2,
+      "crush_rule": 1,
+      "peering_crush_bucket_count": 2,
+      "peering_crush_bucket_target": 2,
+      "peering_crush_bucket_barrier": 8,
+      "peering_crush_bucket_mandatory_member": 2147483647,
+      "is_stretch_pool": true,
+      "last_force_op_resend": "0"
+    }
+  ]
+}

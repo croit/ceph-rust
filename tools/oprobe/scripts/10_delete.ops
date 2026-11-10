@@ -1,0 +1,17 @@
+# delete: missing -> ENOENT; removes data, xattrs, omap
+delete
+---
+writefull "data"; setxattr k v; omap-set a=1
+---
+delete
+---
+stat
+---
+delete
+---
+# recreate: previous xattrs/omap are gone
+write 0 "n"
+---
+getxattrs
+---
+omap-get-vals

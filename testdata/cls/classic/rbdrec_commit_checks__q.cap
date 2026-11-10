@@ -1,0 +1,29 @@
+# rbdrec_commit_checks__q
+# t=1791735734
+> call 2pc_queue 2pc_queue_init hex:010115000000a08601000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c0000000a0000000000000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_commit hex:01011700000001000000010000000b0000000000000000000000000000
+result=-22
+[0] rval=-22 out=
+> call 2pc_queue 2pc_queue_commit hex:01011b000000010000000200000006000000000000000000050000000000000000
+result=-22
+[0] rval=-22 out=
+> call 2pc_queue 2pc_queue_commit hex:0101080000006300000000000000
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=9100000000000000b6b7cb6a13b55f14

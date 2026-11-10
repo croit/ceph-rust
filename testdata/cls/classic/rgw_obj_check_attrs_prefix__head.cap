@@ -1,0 +1,35 @@
+# rgw_obj_check_attrs_prefix__head
+# t=1791707459
+> call rgw obj_check_attrs_prefix hex:01011a00000015000000757365722e7267772e6f6c682e70656e64696e672e01
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:01011a00000015000000757365722e7267772e6f6c682e70656e64696e672e00
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:0101110000000c000000757365722e7267772e7a7a7a01
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:0101110000000c000000757365722e7267772e7a7a7a00
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:0101050000000000000001
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:010106000000010000007001
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_attrs_prefix hex:010106000000010000007000
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

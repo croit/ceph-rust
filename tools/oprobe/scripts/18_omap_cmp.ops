@@ -1,0 +1,34 @@
+# omap-cmp: stored OP expected (opposite direction of cmpxattr); missing key = empty
+omap-set k=5
+---
+omap-cmp k eq 5
+---
+omap-cmp k eq 6
+---
+omap-cmp k gt 4
+---
+omap-cmp k gt 6
+---
+omap-cmp k lt 6
+---
+omap-cmp k lt 4
+---
+# missing key compares as empty
+omap-cmp nope eq ""
+---
+omap-cmp nope eq "x"
+---
+# invalid op -> EINVAL
+omap-cmp k 9 5
+---
+# as a guard in a mutating message
+omap-cmp k eq 5; omap-set k=6
+---
+omap-cmp k eq 5; omap-set k=7
+---
+omap-get-vals
+---
+# on a missing object -> ENOENT
+delete
+---
+omap-cmp k eq 5

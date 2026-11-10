@@ -1,0 +1,42 @@
+{
+    "oid": {
+        "oid": "ec",
+        "key": "",
+        "snapid": -2,
+        "hash": 3,
+        "max": 0,
+        "pool": 1,
+        "namespace": ""
+    },
+    "version": "0'0",
+    "prior_version": "0'0",
+    "last_reqid": "unknown.0.0:0",
+    "user_version": 0,
+    "size": 0,
+    "mtime": "0.000000",
+    "local_mtime": "0.000000",
+    "lost": 0,
+    "flags": [],
+    "truncate_seq": 0,
+    "truncate_size": 0,
+    "data_digest": "0xffffffff",
+    "omap_digest": "0xffffffff",
+    "expected_object_size": 0,
+    "expected_write_size": 0,
+    "alloc_hint_flags": 0,
+    "manifest": {
+        "type": 0
+    },
+    "watchers": {},
+    "shard_versions": [
+        {
+            "id": 0,
+            "version": "1'2"
+        },
+        {
+            "id": 2,
+            "version": "3'4"
+        }
+    ]
+}
+

@@ -1,0 +1,41 @@
+# rbd_group
+# t=1791560685
+> call rbd create hex:0000004000000000163d000000000000000c0000007262645f646174612e616263
+result=0
+[0] rval=0 out=
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010c000000ffffffffffffffff00000000
+> call rbd image_group_add hex:01010e0000000100000000000000020000006731
+result=0
+[0] rval=0 out=
+> call rbd image_group_add hex:01010e0000000100000000000000020000006731
+result=0
+[0] rval=0 out=
+> call rbd image_group_add hex:01010e0000000100000000000000020000006732
+result=-17
+[0] rval=-17 out=
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010e0000000100000000000000020000006731
+> call rbd op_features_get
+result=0
+[0] rval=0 out=0400000000000000
+> call rbd image_group_remove hex:01010e0000000100000000000000020000006732
+result=-9
+[0] rval=-9 out=
+> call rbd image_group_remove hex:01010e0000000100000000000000020000006731
+result=0
+[0] rval=0 out=
+> call rbd image_group_remove hex:01010e0000000100000000000000020000006731
+result=-2
+[0] rval=-2 out=
+> call rbd image_group_get
+result=0
+[0] rval=0 out=01010c000000ffffffffffffffff00000000
+> call rbd op_features_get
+result=0
+[0] rval=0 out=0000000000000000
+> call rbd get_features hex:0000000000000000
+result=0
+[0] rval=0 out=3d000000000000003d00000000000000

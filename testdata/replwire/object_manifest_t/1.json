@@ -1,0 +1,13 @@
+{
+    "type": 1,
+    "redirect_target": {
+        "oid": "",
+        "key": "",
+        "snapid": 0,
+        "hash": 0,
+        "max": 0,
+        "pool": -9223372036854775808,
+        "namespace": ""
+    }
+}
+

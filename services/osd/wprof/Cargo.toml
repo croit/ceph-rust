@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "wprof"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+description = "Per-stage CPU accounting of the write path for the in-process bench (doc/perf/w4k-cpu.md). Feature `on` only in test builds of the osd crate; otherwise every call compiles to nothing."
+
+[lints]
+workspace = true
+
+[features]
+on = []
+
+# The tests exercise the accounting itself, which only exists with `on`: the self dev-dependency enables the feature
+# for the test build without turning it on for dependents (production stays a no-op).
+[dev-dependencies]
+wprof = { path = ".", features = ["on"] }

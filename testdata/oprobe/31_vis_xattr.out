@@ -1,0 +1,55 @@
+# 31_vis_xattr
+> @flags=returnvec; setxattr k v1; getxattr k
+result=-2(ENOENT)
+  [0] setxattr rval=0 out=<empty>
+  [1] getxattr rval=-2(ENOENT) out=<empty>
+> @flags=returnvec; stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> create
+result=0
+  [0] create rval=0 out=<empty>
+> setxattr k old
+result=0
+  [0] setxattr rval=0 out=<empty>
+> @flags=returnvec; setxattr k new; getxattr k; getxattrs; cmpxattr k new; cmpxattr k old
+result=-125(ECANCELED)
+  [0] setxattr rval=0 out=<empty>
+  [1] getxattr rval=0 len=3 "old"
+  [2] getxattrs rval=0 map={"k"="old"}
+  [3] cmpxattr rval=-125(ECANCELED) out=<empty>
+  [4] cmpxattr rval=0 out=<empty>
+> @flags=returnvec; setxattr k new; cmpxattr k old
+result=1
+  [0] setxattr rval=0 out=<empty>
+  [1] cmpxattr rval=1 out=<empty>
+> @flags=returnvec; getxattr k
+result=0
+  [0] getxattr rval=0 len=3 "new"
+> @flags=returnvec; setxattr n1 v; getxattr n1
+result=-61(ENODATA)
+  [0] setxattr rval=0 out=<empty>
+  [1] getxattr rval=-61(ENODATA) out=<empty>
+> @flags=returnvec; setxattr n1 v; getxattrs
+result=0
+  [0] setxattr rval=0 out=<empty>
+  [1] getxattrs rval=0 map={"k"="new"}
+> @flags=returnvec; rmxattr k; getxattr k; getxattrs
+result=0
+  [0] rmxattr rval=0 out=<empty>
+  [1] getxattr rval=0 len=3 "new"
+  [2] getxattrs rval=0 map={"k"="new", "n1"="v"}
+> @flags=returnvec; getxattrs
+result=0
+  [0] getxattrs rval=0 map={"n1"="v"}
+> setxattr cnt 5
+result=0
+  [0] setxattr rval=0 out=<empty>
+> @flags=returnvec; setxattr cnt 7; cmpxattr cnt 5 eq u64
+result=1
+  [0] setxattr rval=0 out=<empty>
+  [1] cmpxattr rval=1 out=<empty>
+> @flags=returnvec; setxattr cnt 7; cmpxattr cnt 7 eq u64
+result=1
+  [0] setxattr rval=0 out=<empty>
+  [1] cmpxattr rval=1 out=<empty>

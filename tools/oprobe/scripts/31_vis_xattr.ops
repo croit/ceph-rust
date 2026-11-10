@@ -1,0 +1,43 @@
+# setxattr then getxattr/getxattrs/cmpxattr in one message (committed view)
+@flags=returnvec
+setxattr k v1; getxattr k
+---
+@flags=returnvec
+stat
+---
+create
+---
+setxattr k old
+---
+# existing attr: read returns OLD value, cmpxattr against the new value fails
+@flags=returnvec
+setxattr k new; getxattr k; getxattrs; cmpxattr k new; cmpxattr k old
+---
+@flags=returnvec
+setxattr k new; cmpxattr k old
+---
+@flags=returnvec
+getxattr k
+---
+# new attr on existing object is invisible to the same message's getxattr
+@flags=returnvec
+setxattr n1 v; getxattr n1
+---
+@flags=returnvec
+setxattr n1 v; getxattrs
+---
+# rmxattr: still visible within the message
+@flags=returnvec
+rmxattr k; getxattr k; getxattrs
+---
+@flags=returnvec
+getxattrs
+---
+# u64 compare against the committed value
+setxattr cnt 5
+---
+@flags=returnvec
+setxattr cnt 7; cmpxattr cnt 5 eq u64
+---
+@flags=returnvec
+setxattr cnt 7; cmpxattr cnt 7 eq u64

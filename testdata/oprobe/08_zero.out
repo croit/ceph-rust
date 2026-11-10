@@ -1,0 +1,38 @@
+# 08_zero
+> writefull rep:100:x
+result=0
+  [0] writefull rval=0 out=<empty>
+> zero 10 5
+result=0
+  [0] zero rval=0 out=<empty>
+> read 8 10; stat
+result=0
+  [0] read rval=0 len=10 hex:78780000000000787878
+  [1] stat rval=0 size=100 mtime=<t>
+> zero 50 1000
+result=0
+  [0] truncate rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=50 mtime=<t>
+> zero 500 10
+result=0
+  [0] zero rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=50 mtime=<t>
+> zero 5 0
+result=0
+  [0] zero rval=0 out=<empty>
+> read 0 12
+result=0
+  [0] read rval=0 len=12 hex:787878787878787878780000
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> zero 0 10
+result=0
+  [0] zero rval=0 out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>

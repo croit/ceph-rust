@@ -1,0 +1,12 @@
+# rbd_id_empty
+# t=1791560685
+> create
+result=0
+[0] rval=0 out=
+> call rbd get_id
+result=-2
+[0] rval=-2 out=
+> create; call rbd get_id
+result=-2
+[0] rval=0 out=
+[1] rval=-2 out=

@@ -1,0 +1,35 @@
+# 07_writesame
+> writesame 0 12 ab
+result=0
+  [0] write-same rval=0 out=<empty>
+> read 0 20; stat
+result=0
+  [0] read rval=0 len=12 "abababababab"
+  [1] stat rval=0 size=12 mtime=<t>
+> writesame 3 4 xy
+result=0
+  [0] write-same rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=12 "abaxyxybabab"
+> writesame 0 5 ab
+result=-22(EINVAL)
+  [0] write-same rval=-22(EINVAL) out=<empty>
+> writesame 0 4 ""
+result=-22(EINVAL)
+  [0] write-same rval=-22(EINVAL) out=<empty>
+> writesame 0 0 ab
+result=0
+  [0] write-same rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=12 "abaxyxybabab"
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> writesame 0 0 ab
+result=0
+  [0] write-same rval=0 out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>

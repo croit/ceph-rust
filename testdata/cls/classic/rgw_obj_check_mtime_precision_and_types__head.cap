@@ -1,0 +1,50 @@
+# rgw_obj_check_mtime_precision_and_types__head
+# t=1791707459
+> call rgw obj_check_mtime hex:02010a000000e8030000e70300000000
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000e70300000001
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000f40100000001
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e9030000000000000100
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000000000000100
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000000000000200
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e7030000000000000300
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000000000000300
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000000000000400
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a000000e8030000000000000900
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a00000000000000000000000001
+result=-2
+[0] rval=0 out=
+> call rgw obj_check_mtime hex:02010a00000005000000000000000101
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

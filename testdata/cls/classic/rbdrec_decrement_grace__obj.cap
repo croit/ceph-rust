@@ -1,0 +1,35 @@
+# rbdrec_decrement_grace__obj
+# t=1791735734
+> call sem_set increment hex:010109000000010000000100000061
+result=0
+[0] rval=0 out=
+> call sem_set increment hex:010109000000010000000100000061
+result=0
+[0] rval=0 out=
+> call sem_set increment hex:010109000000010000000100000061
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:0101110000000100000001000000610a00000000000000
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:0101110000000100000001000000610a00000000000000
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:0101110000000100000001000000610a00000000000000
+result=0
+[0] rval=0 out=
+> call sem_set decrement hex:010111000000010000000100000061ffffffff00000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=010000000d000000434c535f53454d5f5345545f61160000000101100000000200000000000000b6b7cb6a73cf581b00
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a64d4571b

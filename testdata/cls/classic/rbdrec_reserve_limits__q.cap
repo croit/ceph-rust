@@ -1,0 +1,41 @@
+# rbdrec_reserve_limits__q
+# t=1791735735
+> call 2pc_queue 2pc_queue_init hex:010115000000e80300000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000000000000000000001000000
+result=-22
+[0] rval=-22 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000050000000000000000000000
+result=-22
+[0] rval=-22 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000df0300000000000001000000
+result=-28
+[0] rval=-28 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000ffffffffffffffff01000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000de0300000000000001000000
+result=-28
+[0] rval=-28 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000010000000000000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_abort hex:01010400000001000000
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_reserve hex:01010c000000010000000000000001000000
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=af00000000000000b7b7cb6a854ee033

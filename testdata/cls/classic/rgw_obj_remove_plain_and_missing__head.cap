@@ -1,0 +1,20 @@
+# rgw_obj_remove_plain_and_missing__head
+# t=1791707459
+> call rgw obj_remove hex:01010400000000000000
+result=-2
+[0] rval=-2 out=
+> call rgw obj_remove hex:01010400000000000000
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

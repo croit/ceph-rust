@@ -1,0 +1,21 @@
+{
+    "lock_type": "shared",
+    "tag": "tag",
+    "lockers": [
+        {
+            "locker": "client.1",
+            "description": "description1",
+            "cookie": "cookie1",
+            "expiration": "10.000000",
+            "addr": "127.0.1.2:20/10"
+        },
+        {
+            "locker": "client.2",
+            "description": "description2",
+            "cookie": "cookie2",
+            "expiration": "20.000000",
+            "addr": "127.0.1.2:40/30"
+        }
+    ]
+}
+

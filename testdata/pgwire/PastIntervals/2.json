@@ -1,0 +1,30 @@
+{
+    "PastIntervals::compact_rep": {
+        "first": "10",
+        "last": "50",
+        "all_participants": [
+            {
+                "osd": 0
+            },
+            {
+                "osd": 1
+            },
+            {
+                "osd": 2
+            }
+        ],
+        "intervals": [
+            {
+                "first": "21",
+                "last": "30",
+                "acting": "1,2"
+            },
+            {
+                "first": "36",
+                "last": "50",
+                "acting": "0,2"
+            }
+        ]
+    }
+}
+

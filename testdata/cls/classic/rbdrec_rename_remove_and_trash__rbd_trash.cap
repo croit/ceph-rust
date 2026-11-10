@@ -1,0 +1,35 @@
+# rbdrec_rename_remove_and_trash__rbd_trash
+# t=1791735735
+> call rbd trash_add hex:08000000313061626364656602011a0000000004000000696d673200d2496b8813000000d2496b8813000000
+result=0
+[0] rval=0 out=
+> call rbd trash_get hex:080000003130616263646566
+result=0
+[0] rval=0 out=02011a0000000004000000696d673200d2496b8813000000d2496b8813000000
+> call rbd trash_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=0100000008000000313061626364656602011a0000000004000000696d673200d2496b8813000000d2496b8813000000
+> call rbd trash_state_set hex:0800000031306162636465660300
+result=0
+[0] rval=0 out=
+> call rbd trash_state_set hex:0800000031306162636465660200
+result=-116
+[0] rval=-116 out=
+> call rbd trash_remove hex:080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd trash_get hex:080000003130616263646566
+result=-2
+[0] rval=-2 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b7b7cb6a11e21d30

@@ -1,0 +1,35 @@
+{
+    "oid": {
+        "oid": "obj",
+        "key": "loc",
+        "snapid": 5,
+        "hash": 17,
+        "max": 0,
+        "pool": 2,
+        "namespace": "ns"
+    },
+    "version": "3'4",
+    "prior_version": "0'0",
+    "last_reqid": "unknown.0.0:0",
+    "user_version": 0,
+    "size": 100,
+    "mtime": "0.000000",
+    "local_mtime": "0.000000",
+    "lost": 0,
+    "flags": [
+        "dirty"
+    ],
+    "truncate_seq": 0,
+    "truncate_size": 0,
+    "data_digest": "0xffffffff",
+    "omap_digest": "0xffffffff",
+    "expected_object_size": 0,
+    "expected_write_size": 0,
+    "alloc_hint_flags": 0,
+    "manifest": {
+        "type": 0
+    },
+    "watchers": {},
+    "shard_versions": []
+}
+

@@ -1,0 +1,34 @@
+# read-only messages on a missing object: whole message ENOENT before execution (client-ops 5.4 #24)
+read 0 10
+---
+stat
+---
+sparse-read 0 10
+---
+getxattr k
+---
+getxattrs
+---
+omap-get-vals
+---
+omap-get-keys
+---
+omap-get-header
+---
+omap-get-vals-by-keys a b
+---
+checksum crc32c 0 4 4
+---
+list-watchers
+---
+# cmpext in a read-only message on a missing object
+cmpext 0 abc
+---
+# compound: first op decides, later ops not executed (rval 0)
+stat; read 0 10
+---
+# FAILOK does not rescue the pre-execution ENOENT guard
+read 0 10 !failok
+---
+# ... but a mutating op in the message disables the guard (touch + reads in committed view)
+create; stat

@@ -1,0 +1,48 @@
+# 02_missing_object
+> read 0 10
+result=-2(ENOENT)
+  [0] read rval=0 out=<empty>
+> stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> sparse-read 0 10
+result=-2(ENOENT)
+  [0] sparse-read rval=0 out=<empty>
+> getxattr k
+result=-2(ENOENT)
+  [0] getxattr rval=0 out=<empty>
+> getxattrs
+result=-2(ENOENT)
+  [0] getxattrs rval=0 out=<empty>
+> omap-get-vals
+result=-2(ENOENT)
+  [0] omap-get-vals rval=0 out=<empty>
+> omap-get-keys
+result=-2(ENOENT)
+  [0] omap-get-keys rval=0 out=<empty>
+> omap-get-header
+result=-2(ENOENT)
+  [0] omap-get-header rval=0 out=<empty>
+> omap-get-vals-by-keys a b
+result=-2(ENOENT)
+  [0] omap-get-vals-by-keys rval=0 out=<empty>
+> checksum crc32c 0 4 4
+result=-2(ENOENT)
+  [0] checksum rval=0 out=<empty>
+> list-watchers
+result=-2(ENOENT)
+  [0] list-watchers rval=0 out=<empty>
+> cmpext 0 abc
+result=-2(ENOENT)
+  [0] cmpext rval=0 out=<empty>
+> stat; read 0 10
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+  [1] read rval=0 out=<empty>
+> read 0 10 !failok
+result=-2(ENOENT)
+  [0] read rval=0 out=<empty>
+> create; stat
+result=0
+  [0] create rval=0 out=<empty>
+  [1] stat rval=0 out=<empty>

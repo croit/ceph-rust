@@ -1,0 +1,58 @@
+# 30_vis_data
+> @flags=returnvec; write 0 abc; read 0 3
+result=-2(ENOENT)
+  [0] write rval=0 out=<empty>
+  [1] read rval=-2(ENOENT) out=<empty>
+> @flags=returnvec; stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>
+> @flags=returnvec; writefull XXXXXXXX
+result=0
+  [0] writefull rval=0 out=<empty>
+> @flags=returnvec; write 0 abc; read 0 8; read 0 3
+result=0
+  [0] write rval=0 out=<empty>
+  [1] read rval=0 len=8 "XXXXXXXX"
+  [2] read rval=0 len=3 "XXX"
+> @flags=returnvec; read 0 8
+result=0
+  [0] read rval=0 len=8 "abcXXXXX"
+> @flags=returnvec; append zz; read 0 100; stat
+result=0
+  [0] append rval=0 out=<empty>
+  [1] read rval=0 len=8 "abcXXXXX"
+  [2] stat rval=0 size=10 mtime=<t>
+> @flags=returnvec; truncate 2; read 0 8; stat
+result=0
+  [0] truncate rval=0 out=<empty>
+  [1] read rval=0 len=2 "ab"
+  [2] stat rval=0 size=2 mtime=<t>
+> @flags=returnvec; writefull NEWDATA; read 0 20; stat
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] read rval=0 len=2 "ab"
+  [2] stat rval=0 size=7 mtime=<t>
+> @flags=returnvec; zero 0 3; read 0 20
+result=0
+  [0] zero rval=0 out=<empty>
+  [1] read rval=0 len=7 "NEWDATA"
+> @flags=returnvec; read 0 20
+result=0
+  [0] read rval=0 len=7 hex:00000044415441
+> @flags=returnvec; write 10 TAIL; read 0 20; sparse-read 0 20
+result=0
+  [0] write rval=0 out=<empty>
+  [1] read rval=0 len=7 hex:00000044415441
+  [2] sparse-read rval=0 sparse-data(zero-filled, trailing zeros trimmed) len=7 data=hex:00000044415441
+> @flags=returnvec; stat; write 100 Q; stat
+result=0
+  [0] stat rval=0 size=14 mtime=<t>
+  [1] write rval=0 out=<empty>
+  [2] stat rval=0 size=101 mtime=<t>
+> @flags=returnvec; delete; read 0 5
+result=0
+  [0] delete rval=0 out=<empty>
+  [1] read rval=0 out=<empty>
+> @flags=returnvec; stat
+result=-2(ENOENT)
+  [0] stat rval=0 out=<empty>

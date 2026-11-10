@@ -1,0 +1,74 @@
+# 15_cmpxattr
+> writefull x; setxattr s abc; setxattr n 5
+result=0
+  [0] writefull rval=0 out=<empty>
+  [1] setxattr rval=0 out=<empty>
+  [2] setxattr rval=0 out=<empty>
+> cmpxattr s abc
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr s abd
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr s abd ne
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr s abd gt
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr s abb gt
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr s abc gte
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr s abc lt
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr s abd lt
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr s abc lte
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr nope "" eq
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr nope x eq
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr nope x ne
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr n 5 eq u64
+result=1
+  [0] cmpxattr rval=1 out=<empty>
+> cmpxattr n 6 eq u64
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr n 4 gt u64
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr n 6 lt u64
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+> cmpxattr s 1 eq u64
+result=-22(EINVAL)
+  [0] cmpxattr rval=-22(EINVAL) out=<empty>
+> cmpxattr s abc 9
+result=-22(EINVAL)
+  [0] cmpxattr rval=-22(EINVAL) out=<empty>
+> cmpxattr s abc eq 7
+result=-22(EINVAL)
+  [0] cmpxattr rval=-22(EINVAL) out=<empty>
+> cmpxattr s abc; write 0 ok
+result=0
+  [0] cmpxattr rval=1 out=<empty>
+  [1] write rval=0 out=<empty>
+> cmpxattr s zzz; write 0 no
+result=-125(ECANCELED)
+  [0] cmpxattr rval=-125(ECANCELED) out=<empty>
+  [1] write rval=0 out=<empty>
+> read 0 10
+result=0
+  [0] read rval=0 len=2 "ok"

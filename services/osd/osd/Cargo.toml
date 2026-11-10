@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "osd"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+daemon-io = { path = "../../../crates/daemon-io" }
+deadline = { path = "../../../crates/deadline" }
+ingress = { path = "../../../crates/ingress" }
+wprof = { path = "../wprof" }
+denc = { path = "../../../crates/denc" }
+rdma = { path = "../../../crates/rdma" }
+messages = { path = "../../../crates/messages" }
+osdmap = { path = "../../../crates/osdmap" }
+monc = { path = "../../../crates/monc" }
+msgr2 = { path = "../../../crates/msgr2" }
+cephx = { path = "../../../crates/cephx" }
+osddir = { path = "../osddir" }
+serde_json = "1.0.151"
+signal-hook = { version = "0.4.5", optional = true }
+peering = { version = "0.0.0", path = "../../../services/osd/peering" }
+ec = { version = "0.0.0", path = "../../../crates/ec" }
+ecwire = { version = "0.0.0", path = "../../../services/osd/ecwire" }
+opexec = { version = "0.0.0", path = "../../../services/osd/opexec" }
+pgwire = { version = "0.0.0", path = "../../../services/osd/pgwire" }
+opwire = { version = "0.0.0", path = "../../../crates/opwire" }
+replwire = { version = "0.0.0", path = "../../../services/osd/replwire" }
+store = { version = "0.0.0", path = "../../../services/osd/store" }
+storeadapt = { version = "0.0.0", path = "../../../services/osd/storeadapt" }
+nvme = { version = "0.0.0", path = "../../../crates/nvme" }
+foldhash = "0.2.0"
+bytes = "1.12.1"
+libc = "0.2.191"
+serde = "1.0.229"
+zeroize = "1.9.1"
+
+[features]
+rocksdb = ["store/rocksdb"]
+splinterdb = ["store/splinterdb", "storeadapt/splinterdb"]
+# TEST ONLY (adr 0024): `rdma fault` tell command (forced QP error) for the RDMA fault campaign. Off in production.
+rdma-fault = ["rdma/fault-inject"]
+# TEST ONLY: CPU probes use bare System instead of the allocation-counting test allocator.
+perf4-plain-allocator = []
+# TEST ONLY: count allocation bytes for the EC key overlay probe (run separately from CPU).
+perf4-overlay-allocations = []
+# Dev-only std::net + poll loop driver (ADR 0015 amendment). Never part of the production data path.
+kernel-probe = ["mon-std", "lab", "wprof-on"]
+# LAB/TEST ONLY: per-stage CPU accounting (wprof spans) compiled in; the kernel-probe driver logs it every 2 s.
+wprof-on = ["wprof/on"]
+# std::net dev driver (`osd::kdrv`: kernel-probe OSD loop, signal flag) for the dev daemon and the provisioning tool. Not linked into
+# the production daemon (short mon sessions before start, mkfs and the config bootstrap, are `osd::monboot`, always built).
+mon-std = ["dep:signal-hook"]
+# DEV/LAB ONLY: FileMetaStore, DevMemStore, FileDev (adr 0024-zero-cost-lab-backends). Never in production builds.
+lab = ["nvme/lab"]
+# SPDK devices (production).
+spdk = ["nvme/spdk"]
+# `kernel:` devices (adr 0169): NVMe namespace on the kernel nvme driver through io_uring.
+kernel-nvme = ["nvme/kernel"]
+# Elastic shard capacity (adr 0021 am. 53): pool transport between cores, config keys, pool-aware statfs. Default off, zero cost.
+elastic = ["store/elastic", "storeadapt/elastic"]
+
+[dependencies.crc]
+path = "../../../crates/crc"
+
+[dev-dependencies]
+crush = { path = "../../../crates/crush" }
+storeadapt = { version = "0.0.0", path = "../../../services/osd/storeadapt", features = ["test-knobs"] }
+msgr2 = { path = "../../../crates/msgr2", features = ["test-hooks"] }
+wprof = { path = "../wprof", features = ["on"] }
+mimalloc = "0.1.52"

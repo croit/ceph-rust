@@ -1,0 +1,26 @@
+# rbdrec_hello_return_data_and_violators__obj
+# t=1791735734
+> call hello write_return_data
+result=0
+[0] rval=42 out=
+> call hello write_too_much_return_data
+result=0
+[0] rval=42 out=
+> call hello bad_writer hex:7a7a
+result=-5
+[0] rval=-5 out=
+> call hello bad_reader
+result=-5
+[0] rval=-5 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=0100000003000000666f6f03000000626172
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a7f8fe228

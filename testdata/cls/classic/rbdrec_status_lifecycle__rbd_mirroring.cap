@@ -1,0 +1,92 @@
+# rbdrec_status_lifecycle__rbd_mirroring
+# t=1791735736
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310101
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069320201080000000200000067320101
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069320201080000000200000067320001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_get hex:020000006731
+result=-2
+[0] rval=-2 out=
+> call rbd mirror_image_status_set hex:0800000067556e6b6e6f776e01010f000000040100000078010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:02000000673201010f000000040100000078010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:020000006731
+result=-22
+[0] rval=-22 out=
+> call rbd mirror_image_status_set hex:02000000673101011700000004090000007265706c6179696e67010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:02000000673102021f00000006000000706565722d61020700000073796e63696e67010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_get hex:020000006731
+result=0
+[0] rval=0 out=02013b00000004090000007265706c6179696e67b8b7cb6aada4c92000010100000006000000706565722d61020700000073796e63696e67b8b7cb6a9b79da2000
+> call rbd mirror_image_instance_get hex:020000006731
+result=-116
+[0] rval=-116 out=
+> call rbd mirror_image_instance_get hex:05000000674e6f6e65
+result=-2
+[0] rval=-2 out=
+> call rbd mirror_image_status_get hex:020000006731
+result=0
+[0] rval=0 out=02013b00000004090000007265706c6179696e67b8b7cb6aada4c92000010100000006000000706565722d61020700000073796e63696e67b8b7cb6a9b79da2000
+> call rbd mirror_image_instance_get hex:020000006731
+result=-116
+[0] rval=-116 out=
+> call rbd mirror_image_status_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=02000000020000006931020108000000020000006731010102000000693202010800000002000000673200010100000002000000693102013b00000004090000007265706c6179696e67b8b7cb6aada4c92000010100000006000000706565722d61020700000073796e63696e67b8b7cb6a9b79da2000
+> call rbd mirror_image_instance_list hex:000000000a00000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd mirror_image_instance_list hex:000000000000000000000000
+result=0
+[0] rval=0 out=00000000
+> call rbd mirror_image_status_remove_down
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_remove_down
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:02000000673101010f000000040100000061010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:0200000067310202140000000100000070040100000061010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_remove hex:020000006731
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_remove hex:020000006731
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_status_set hex:0200000067310202140000000100000070040100000061010000000100000001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_set hex:0200000069310201080000000200000067310001
+result=0
+[0] rval=0 out=
+> call rbd mirror_image_remove hex:020000006931
+result=0
+[0] rval=0 out=
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0200000009000000676c6f62616c5f67320600000002000000693208000000696d6167655f69320e000000020108000000020000006732000100
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b8b7cb6acf60f621

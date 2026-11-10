@@ -1,0 +1,23 @@
+# rbdrec_init_head_and_exact_urgent_bytes__q
+# t=1791735734
+> call 2pc_queue 2pc_queue_init hex:010115000000881300000000000001000000000000000100000009
+result=0
+[0] rval=0 out=
+> call 2pc_queue 2pc_queue_init hex:010115000000881300000000000001000000000000000100000009
+result=-17
+[0] rval=-17 out=
+> call 2pc_queue 2pc_queue_get_capacity
+result=0
+[0] rval=0 out=0101080000008813000000000000
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=0000000000
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=7300000000000000b6b7cb6a071d5c2e

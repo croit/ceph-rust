@@ -1,0 +1,52 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: ceph-rust (croit-flashstore-osd and client libraries)
+Source: internal repository (see doc/adr/0164-license-lgpl.md)
+Copyright: 2026 croit GmbH and the contributors listed in AUTHORS
+Note: per-file SPDX-License-Identifier lines are authoritative. This file maps paths to
+ licenses. Full texts: COPYING-MPL-2.0, COPYING-LGPL3 (incorporates COPYING-GPL3 by
+ reference), COPYING-CC-BY-SA-4.0.
+
+# Default for every path not matched below (daemon services/osd/*, OSD-only crates,
+# tools/, lab/, scripts, test data): LGPL-3.0-only.
+
+Files: *
+License: LGPL-3.0-only
+ Full text: COPYING-LGPL3 and COPYING-GPL3.
+
+# MPL: client libraries (rados and rbd clients and everything they depend on, transitively,
+# adr 0164 am.1) plus the shared building blocks eal-heap and slabcoll (MPL by choice, adr 0164
+# am. 3). File-level copyleft; static linking unrestricted. Secondary Licenses
+# (MPL-2.0 1.12): GPL-2.0-or-later, LGPL-2.1-or-later, AGPL-3.0-or-later.
+# Must list exactly the packages whose Cargo.toml says MPL-2.0 (lab/relicense-headers.sh checks it).
+
+Files: crates/abi-conformance/* crates/cephconf/* crates/cephfs-proto/* crates/cephx/* crates/cls-lock/* crates/crc/*
+ crates/crush/* crates/deadline/* crates/denc/* crates/diag/* crates/dpdk-link/* crates/eal-heap/* crates/gnucxx/*
+ crates/ingress/* crates/messages/* crates/monc/* crates/msgr2/* crates/net/* crates/opwire/*
+ crates/osdmap/* crates/outfmt/* crates/rados-ffi/* crates/rados-provider/* crates/rados-rt/* crates/rbd-ffi/* crates/rdma/*
+ crates/rustycephfs2/* crates/rustyrados/* crates/rustyrbd/* crates/slabcoll/* crates/spsc/*
+ crates/striper-ffi/*
+License: MPL-2.0
+ Full text: COPYING-MPL-2.0.
+
+# NIXL storage-backend plugin (C++ by design, built against NVIDIA NIXL): Apache-2.0 like NIXL
+# itself, so the plugin can go upstream. Its README falls under the docs stanza below.
+Files: contrib/nixl/*
+License: Apache-2.0
+ Full text: COPYING-APACHE-2.0.
+
+Files: doc/** *.md
+License: CC-BY-SA-4.0
+ Full text: COPYING-CC-BY-SA-4.0.
+
+# Code inside doc/ stays under the code license (overrides the stanza above).
+Files: doc/**/*.rs doc/**/*.sh doc/**/*.awk doc/**/*.pl doc/**/*.jq doc/**/*.toml
+License: LGPL-3.0-only
+
+Files: lab/devcontainer/dpdk-patches/* lab/proxmox/dpdk-bnxt-alias.patch
+License: BSD-3-Clause
+ DPDK patches. Same license as the patched DPDK files (Copyright Intel Corporation and
+ DPDK contributors). Not covered by the project license.
+
+Files: ceph/*
+License: see ceph/COPYING in the submodule tree
+ Upstream Ceph (reference only, not part of this distribution). Never modified.

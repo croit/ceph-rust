@@ -1,0 +1,40 @@
+# 04_write
+> write 0 abcdef
+result=0
+  [0] write rval=0 out=<empty>
+> write 2 XY
+result=0
+  [0] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=6 "abXYef"
+> write 10 Z
+result=0
+  [0] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=11 hex:616258596566000000005a
+> stat
+result=0
+  [0] stat rval=0 size=11 mtime=<t>
+> write 3 ""
+result=0
+  [0] write rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=11 hex:616258596566000000005a
+> write 40 ""
+result=0
+  [0] write rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=40 mtime=<t>
+> write 0x8000000 x
+result=-27(EFBIG)
+  [0] write rval=-27(EFBIG) out=<empty>
+> write 0x7ffffff xx
+result=-27(EFBIG)
+  [0] write rval=-27(EFBIG) out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=40 mtime=<t>

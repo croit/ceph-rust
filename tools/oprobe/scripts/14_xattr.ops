@@ -1,0 +1,45 @@
+# xattrs
+getxattr k
+---
+setxattr k v1
+---
+getxattr k
+---
+setxattr k2 ""
+---
+getxattrs
+---
+getxattr k2
+---
+# missing attr on existing object -> ENODATA
+getxattr nope
+---
+rmxattr k
+---
+getxattrs
+---
+# rm of an absent attr: success
+rmxattr k
+---
+# overwrite
+setxattr k2 "now"
+---
+getxattr k2
+---
+# name too long (> 100 bytes)
+setxattr rep:101:n v
+---
+# 100 bytes is fine
+setxattr rep:100:n v
+---
+# setxattr on a missing object creates it
+delete
+---
+setxattr fresh 1
+---
+stat; getxattrs
+---
+# rmxattr on a missing object -> ENOENT
+delete
+---
+rmxattr k

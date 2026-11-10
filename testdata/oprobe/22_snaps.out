@@ -1,0 +1,46 @@
+# 22_snaps
+> @snapc=2:2; writefull v1
+result=0
+  [0] writefull rval=0 out=<empty>
+> @snapc=3:3,2; writefull v2-longer
+result=0
+  [0] writefull rval=0 out=<empty>
+> @snapid=snapdir; list-snaps
+result=0
+  [0] list-snaps rval=0 seq=3 clones=[clone{id=3 snaps=[3] overlap=[] size=2}, clone{id=-2 snaps=[] overlap=[] size=9}]
+> @snapid=3; read 0 20
+result=0
+  [0] read rval=0 len=2 "v1"
+> read 0 20
+result=0
+  [0] read rval=0 len=9 "v2-longer"
+> @snapid=3; stat
+result=0
+  [0] stat rval=0 size=2 mtime=<t>
+> @snapc=3:3,2; write 0 V2
+result=0
+  [0] write rval=0 out=<empty>
+> @snapid=snapdir; list-snaps
+result=0
+  [0] list-snaps rval=0 seq=3 clones=[clone{id=3 snaps=[3] overlap=[] size=2}, clone{id=-2 snaps=[] overlap=[] size=9}]
+> list-snaps
+result=-22(EINVAL)
+  [0] list-snaps rval=0 out=<empty>
+> @snapid=snapdir; read 0 10
+result=-22(EINVAL)
+  [0] read rval=0 out=<empty>
+> @snapid=5; write 0 x
+result=-22(EINVAL)
+  [0] write rval=0 out=<empty>
+> @snapc=5:3,4; write 0 x
+result=-22(EINVAL)
+  [0] write rval=0 out=<empty>
+> @snapc=2:3; write 0 x
+result=-22(EINVAL)
+  [0] write rval=0 out=<empty>
+> @snapid=2; read 0 20
+result=-2(ENOENT)
+  [0] read rval=0 out=<empty>
+> @snapid=1; read 0 20
+result=-2(ENOENT)
+  [0] read rval=0 out=<empty>

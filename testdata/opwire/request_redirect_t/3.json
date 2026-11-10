@@ -1,0 +1,10 @@
+{
+    "object": "redir_obj",
+    "locator": {
+        "pool": 1,
+        "key": "",
+        "namespace": "redir_obj",
+        "hash": -1
+    }
+}
+

@@ -1,0 +1,23 @@
+# rbdrec_create_open_resize__rbd_directory
+# t=1791735734
+> call rbd dir_add_image hex:03000000696d67080000003130616263646566
+result=0
+[0] rval=0 out=
+> call rbd dir_get_id hex:03000000696d67
+result=0
+[0] rval=0 out=080000003130616263646566
+> call rbd dir_get_name hex:080000003130616263646566
+result=0
+[0] rval=0 out=03000000696d67
+> omap-get-header
+result=0
+[0] rval=0 out=
+> omap-get-vals
+result=0
+[0] rval=0 out=020000000b00000069645f31306162636465660700000003000000696d67080000006e616d655f696d670c00000008000000313061626364656600
+> getxattrs
+result=0
+[0] rval=0 out=00000000
+> stat
+result=0
+[0] rval=0 out=0000000000000000b6b7cb6a7fbe1017

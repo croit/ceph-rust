@@ -1,0 +1,35 @@
+# rbdrec_cmp_vals_u64_default_and_missing__obj
+# t=1791735734
+> call cmpomap cmp_vals hex:010118000000020301000000010000006108000000060000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:010118000000020101000000010000006108000000060000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:01011a00000002010100000001000000610a00000005000000000000007a7a00
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:010118000000020101000000010000006508000000000000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:010118000000020101000000010000007808000000000000000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:010124000000020101000000010000007808000000070000000000000001080000000700000000000000
+result=-2
+[0] rval=0 out=
+> call cmpomap cmp_vals hex:01010700000002010000000000
+result=-2
+[0] rval=0 out=
+> omap-get-header
+result=-2
+[0] rval=0 out=
+> omap-get-vals
+result=-2
+[0] rval=0 out=
+> getxattrs
+result=-2
+[0] rval=0 out=
+> stat
+result=-2
+[0] rval=0 out=

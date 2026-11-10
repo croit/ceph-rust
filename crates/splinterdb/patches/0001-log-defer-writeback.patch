@@ -1,0 +1,106 @@
+--- a/include/splinterdb/splinterdb.h
++++ b/include/splinterdb/splinterdb.h
+@@ -124,6 +124,13 @@
+    // Background task scheduling may enlist foreground threads to do the work.
+    uint64 log_group_size_pages;
+ 
++   // Defer the device write of filled log pages until a durability barrier, a
++   // checkpoint seal or another log-durability wait needs them, instead of
++   // submitting each page as it fills. Durability is unchanged: log pages are
++   // durable only after such a wait either way. This moves per-page write
++   // submissions off inserting threads onto the waiting thread.
++   _Bool log_defer_writeback;
++
+    // Automatic checkpoints: once the write-ahead log has grown by this many
+    // bytes, SplinterDB arms a checkpoint.  The next natural memtable rotation
+    // cuts the log, after which the checkpoint folds the logged updates into the
+--- a/src/shard_log.c
++++ b/src/shard_log.c
+@@ -1120,8 +1120,17 @@
+    }
+ 
+    platform_assert(thread_data->state == SHARD_LOG_BUFFER_INCACHE);
+-   platform_status rc = writeback_set_add_page(
+-      &thread_data->wbset, &thread_data->incache_page, PAGE_TYPE_LOG);
++   /*
++    * Every durability wait retries its groups' incomplete entries before waiting
++    * (shard_log_wait_for_ticket_to_be_durable), which issues deferred pages.
++    */
++   platform_status rc =
++      log->cfg->defer_writeback
++         ? writeback_set_defer_page(&thread_data->wbset,
++                                    page_handle_addr(&thread_data->incache_page),
++                                    PAGE_TYPE_LOG)
++         : writeback_set_add_page(
++              &thread_data->wbset, &thread_data->incache_page, PAGE_TYPE_LOG);
+    if (!SUCCESS(rc)) {
+       return rc;
+    }
+--- a/src/shard_log.h
++++ b/src/shard_log.h
+@@ -34,6 +34,7 @@
+    data_config     *data_cfg;
+    uint64           seed;
+    uint64           group_size_pages; // UINT64_MAX disables automatic cuts
++   bool32           defer_writeback;  // issue page writes at the next wait
+    mini_blob_config blob_cfg;
+ } shard_log_config;
+ 
+--- a/src/splinterdb.c
++++ b/src/splinterdb.c
+@@ -439,6 +439,7 @@
+    }
+    shard_log_config_init(&kvs->log_cfg, &kvs->cache_cfg.super, kvs->data_cfg);
+    kvs->log_cfg.group_size_pages = cfg.log_group_size_pages;
++   kvs->log_cfg.defer_writeback  = cfg.log_defer_writeback;
+    kvs->log_cfg.blob_cfg.blob_max_descriptor_size =
+       cfg.blob_max_descriptor_size;
+ 
+--- a/src/writeback_set.c
++++ b/src/writeback_set.c
+@@ -71,6 +71,28 @@
+ }
+ 
+ platform_status
++writeback_set_defer_page(writeback_set *set, uint64 addr, page_type type)
++{
++   platform_status rc = writeback_set_reserve_one(set);
++   if (!SUCCESS(rc)) {
++      return rc;
++   }
++
++   /*
++    * Nothing issued yet (gen 0 reads as complete): needs_retry makes the next
++    * writeback_set_retry_incomplete() submit it before any wait relies on it.
++    */
++   writeback_set_entry entry = {
++      .request     = {.addr = addr, .gen = 0, .is_extent = FALSE},
++      .type        = type,
++      .needs_retry = TRUE,
++   };
++   rc = vector_append(&set->entries, entry);
++   platform_assert_status_ok(rc); // reserved above
++   return STATUS_OK;
++}
++
++platform_status
+ writeback_set_add_extent(writeback_set *set, uint64 addr, page_type type)
+ {
+    platform_status rc = writeback_set_reserve_one(set);
+--- a/src/writeback_set.h
++++ b/src/writeback_set.h
+@@ -72,6 +72,14 @@
+ platform_status
+ writeback_set_add_page(writeback_set *set, page_handle *page, page_type type);
+ 
++/*
++ * Enroll a dirty page whose write is not issued yet: the next
++ * writeback_set_retry_incomplete() submits it. A caller must run that retry
++ * pass before writeback_set_wait() relies on the page.
++ */
++platform_status
++writeback_set_defer_page(writeback_set *set, uint64 addr, page_type type);
++
+ platform_status
+ writeback_set_add_extent(writeback_set *set, uint64 addr, page_type type);
+ 

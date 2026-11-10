@@ -1,0 +1,2 @@
+# Applied in order to a copy of third_party/splinterdb (pinned 73f89d8) by build.rs.
+0001-log-defer-writeback.patch

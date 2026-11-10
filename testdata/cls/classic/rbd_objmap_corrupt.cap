@@ -1,0 +1,44 @@
+# rbd_objmap_corrupt
+# t=1791560685
+> writefull hex:0e000000010108000000040000000000000000
+result=0
+[0] rval=0 out=
+> call rbd object_map_load
+result=-22
+[0] rval=-22 out=
+> call rbd object_map_update hex:000000000000000001000000000000000100
+result=-22
+[0] rval=-22 out=
+> call rbd object_map_snap_add
+result=-22
+[0] rval=-22 out=
+> call rbd object_map_resize hex:080000000000000000
+result=-22
+[0] rval=-22 out=
+> read 0 0
+result=0
+[0] rval=0 out=0e000000010108000000040000000000000000
+> write 18 hex:ff
+result=0
+[0] rval=0 out=
+> call rbd object_map_load
+result=-22
+[0] rval=-22 out=
+> call rbd object_map_update hex:000000000000000001000000000000000100
+result=-22
+[0] rval=-22 out=
+> call rbd object_map_resize hex:080000000000000000
+result=-22
+[0] rval=-22 out=
+> writefull zeros:0
+result=0
+[0] rval=0 out=
+> call rbd object_map_load
+result=-2
+[0] rval=-2 out=
+> call rbd object_map_resize hex:040000000000000001
+result=0
+[0] rval=0 out=
+> read 0 0
+result=0
+[0] rval=0 out=0e0000000101080000000400000000000000550c0000003f38aacb01000000cfced464

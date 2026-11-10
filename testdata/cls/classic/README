@@ -1,0 +1,9 @@
+Classic-OSD differential cases for crates/cls (tests/differential.rs).
+*.ops = oprobe scripts, *.cap = raw transcripts recorded on a classic OSD (ceph 21.1.1, lab cluster).
+Re-record (lab cluster up, scratch pool `clsprobe`, container cls-probe at 172.28.0.80):
+  docker run -d --name cls-probe --network nvmeosd-lab-net --ip 172.28.0.80 -v $PWD:/work \
+    -v nvmeosd-dev-target-cls:/cargo-target -v nvmeosd-dev-cargo:/usr/local/cargo/registry \
+    -e CARGO_TARGET_DIR=/cargo-target -v nvmeosd-lab-etc:/etc/ceph:ro -w /work nvmeosd-dev:latest sleep infinity
+  docker exec cls-probe cargo build --release -p cls --features capture --example capture
+  docker exec cls-probe /cargo-target/release/examples/capture --pool clsprobe --osd 0
+  docker rm -f cls-probe; ceph osd pool rm clsprobe clsprobe --yes-i-really-really-mean-it

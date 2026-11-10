@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "croit-flashstore-osd"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "croit-flashstore-osd"
+path = "src/main.rs"
+
+[features]
+rocksdb = ["osd/rocksdb", "store/rocksdb"]
+splinterdb = ["osd/splinterdb"]
+default = ["elastic"]
+# DEV/LAB ONLY: file: devices, FileMetaStore, DevMemStore. OFF in production (adr 0024-zero-cost-lab-backends).
+lab = ["osd/lab", "hwcheck/lab"]
+# LAB ONLY: write-view guard (free guard + crc recheck, nvme::viewguard). Costs a lock and a crc per write view: not for timing runs.
+viewguard = ["nvme/viewguard"]
+# Kernel TCP tier over io_uring (Linux; adr 0053), any NIC.
+knet = ["dep:rt", "rt/knet", "dep:signal-hook", "hwcheck/knet", "kernel-nvme"]
+# RDMA (RoCEv2) upgrade of kernel-tier connections (0469-rdma-transport), conf `flashstore_rdma = true`. Links the static rdma-core of RDMA_CORE_DIR.
+rdma = ["knet", "rt/rdma"]
+# LAB ONLY (adr 0024): `rdma` plus the `rdma fault` tell command (forced QP error), doc/perf/rdma-fault-20261022.md.
+rdma-fault = ["rdma", "osd/rdma-fault"]
+# LAB ONLY: chunk arrival probe of large frames on the kernel tier (rt/cut-probe, stderr `CUTPROBE` lines), doc/perf/cut-through-20261021.md.
+cut-probe = ["knet", "rt/cut-probe"]
+# `kernel:` store devices (adr 0169): NVMe on the kernel nvme driver through io_uring, `--store-backend kernel|kernel-cmd`. Part of `knet`.
+kernel-nvme = ["osd/kernel-nvme", "rt?/kernel-nvme"]
+# Dev-only std::net driver (ADR 0015 amendment), run as `croit-flashstore-osd kernel-probe ...`.
+kernel-probe = ["osd/kernel-probe", "lab"]
+# SPDK devices (`--dev spdk:PCI`).
+spdk = ["osd/spdk", "hwcheck/spdk", "dep:eal-heap", "eal-heap/spdk", "rt?/eal-heap"]
+# Elastic shard capacity (adr 0021 am. 53, default since am. 55): chunked store + shared pool; `--no-default-features` = plain static shards.
+elastic = ["osd/elastic", "hwcheck/elastic"]
+# DEBUG/TESTING ONLY: SPDK multi-process (`--dev spdk:PCI,ns=N,shared`, subcommand `spdk-primary`; adr 0463). Never in
+# production builds: one OSD per controller (adr 0103).
+spdk-mp = ["spdk", "nvme/spdk-mp"]
+# mimalloc as global allocator (production builds).
+mimalloc = ["dep:mimalloc", "hwcheck/mimalloc"]
+# LAB ONLY: per-stage CPU (wprof spans), every core logs its stage sums once per tick (osd tick, 1 s).
+wprof = ["osd/wprof-on"]
+# LAB ONLY (adr 0024): heap profile (live bytes + allocation sites, src/heapprof.rs) around mimalloc or, without `mimalloc`, the
+# system allocator; kernel tier without spdk; frame-pointer builds (lab/build-host-build.sh heapprof / heapsys), doc/perf/osd-rss-growth-20261029.md.
+heapprof = []
+
+[dependencies]
+mimalloc = { version = "0.1.52", optional = true }
+osd = { path = "../../../services/osd/osd" }
+osddir = { path = "../../../services/osd/osddir" }
+nvme = { path = "../../../crates/nvme" }
+hwcheck = { path = "../../../crates/hwcheck" }
+store = { path = "../../../services/osd/store" }
+messages = { path = "../../../crates/messages" }
+monc = { path = "../../../crates/monc" }
+rt = { path = "../../../crates/rt", optional = true }
+eal-heap = { path = "../../../crates/eal-heap", optional = true }
+signal-hook = { version = "0.4.5", optional = true }
+# `--opt=value` split, `spdk-primary --format`
+outfmt = { path = "../../../crates/outfmt" }
+serde_json = "1.0.154"
+libc = "0.2.191"
+
+[dev-dependencies]
+# key generation in the `run` bootstrap tests
+cephx = { path = "../../../crates/cephx" }

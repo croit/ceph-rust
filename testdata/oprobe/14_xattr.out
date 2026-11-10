@@ -1,0 +1,59 @@
+# 14_xattr
+> getxattr k
+result=-2(ENOENT)
+  [0] getxattr rval=0 out=<empty>
+> setxattr k v1
+result=0
+  [0] setxattr rval=0 out=<empty>
+> getxattr k
+result=0
+  [0] getxattr rval=0 len=2 "v1"
+> setxattr k2 ""
+result=0
+  [0] setxattr rval=0 out=<empty>
+> getxattrs
+result=0
+  [0] getxattrs rval=0 map={"k"="v1", "k2"=<empty>}
+> getxattr k2
+result=0
+  [0] getxattr rval=0 out=<empty>
+> getxattr nope
+result=-61(ENODATA)
+  [0] getxattr rval=-61(ENODATA) out=<empty>
+> rmxattr k
+result=0
+  [0] rmxattr rval=0 out=<empty>
+> getxattrs
+result=0
+  [0] getxattrs rval=0 map={"k2"=<empty>}
+> rmxattr k
+result=0
+  [0] rmxattr rval=0 out=<empty>
+> setxattr k2 now
+result=0
+  [0] setxattr rval=0 out=<empty>
+> getxattr k2
+result=0
+  [0] getxattr rval=0 len=3 "now"
+> setxattr rep:101:n v
+result=-36(ENAMETOOLONG)
+  [0] setxattr rval=-36(ENAMETOOLONG) out=<empty>
+> setxattr rep:100:n v
+result=0
+  [0] setxattr rval=0 out=<empty>
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> setxattr fresh 1
+result=0
+  [0] setxattr rval=0 out=<empty>
+> stat; getxattrs
+result=0
+  [0] stat rval=0 size=0 mtime=<t>
+  [1] getxattrs rval=0 map={"fresh"="1"}
+> delete
+result=0
+  [0] delete rval=0 out=<empty>
+> rmxattr k
+result=-2(ENOENT)
+  [0] rmxattr rval=-2(ENOENT) out=<empty>

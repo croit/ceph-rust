@@ -1,0 +1,12 @@
+{
+    "id": 3,
+    "namespace": {
+        "type": "trash",
+        "original_name": "snap1",
+        "original_snapshot_namespace": "user"
+    },
+    "name": "12345",
+    "image_size": 123,
+    "timestamp": "123456.000000"
+}
+

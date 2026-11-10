@@ -1,0 +1,26 @@
+# 06_append
+> append one
+result=0
+  [0] append rval=0 out=<empty>
+> append two
+result=0
+  [0] append rval=0 out=<empty>
+> read 0 20; stat
+result=0
+  [0] read rval=0 len=6 "onetwo"
+  [1] stat rval=0 size=6 mtime=<t>
+> append ""
+result=0
+  [0] append rval=0 out=<empty>
+> stat
+result=0
+  [0] stat rval=0 size=6 mtime=<t>
+> truncate 2
+result=0
+  [0] truncate rval=0 out=<empty>
+> append X
+result=0
+  [0] append rval=0 out=<empty>
+> read 0 20
+result=0
+  [0] read rval=0 len=3 "onX"

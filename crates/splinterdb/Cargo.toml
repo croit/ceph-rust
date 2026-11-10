@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+[package]
+name = "nvmeosd-splinterdb"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+license = "LGPL-3.0-only"
+
+[features]
+default = []
+native = []
+
+[dependencies]
+libc = "0.2.191"
+
+[build-dependencies]
+cc = "1.6.0"
+
+[lints]
+workspace = true

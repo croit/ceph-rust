@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-FileCopyrightText: 2026 croit GmbH
+# SPDX-FileContributor: Martin Verges, croit GmbH
+# SPDX-FileContributor: Igor Fedotov, croit GmbH
+# SPDX-FileContributor: Mahamudur Rahaman Sajib, croit GmbH
+[package]
+name = "peering"
+version.workspace = true
+edition.workspace = true
+license = "LGPL-3.0-only"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# TEST ONLY: MemStore fault knobs (replica cold-page waits) for the integration tests; never in production builds (adr 0024).
+test-knobs = []
+
+[dependencies]
+deadline = { path = "../../../crates/deadline" }
+ingress = { path = "../../../crates/ingress" }
+wprof = { path = "../wprof" }
+denc = { path = "../../../crates/denc" }
+messages = { path = "../../../crates/messages" }
+pgwire = { path = "../../../services/osd/pgwire" }
+replwire = { path = "../../../services/osd/replwire" }
+osdmap = { path = "../../../crates/osdmap" }
+ec = { path = "../../../crates/ec" }
+ecwire = { path = "../../../services/osd/ecwire" }
+ecback = { path = "../../../services/osd/ecback" }
+crc = { path = "../../../crates/crc" }
+bytes = "1.12.1"
+foldhash = "0.2.0"
+arc-swap = "1.9.3"
+
+[dev-dependencies]
+crush = { path = "../../../crates/crush" }
+peering = { path = ".", features = ["test-knobs"] }
+flate2 = "1.1.10"
+opexec = { path = "../../../services/osd/opexec" }
+opwire = { path = "../../../crates/opwire" }
+serde_json = "1.0.152"

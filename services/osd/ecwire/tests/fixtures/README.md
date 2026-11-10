@@ -1,0 +1,1 @@
+Classic-produced struct encodings (data, not Ceph code). Origin: `lab/docker/dencoder.sh type <T> select_test <N> encode export`, image quay.io/ceph/ceph:v21.1.1, 2026-10-10. T = ECSubWrite (1-3), ECSubWriteReply (1-2), ECSubRead (1-2), ECSubReadReply (1-2). Struct only (no message head).

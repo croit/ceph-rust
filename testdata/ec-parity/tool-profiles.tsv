@@ -1,0 +1,33 @@
+profile	validate_rc	chunk_count	calc8192_rc	chunk_size_8192
+plugin=isa,technique=cauchy,k=40,m=4	0	44 	0	224 
+plugin=isa,technique=reed_sol_van,k=40,m=4	139	 	139	 
+plugin=isa,technique=cauchy,k=40,m=33	139	 	139	 
+plugin=isa,technique=reed_sol_van,k=+2,m=1	0	3 	0	4096 
+plugin=isa,technique=reed_sol_van,k=02,m=1	0	3 	0	4096 
+plugin=jerasure_generic,k=2,m=1	0	3 	0	4096 
+plugin=jerasure_neon,k=2,m=1	0	3 	0	4096 
+plugin=jerasure_sse3,k=2,m=1	139	 	139	 
+plugin=jerasure_sse4,k=2,m=1	139	 	139	 
+plugin=shec_generic,k=2,m=1,c=1	0	3 	0	4096 
+plugin=shec_neon,k=2,m=1,c=1	0	3 	0	4096 
+plugin=shec,k=1,m=1,c=1	0	2 	0	8192 
+plugin=shec,technique=multiple,k=4,m=3,c=2,w=16	0	7 	0	2048 
+plugin=shec,technique=multiple,k=4,m=2,c=2,w=32	0	6 	0	2048 
+plugin=shec,k=2,m=1,c=1,mapping=_DD	0	3 	0	4096 
+plugin=jerasure,technique=liberation,k=2,m=2,w=7,packetsize=4	0	4 	0	4144 
+plugin=jerasure,technique=blaum_roth,k=4,m=2,w=6,packetsize=4	0	6 	0	2112 
+plugin=jerasure,technique=cauchy_good,k=3,m=2,packetsize=4,jerasure-per-chunk-alignment=true	0	5 	0	2752 
+plugin=jerasure,k=2,m=1,mapping=DD	139	 	139	 
+plugin=jerasure,k=2,m=1,mapping=_DD	0	3 	0	4096 
+plugin=jerasure,k=2,m=1,mapping=DDD	0	3 	0	4096 
+plugin=isa,k=2,m=1,mapping=D	134	 	134	 
+plugin=isa,k=2,m=1,mapping=D_D_	134	 	134	 
+plugin=isa,k=2,m=1,mapping=DDD_	134	 	134	 
+plugin=clay,k=4,m=3,d=5,scalar_mds=shec	0	7 	0	2048 
+plugin=clay,k=4,m=3,d=6,scalar_mds=shec,technique=multiple	0	7 	0	2592 
+plugin=clay,k=4,m=2,d=5,scalar_mds=jerasure,technique=cauchy_good	0	6 	0	524288 
+plugin=clay,k=4,m=2,d=5,scalar_mds=jerasure,technique=cauchy_orig	0	6 	0	524288 
+plugin=clay,k=4,m=2,d=5,scalar_mds=jerasure,technique=liber8tion	0	6 	0	524288 
+plugin=clay,k=33,m=2,d=34,scalar_mds=isa,technique=cauchy	0	35 	0	8388608 
+plugin=clay,k=33,m=2,d=34,scalar_mds=isa,technique=reed_sol_van	139	 	139	 
+plugin=clay,k=2,m=2,d=3,mapping=_DD_	0	4 	0	4096 
