@@ -65,6 +65,7 @@ BlueStore on the same 5-host EPYC cluster. Full data, method and every cell:
 - [benchmark report](assets/marketing/benchmark-report.pdf "target:_blank")
 - [fact sheet](assets/marketing/fact-sheet.pdf "target:_blank")
 - [press Q&A](assets/marketing/press-qa.pdf "target:_blank")
+- [architecture](assets/marketing/architecture.pdf "target:_blank")
 - [charts](assets/marketing/charts/rep3-throughput-ratio.png "target:_blank") and [architecture diagrams](assets/marketing/architecture/croit-flashstore-osd-architecture.png "target:_blank")
 <!-- assets:end -->
 
